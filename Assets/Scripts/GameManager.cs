@@ -1,22 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     enum State { Title, lvlSelect, Grid, Game, Pause};
+
+    private static GameManager _instance;
+
+    public static GameManager Instance { get { return _instance; } }
+
     public int currentLevel;
     State currentState;
-    public LevelManager levelManager;
+    public static LevelManager levelManager;
 
     public GameObject trebuchetPrefab;
     public GameObject playerPrefab;
+
+    List<GameObject> levelSelectButtons;
+
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         currentLevel = 1;
         currentState = State.lvlSelect;
-        levelManager = GameObject.Find("LevelManagerObj").GetComponent<LevelManager>();
+        levelManager = LevelManager.Instance;
+        if(levelSelectButtons == null) levelSelectButtons = new List<GameObject>();
+        if(levelManager.levels.Count == 0) levelManager.InitLevels();
     }
 
     // Update is called once per frame
@@ -49,8 +73,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void OnDestroy() { if (this == _instance) { _instance = null; } }
+
     void DisplayLevelSelect()
     {
 
+        
+    }
+
+    void LoadLevels()
+    {
+
+        
+    }
+
+    public void StartLevel(int value)
+    {
+        levelManager = LevelManager.Instance;
+        levelManager.CleanUpLevel();
+        levelManager.setCurrentLevel(value);     
     }
 }

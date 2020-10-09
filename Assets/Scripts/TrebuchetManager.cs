@@ -17,9 +17,7 @@ public class TrebuchetManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        defaultTarget = new Vector2(0, 0);
-        defaultUpwardVal = 0.0f;
-        defaultBoulderType = 0;
+
     }
 
     // Update is called once per frame
@@ -39,6 +37,7 @@ public class TrebuchetManager : MonoBehaviour
         defaultTarget = target;
         defaultUpwardVal = upwardVel;
         defaultBoulderType = boulderType;
+        Debug.Log(defaultUpwardVal);
     }
 
     /// <summary>
@@ -59,6 +58,7 @@ public class TrebuchetManager : MonoBehaviour
         Debug.Log("X force: " + xForce);
         Debug.Log("Upward velocity: " + upwardVel);
         Debug.Log("Air time: " + airTime);
+        StartCoroutine(DestroyOldProjectiles(false, 5.0f, projectileHolder));
     }
 
     /// <summary>
@@ -68,5 +68,12 @@ public class TrebuchetManager : MonoBehaviour
     public void LaunchDefaultBoulder(float variance)
     {
         LaunchBoulder(defaultTarget, defaultUpwardVal + variance, defaultBoulderType);
+    }
+
+    IEnumerator DestroyOldProjectiles(bool status, float delayTime, GameObject toDestroy)
+    {
+        yield return new WaitForSeconds(delayTime);
+        // Now do your thing here
+        Destroy(toDestroy);
     }
 }
