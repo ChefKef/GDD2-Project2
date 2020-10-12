@@ -135,6 +135,8 @@ public class BlockManager : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(gameCam.ScreenToWorldPoint(Input.mousePosition), Vector3.forward);
 
+        GameObject[] children = new GameObject[5];
+
         if (Input.GetMouseButtonDown(0))
         {
             //code for merging blocks
@@ -145,17 +147,61 @@ public class BlockManager : MonoBehaviour
                  */
 
                 //Make array of blocks, max 5
-                //add clicked block to array
-                //
-
-                if (Input.GetMouseButtonDown(1))
+                
+                if(children[0] = null)
                 {
-                    //merge into parent and shit
-                    //make the empty gameobject at 0,0 or bottom left of shape
-                    //loop through array, child all array objects to empty parent & remove them from list
-                    //add parent to list
+                    children[0] = hit.collider.gameObject;
+                    blockList.Remove(hit.collider.gameObject);
+                    Debug.Log(children);
                 }
+                else
+                {
+                    //adjacency check, if adkacent, add to array
+                    for(int i = 0; i < 5; i++)
+                    {
+                        if(children[i] != null)
+                        {
+
+                        }
+                        else
+                        {
+                            Debug.Log(children[i]);
+                            children[i] = hit.collider.gameObject;
+                            blockList.Remove(hit.collider.gameObject);
+                            Debug.Log(children);
+                            i = 5;
+                        }
+                    }
+                }
+                //add clicked block to array
             }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            //merge into parent and shit
+            GameObject parentObject = new GameObject();
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    if (children[i].tag == "block")
+            //    {
+            //        children[i].transform.parent = parentObject.transform;
+            //    }
+            //    else
+            //    {
+            //
+            //    }
+            //
+            //}
+
+            foreach(GameObject g in children)
+            {
+                g.transform.parent = parentObject.transform;
+            }
+
+            blockList.Add(parentObject);
+
+            Debug.Log("Parent has been made");
         }
     }
 }
