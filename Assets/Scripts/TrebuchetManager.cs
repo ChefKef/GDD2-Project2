@@ -10,12 +10,15 @@ public class TrebuchetManager : MonoBehaviour
     //Private variables
     private GameObject projectileHolder; //Holds the projectile to run calculations on it after creation.
     private Rigidbody2D projectileRigidbody; //Holds the projectile's rigidbody.
+
+    private Vector2 defaultTarget;
+    private float defaultUpwardVal;
+    private int defaultBoulderType;
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("I am alive!");
-        //Test
-        LaunchBoulder(new Vector2(0.0f, 0.0f), 20.0f, 1);
+        //Debug boulder
+        LaunchBoulder(new Vector2(0.0f, 0.0f), 20.0f, 0);
     }
 
     // Update is called once per frame
@@ -23,13 +26,28 @@ public class TrebuchetManager : MonoBehaviour
     {
        
     }
+
+    /// <summary>
+    /// Changes where the automatic firing will target.
+    /// </summary>
+    /// <param name="target">The target the boulder will be launched at.</param>
+    /// <param name="upwardVel">The initial upward velocity of the boulder.</param>
+    /// <param name="boulderType">The type of boulder being launched. Currently not in use.</param>
+    public void updateTarget(Vector2 target, float upwardVel, int boulderType)
+    {
+        defaultTarget = target;
+        defaultUpwardVal = upwardVel;
+        defaultBoulderType = boulderType;
+        Debug.Log(defaultUpwardVal);
+    }
+
     /// <summary>
     /// Creates and launches a boulder at a target.
     /// </summary>
     /// <param name="target">The target the boulder will be launched at.</param>
     /// <param name="upwardVel">The initial upward velocity of the boulder.</param>
     /// <param name="boulderType">The type of boulder being launched. Currently not in use.</param>
-    private void LaunchBoulder(Vector2 target, float upwardVel, int boulderType)
+    void LaunchBoulder(Vector2 target, float upwardVel, int boulderType)
     {
         projectileHolder = (GameObject)Instantiate(projectile, new Vector3(gameObject.transform.position.x + .5f, gameObject.transform.position.y + .22f, gameObject.transform.position.z - .001f), Quaternion.identity); //Create projectile
         projectileRigidbody = projectileHolder.GetComponent<Rigidbody2D>();
@@ -41,5 +59,22 @@ public class TrebuchetManager : MonoBehaviour
         Debug.Log("X force: " + xForce);
         Debug.Log("Upward velocity: " + upwardVel);
         Debug.Log("Air time: " + airTime);
+        StartCoroutine(DestroyOldProjectiles(false, 5.0f, projectileHolder));
+    }
+
+    /// <summary>
+    /// Launch a boulder at the default positions, given a random variance
+    /// </summary>
+    /// <param name="variance">A value between -0.5 and 0.5. Slightly changes where the trebuchet fires.</param>
+    public void LaunchDefaultBoulder(float variance)
+    {
+        LaunchBoulder(defaultTarget, defaultUpwardVal + variance, defaultBoulderType);
+    }
+
+    IEnumerator DestroyOldProjectiles(bool status, float delayTime, GameObject toDestroy)
+    {
+        yield return new WaitForSeconds(delayTime);
+        // Now do your thing here
+        Destroy(toDestroy);
     }
 }
