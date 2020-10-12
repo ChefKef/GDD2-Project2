@@ -13,6 +13,9 @@ public class ExampleScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(transform.position.y <= - 5 || transform.position.y >= 5 || transform.position.x <= -11 || transform.position.x >= 11)
+        {
+            Destroy(gameObject);
+        }
     }
 }
