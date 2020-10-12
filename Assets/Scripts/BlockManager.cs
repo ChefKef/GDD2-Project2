@@ -9,10 +9,13 @@ public class BlockManager : MonoBehaviour
     public GameObject TestBlockPublic;
     private GameObject testBlockPrivate;
 
+    private List<GameObject> BlockList;
+
     private enum EditorState
     {
         Painting,
-        Deleting
+        Deleting,
+        Connecting
     }
 
     private EditorState currentState;
@@ -22,6 +25,8 @@ public class BlockManager : MonoBehaviour
     {
         Grid grid = new Grid(21, 9, 1f);
         testBlockPrivate = TestBlockPublic;
+        BlockList = new List<GameObject>();
+
 
         currentState = EditorState.Painting;
     }
@@ -36,30 +41,43 @@ public class BlockManager : MonoBehaviour
         {
             if (hit.collider == null && currentState == EditorState.Painting)
             {
+                bool intersecting = false;
+
                 //Debug.Log(hit);
                 GameObject instanceBlock;
                 instanceBlock = Instantiate(testBlockPrivate, gameCam.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
                 instanceBlock.transform.position = new Vector3(Mathf.Round(instanceBlock.transform.position.x), Mathf.Round(instanceBlock.transform.position.y), 0);
+
+                foreach(GameObject g in BlockList)
+                {
+                    if (g.transform.position == instanceBlock.transform.position)
+                    {
+                        Destroy(instanceBlock);
+                        intersecting = true;
+                    }
+                }
+
+                if(!intersecting)
+                {
+                    BlockList.Add(instanceBlock);
+                }
+                
             }
             else if (hit.collider != null && hit.collider.gameObject.tag == "block" && currentState == EditorState.Deleting)
             {
+                BlockList.Remove(hit.collider.gameObject);
                 Destroy(hit.collider.gameObject);
             }
         }
-
         //right click input code
-        else if (Input.GetMouseButton(1))
+        else if (Input.GetMouseButtonDown(1))
         {
-            if (hit.collider == null)
+            //Apply rigid bodies to all blocks and remove them from the list so its not done another time
+            while(BlockList.Count > 0)
             {
-                //Debug.Log("nothing happened");
+                BlockList[0].AddComponent<Rigidbody2D>();
+                BlockList.RemoveAt(0);
             }
-            if (hit.collider != null && hit.collider.gameObject.tag == "block")
-            {
-                //Debug.Log("hit a block");
-            }
-
-            Debug.Log("held");
         }
 
         //right click input code
@@ -76,5 +94,17 @@ public class BlockManager : MonoBehaviour
                 currentState = EditorState.Painting;
             }
         }
+
+        //for (int i = 0; i < BlockList.Count - 1; i++)
+        //{
+        //    for(int j = 1; j < BlockList.Count; j++)
+        //    {
+        //        if(BlockList[i].transform.position == BlockList[j].transform.position)
+        //        {
+        //            Destroy(BlockList[j]);
+        //            BlockList.RemoveAt(j);
+        //        }
+        //    }
+        //}
     }
 }
