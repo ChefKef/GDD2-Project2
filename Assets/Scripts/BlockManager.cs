@@ -9,7 +9,7 @@ public class BlockManager : MonoBehaviour
     public GameObject TestBlockPublic;
     private GameObject testBlockPrivate;
 
-    private List<GameObject> BlockList;
+    private List<GameObject> blockList;
 
     private enum EditorState
     {
@@ -25,7 +25,7 @@ public class BlockManager : MonoBehaviour
     {
         Grid grid = new Grid(21, 9, 1f);
         testBlockPrivate = TestBlockPublic;
-        BlockList = new List<GameObject>();
+        blockList = new List<GameObject>();
 
 
         currentState = EditorState.Painting;
@@ -34,10 +34,46 @@ public class BlockManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(currentState == EditorState.Painting)
+        {
+            PainterMode();
+        }
+        else if (currentState == EditorState.Deleting)
+        {
+            DeleterMode();
+        }
+        else if (currentState == EditorState.Connecting)
+        {
+            ConnectorMode();
+        }
+
+        //right click input code
+        if (Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(3) || Input.GetMouseButtonDown(4))
+        {
+            if (currentState == EditorState.Painting)
+            {
+                Debug.Log("Now Deleting");
+                currentState = EditorState.Deleting;
+            }
+            else if (currentState == EditorState.Deleting)
+            {
+                Debug.Log("Now Connecting");
+                currentState = EditorState.Connecting;
+            }
+            else if (currentState == EditorState.Connecting)
+            {
+                Debug.Log("Now Painting");
+                currentState = EditorState.Painting;
+            }
+
+        }
+    }
+
+    void PainterMode()
+    {
         RaycastHit2D hit = Physics2D.Raycast(gameCam.ScreenToWorldPoint(Input.mousePosition), Vector3.forward);
 
-        //Left click input code
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             if (hit.collider == null && currentState == EditorState.Painting)
             {
@@ -48,7 +84,7 @@ public class BlockManager : MonoBehaviour
                 instanceBlock = Instantiate(testBlockPrivate, gameCam.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
                 instanceBlock.transform.position = new Vector3(Mathf.Round(instanceBlock.transform.position.x), Mathf.Round(instanceBlock.transform.position.y), 0);
 
-                foreach(GameObject g in BlockList)
+                foreach (GameObject g in blockList)
                 {
                     if (g.transform.position == instanceBlock.transform.position)
                     {
@@ -57,54 +93,69 @@ public class BlockManager : MonoBehaviour
                     }
                 }
 
-                if(!intersecting)
+                if (!intersecting)
                 {
-                    BlockList.Add(instanceBlock);
+                    blockList.Add(instanceBlock);
+
+                    if (instanceBlock.transform.position.y <= -5 || instanceBlock.transform.position.y >= 5 || instanceBlock.transform.position.x <= -11 || instanceBlock.transform.position.x >= 11)
+                    {
+                        blockList.Remove(instanceBlock);
+                    }
                 }
-                
-            }
-            else if (hit.collider != null && hit.collider.gameObject.tag == "block" && currentState == EditorState.Deleting)
-            {
-                BlockList.Remove(hit.collider.gameObject);
-                Destroy(hit.collider.gameObject);
+
             }
         }
         //right click input code
-        else if (Input.GetMouseButtonDown(1))
+        else if (Input.GetMouseButtonDown(1) && currentState == EditorState.Painting)
         {
             //Apply rigid bodies to all blocks and remove them from the list so its not done another time
-            while(BlockList.Count > 0)
+            while (blockList.Count > 0)
             {
-                BlockList[0].AddComponent<Rigidbody2D>();
-                BlockList.RemoveAt(0);
+                blockList[0].AddComponent<Rigidbody2D>();
+                blockList.RemoveAt(0);
             }
         }
+    }
 
-        //right click input code
-        else if (Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(3) || Input.GetMouseButtonDown(4))
+    void DeleterMode()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(gameCam.ScreenToWorldPoint(Input.mousePosition), Vector3.forward);
+
+        if(Input.GetMouseButton(0))
         {
-            if (currentState == EditorState.Painting)
+            if (hit.collider != null && hit.collider.gameObject.tag == "block" && currentState == EditorState.Deleting)
             {
-                Debug.Log("Now Deleting");
-                currentState = EditorState.Deleting;
+                blockList.Remove(hit.collider.gameObject);
+                Destroy(hit.collider.gameObject);
             }
-            else if (currentState == EditorState.Deleting)
+        } 
+    }
+
+    void ConnectorMode()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(gameCam.ScreenToWorldPoint(Input.mousePosition), Vector3.forward);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            //code for merging blocks
+            if (hit.collider != null && hit.collider.gameObject.tag == "block" && currentState == EditorState.Connecting)
             {
-                Debug.Log("Now Painting");
-                currentState = EditorState.Painting;
+                /*
+                 * Code in here for merging blocks
+                 */
+
+                //Make array of blocks, max 5
+                //add clicked block to array
+                //
+
+                if (Input.GetMouseButtonDown(1))
+                {
+                    //merge into parent and shit
+                    //make the empty gameobject at 0,0 or bottom left of shape
+                    //loop through array, child all array objects to empty parent & remove them from list
+                    //add parent to list
+                }
             }
         }
-
-        //for (int i = 0; i < BlockList.Count - 1; i++)
-        //{
-        //    for(int j = 1; j < BlockList.Count; j++)
-        //    {
-        //        if(BlockList[i].transform.position == BlockList[j].transform.position)
-        //        {
-        //            Destroy(BlockList[j]);
-        //            BlockList.RemoveAt(j);
-        //        }
-        //    }
-        //}
     }
 }
