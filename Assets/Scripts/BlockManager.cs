@@ -11,6 +11,8 @@ public class BlockManager : MonoBehaviour
 
     private List<GameObject> blockList;
 
+    private List<GameObject> debugList;
+
     private enum EditorState
     {
         Painting,
@@ -27,6 +29,7 @@ public class BlockManager : MonoBehaviour
         testBlockPrivate = TestBlockPublic;
         blockList = new List<GameObject>();
 
+        debugList = new List<GameObject>();
 
         currentState = EditorState.Painting;
     }
@@ -135,73 +138,66 @@ public class BlockManager : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(gameCam.ScreenToWorldPoint(Input.mousePosition), Vector3.forward);
 
-        GameObject[] children = new GameObject[5];
-
         if (Input.GetMouseButtonDown(0))
         {
             //code for merging blocks
             if (hit.collider != null && hit.collider.gameObject.tag == "block" && currentState == EditorState.Connecting)
             {
-                /*
-                 * Code in here for merging blocks
-                 */
-
-                //Make array of blocks, max 5
-                
-                if(children[0] = null)
+                if(debugList.Count == 0)
                 {
-                    children[0] = hit.collider.gameObject;
+                    debugList.Add(hit.collider.gameObject);
                     blockList.Remove(hit.collider.gameObject);
-                    Debug.Log(children);
+                    Debug.Log(debugList);
                 }
-                else
+                else if (debugList.Count < 5 && debugList.Count > 0)
                 {
-                    //adjacency check, if adkacent, add to array
-                    for(int i = 0; i < 5; i++)
+                    for (int i = 0; i < debugList.Count; i++)
                     {
-                        if(children[i] != null)
+                        float dist = Vector3.Distance(debugList[i].transform.position, hit.collider.gameObject.transform.position);
+                        Debug.Log(dist);
+                        if (dist <= 1)
                         {
-
-                        }
-                        else
-                        {
-                            Debug.Log(children[i]);
-                            children[i] = hit.collider.gameObject;
+                            debugList.Add(hit.collider.gameObject);
                             blockList.Remove(hit.collider.gameObject);
-                            Debug.Log(children);
-                            i = 5;
+                            Debug.Log("Adjacent");
+                            break;
                         }
+                        Debug.Log("Adjacency was checked");
                     }
                 }
-                //add clicked block to array
+                else if(debugList.Count == 5)
+                {
+
+                }
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(3) || Input.GetMouseButtonDown(4))
         {
-            //merge into parent and shit
-            GameObject parentObject = new GameObject();
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    if (children[i].tag == "block")
-            //    {
-            //        children[i].transform.parent = parentObject.transform;
-            //    }
-            //    else
-            //    {
-            //
-            //    }
-            //
-            //}
-
-            foreach(GameObject g in children)
+            if(debugList == null)
             {
-                g.transform.parent = parentObject.transform;
+                Debug.Log("The group is empty");
             }
+            else if(debugList.Count > 0)
+            {
+                //merge into parent and shit
+                GameObject parentObject = new GameObject();
+                parentObject.name = "block group";
 
-            blockList.Add(parentObject);
+                List<GameObject> childList = new List<GameObject>();
+                childList = debugList;
+                debugList = null;
 
-            Debug.Log("Parent has been made");
+                foreach (GameObject g in childList)
+                {
+                    g.transform.parent = parentObject.transform;
+                    Debug.Log("Child has been connected");
+                }
+
+                blockList.Add(parentObject);
+
+                Debug.Log("Parent has been made");
+            }
         }
     }
 }
