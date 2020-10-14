@@ -14,6 +14,11 @@ public class Material : MonoBehaviour
     //everything colliding with this, for force transfer damage calculations. Resets every frame
     protected List<Material> neighbors;
 
+    public MAT_TYPE Type
+    {
+        get { return type; }
+    }
+
     //constructor for the material, this is the base which won't likely be called
     public Material()
     {
@@ -69,8 +74,9 @@ public class Material : MonoBehaviour
             }
         }
     }
-}
 
-//most likely move these enums to a game manager class or something similar. This can be used for easier collision type checking, etc.
-public enum SHOT_TYPE { NONE, STANDARD, FIRE, BOMB, ICE, SPIKE };
-public enum MAT_TYPE { NONE, WOOD, GLASS, STONE, STEEL, MAGIC };
+    public void TakeDamage(float force)
+    {
+
+    }
+}
