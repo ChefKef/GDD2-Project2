@@ -94,3 +94,6 @@ public class GameManager : MonoBehaviour
         levelManager.setCurrentLevel(value);     
     }
 }
+
+public enum SHOT_TYPE { NONE, STANDARD, FIRE, BOMB, ICE, SPIKE };
+public enum MAT_TYPE { NONE, WOOD, GLASS, STONE, STEEL, MAGIC };
