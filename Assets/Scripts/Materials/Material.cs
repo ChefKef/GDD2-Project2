@@ -74,4 +74,9 @@ public class Material : MonoBehaviour
             }
         }
     }
+
+    public void TakeDamage(float force)
+    {
+
+    }
 }
