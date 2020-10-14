@@ -43,4 +43,9 @@ public class LevelObject
     {
         active = !active;
     }
+
+    public void BuildGround(vector2 startPoint, vector2 endPoint)
+    {
+
+    }
 }
