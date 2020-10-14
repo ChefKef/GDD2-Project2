@@ -69,6 +69,11 @@ public class Material : MonoBehaviour
             }
         }
     }
+
+    public void TakeDamage(float force)
+    {
+
+    }
 }
 
 //most likely move these enums to a game manager class or something similar. This can be used for easier collision type checking, etc.
