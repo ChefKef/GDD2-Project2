@@ -9,30 +9,194 @@ public class BlockManager : MonoBehaviour
     public GameObject TestBlockPublic;
     private GameObject testBlockPrivate;
 
+    private List<GameObject> blockList;
+
+    private List<GameObject> debugList;
+
+    private enum EditorState
+    {
+        Painting,
+        Deleting,
+        Connecting
+    }
+
+    private EditorState currentState;
+
     // Start is called before the first frame update
     void Start()
     {
         Grid grid = new Grid(21, 9, 1f);
         testBlockPrivate = TestBlockPublic;
+        blockList = new List<GameObject>();
+
+        debugList = new List<GameObject>();
+
+        currentState = EditorState.Painting;
     }
 
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(gameCam.ScreenToWorldPoint(Input.mousePosition), Vector3.forward);
-        
-        if(Input.GetMouseButtonDown(0))
+        if(currentState == EditorState.Painting)
         {
-            if (hit.collider == null)
+            PainterMode();
+        }
+        else if (currentState == EditorState.Deleting)
+        {
+            DeleterMode();
+        }
+        else if (currentState == EditorState.Connecting)
+        {
+            ConnectorMode();
+        }
+
+        //right click input code
+        if (Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(3) || Input.GetMouseButtonDown(4))
+        {
+            if (currentState == EditorState.Painting)
             {
-                Debug.Log(hit);
+                Debug.Log("Now Deleting");
+                currentState = EditorState.Deleting;
+            }
+            else if (currentState == EditorState.Deleting)
+            {
+                Debug.Log("Now Connecting");
+                currentState = EditorState.Connecting;
+            }
+            else if (currentState == EditorState.Connecting)
+            {
+                Debug.Log("Now Painting");
+                currentState = EditorState.Painting;
+            }
+
+        }
+    }
+
+    void PainterMode()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(gameCam.ScreenToWorldPoint(Input.mousePosition), Vector3.forward);
+
+        if (Input.GetMouseButton(0))
+        {
+            if (hit.collider == null && currentState == EditorState.Painting)
+            {
+                bool intersecting = false;
+
+                //Debug.Log(hit);
                 GameObject instanceBlock;
                 instanceBlock = Instantiate(testBlockPrivate, gameCam.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
                 instanceBlock.transform.position = new Vector3(Mathf.Round(instanceBlock.transform.position.x), Mathf.Round(instanceBlock.transform.position.y), 0);
+
+                foreach (GameObject g in blockList)
+                {
+                    if (g.transform.position == instanceBlock.transform.position)
+                    {
+                        Destroy(instanceBlock);
+                        intersecting = true;
+                    }
+                }
+
+                if (!intersecting)
+                {
+                    blockList.Add(instanceBlock);
+
+                    if (instanceBlock.transform.position.y <= -5 || instanceBlock.transform.position.y >= 5 || instanceBlock.transform.position.x <= -11 || instanceBlock.transform.position.x >= 11)
+                    {
+                        blockList.Remove(instanceBlock);
+                    }
+                }
+
             }
-            if (hit.collider != null && hit.collider.gameObject.tag == "block")
+        }
+        //right click input code
+        else if (Input.GetMouseButtonDown(1) && currentState == EditorState.Painting)
+        {
+            //Apply rigid bodies to all blocks and remove them from the list so its not done another time
+            while (blockList.Count > 0)
             {
+                blockList[0].AddComponent<Rigidbody2D>();
+                blockList.RemoveAt(0);
+            }
+        }
+    }
+
+    void DeleterMode()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(gameCam.ScreenToWorldPoint(Input.mousePosition), Vector3.forward);
+
+        if(Input.GetMouseButton(0))
+        {
+            if (hit.collider != null && hit.collider.gameObject.tag == "block" && currentState == EditorState.Deleting)
+            {
+                blockList.Remove(hit.collider.gameObject);
                 Destroy(hit.collider.gameObject);
+            }
+        } 
+    }
+
+    void ConnectorMode()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(gameCam.ScreenToWorldPoint(Input.mousePosition), Vector3.forward);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            //code for merging blocks
+            if (hit.collider != null && hit.collider.gameObject.tag == "block" && currentState == EditorState.Connecting)
+            {
+                if(debugList.Count == 0)
+                {
+                    debugList.Add(hit.collider.gameObject);
+                    blockList.Remove(hit.collider.gameObject);
+                    Debug.Log(debugList);
+                }
+                else if (debugList.Count < 5 && debugList.Count > 0)
+                {
+                    for (int i = 0; i < debugList.Count; i++)
+                    {
+                        float dist = Vector3.Distance(debugList[i].transform.position, hit.collider.gameObject.transform.position);
+                        Debug.Log(dist);
+                        if (dist <= 1)
+                        {
+                            debugList.Add(hit.collider.gameObject);
+                            blockList.Remove(hit.collider.gameObject);
+                            Debug.Log("Adjacent");
+                            break;
+                        }
+                        Debug.Log("Adjacency was checked");
+                    }
+                }
+                else if(debugList.Count == 5)
+                {
+
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(3) || Input.GetMouseButtonDown(4))
+        {
+            if(debugList == null)
+            {
+                Debug.Log("The group is empty");
+            }
+            else if(debugList.Count > 0)
+            {
+                //merge into parent and shit
+                GameObject parentObject = new GameObject();
+                parentObject.name = "block group";
+
+                List<GameObject> childList = new List<GameObject>();
+                childList = debugList;
+                debugList = null;
+
+                foreach (GameObject g in childList)
+                {
+                    g.transform.parent = parentObject.transform;
+                    Debug.Log("Child has been connected");
+                }
+
+                blockList.Add(parentObject);
+
+                Debug.Log("Parent has been made");
             }
         }
     }
