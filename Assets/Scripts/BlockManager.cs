@@ -13,6 +13,10 @@ public class BlockManager : MonoBehaviour
 
     private List<GameObject> debugList;
 
+    private MAT_TYPE currentMaterial;
+
+    private MAT_TYPE connectorMaterial;
+
     private enum EditorState
     {
         Painting,
@@ -32,6 +36,8 @@ public class BlockManager : MonoBehaviour
         debugList = new List<GameObject>();
 
         currentState = EditorState.Painting;
+
+        currentMaterial = MAT_TYPE.WOOD;
     }
 
     // Update is called once per frame
@@ -50,25 +56,56 @@ public class BlockManager : MonoBehaviour
             ConnectorMode();
         }
 
-        //right click input code
-        if (Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(3) || Input.GetMouseButtonDown(4))
+        //checks if anything is being done now
+        if (Input.anyKey)
         {
-            if (currentState == EditorState.Painting)
+            //right click input code
+            if (Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(3) || Input.GetMouseButtonDown(4))
             {
-                Debug.Log("Now Deleting");
-                currentState = EditorState.Deleting;
-            }
-            else if (currentState == EditorState.Deleting)
-            {
-                Debug.Log("Now Connecting");
-                currentState = EditorState.Connecting;
-            }
-            else if (currentState == EditorState.Connecting)
-            {
-                Debug.Log("Now Painting");
-                currentState = EditorState.Painting;
+                if (currentState == EditorState.Painting)
+                {
+                    Debug.Log("Now Deleting");
+                    currentState = EditorState.Deleting;
+                }
+                else if (currentState == EditorState.Deleting)
+                {
+                    Debug.Log("Now Connecting");
+                    currentState = EditorState.Connecting;
+                }
+                else if (currentState == EditorState.Connecting)
+                {
+                    Debug.Log("Now Painting");
+                    currentState = EditorState.Painting;
+                }
+
             }
 
+            //input checking for changing the material. (Temporarily number buttons, could be permanent as a secondary option to clicking
+            if(Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                currentMaterial = MAT_TYPE.WOOD;
+                Debug.Log("Wood");
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                currentMaterial = MAT_TYPE.GLASS;
+                Debug.Log("Glass");
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                currentMaterial = MAT_TYPE.STONE;
+                Debug.Log("Stone");
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                currentMaterial = MAT_TYPE.STEEL;
+                Debug.Log("Steel");
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                currentMaterial = MAT_TYPE.MAGIC;
+                Debug.Log("Magic");
+            }
         }
     }
 
@@ -86,6 +123,38 @@ public class BlockManager : MonoBehaviour
                 GameObject instanceBlock;
                 instanceBlock = Instantiate(testBlockPrivate, gameCam.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
                 instanceBlock.transform.position = new Vector3(Mathf.Round(instanceBlock.transform.position.x), Mathf.Round(instanceBlock.transform.position.y), 0);
+
+                //adds the script for whaichever material is selected
+                switch (currentMaterial)
+                {
+                    case MAT_TYPE.WOOD:
+                        instanceBlock.AddComponent<Wood>();
+                        break;
+                    case MAT_TYPE.GLASS:
+                        instanceBlock.AddComponent<Glass>();
+
+                        //TEMPORARY PART - CHANGES COLOR, REPLACE WITH ACTUAL SPRITE PICKING
+                        instanceBlock.GetComponent<SpriteRenderer>().color = new Color(0.4f, 0.7f, 1);
+                        break;
+                    case MAT_TYPE.STONE:
+                        instanceBlock.AddComponent<Stone>();
+
+                        //TEMPORARY PART - CHANGES COLOR, REPLACE WITH ACTUAL SPRITE PICKING
+                        instanceBlock.GetComponent<SpriteRenderer>().color = new Color(1, .7f, .5f);
+                        break;
+                    case MAT_TYPE.STEEL:
+                        instanceBlock.AddComponent<Steel>();
+
+                        //TEMPORARY PART - CHANGES COLOR, REPLACE WITH ACTUAL SPRITE PICKING
+                        instanceBlock.GetComponent<SpriteRenderer>().color = new Color(0.8f, 0, 1);
+                        break;
+                    case MAT_TYPE.MAGIC:
+                        instanceBlock.AddComponent<Magic>();
+
+                        //TEMPORARY PART - CHANGES COLOR, REPLACE WITH ACTUAL SPRITE PICKING
+                        instanceBlock.GetComponent<SpriteRenderer>().color = new Color(.2f, 1, 0);
+                        break;
+                }
 
                 foreach (GameObject g in blockList)
                 {
@@ -148,8 +217,11 @@ public class BlockManager : MonoBehaviour
                     debugList.Add(hit.collider.gameObject);
                     blockList.Remove(hit.collider.gameObject);
                     Debug.Log(debugList);
+
+                    //sets the type of this set of connected objects, checks this before adding it to the group
+                    connectorMaterial = hit.collider.gameObject.GetComponent<Material>().Type;
                 }
-                else if (debugList.Count < 5 && debugList.Count > 0)
+                else if (debugList.Count < 5 && debugList.Count > 0 && connectorMaterial == hit.collider.gameObject.GetComponent<Material>().Type)
                 {
                     for (int i = 0; i < debugList.Count; i++)
                     {
@@ -186,11 +258,32 @@ public class BlockManager : MonoBehaviour
 
                 List<GameObject> childList = new List<GameObject>();
                 childList = debugList;
-                debugList = null;
+                debugList = new List<GameObject>();
+
+                //sets the parent's material up
+                switch (connectorMaterial)
+                {
+                    case MAT_TYPE.WOOD:
+                        parentObject.AddComponent<Wood>();
+                        break;
+                    case MAT_TYPE.GLASS:
+                        parentObject.AddComponent<Glass>();
+                        break;
+                    case MAT_TYPE.STONE:
+                        parentObject.AddComponent<Stone>();
+                        break;
+                    case MAT_TYPE.STEEL:
+                        parentObject.AddComponent<Steel>();
+                        break;
+                    case MAT_TYPE.MAGIC:
+                        parentObject.AddComponent<Magic>();
+                        break;
+                }
 
                 foreach (GameObject g in childList)
                 {
                     g.transform.parent = parentObject.transform;
+                    Destroy(g.GetComponent<Material>());
                     Debug.Log("Child has been connected");
                 }
 
