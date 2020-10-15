@@ -43,6 +43,7 @@ public class LevelManager : MonoBehaviour
     {
         LevelObject level1 = new LevelObject();
         level1.AddTrebuchet(new Vector2(5, 0), new Vector2(0, 0), 5, 0);
+        level1.BuildGround(new Vector2(-10, -2), new Vector2(10, -2));
         level1.levelID = 1;
         level1.playerPos = new Vector2(0, 0);
         levels.Add(level1);
@@ -50,7 +51,8 @@ public class LevelManager : MonoBehaviour
         LevelObject level2 = new LevelObject();
         level2.AddTrebuchet(new Vector2(5, 0), new Vector2(0, 0), 5, 0);
         level2.AddTrebuchet(new Vector2(7, 0), new Vector2(0, 0), 7, 0);
-        level2.levelID = 1;
+        level2.BuildGround(new Vector2(-10, -4), new Vector2(10, -4));
+        level2.levelID = 2;
         level2.playerPos = new Vector2(-1, 0);
         levels.Add(level2);
     }
@@ -71,6 +73,11 @@ public class LevelManager : MonoBehaviour
             {
                 //player
                 continue;
+            }
+            else if(activeObjects[i] == null)
+            {
+                //ground
+                break;
             }
 
             activeObjects[i].GetComponent<TrebuchetManager>().LaunchDefaultBoulder(Random.Range(-0.5f,0.5f));

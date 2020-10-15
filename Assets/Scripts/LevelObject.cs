@@ -12,6 +12,7 @@ public class LevelObject
     public List<Vector2> trebuchetTarget = new List<Vector2>();
     public List<float> upwardVels = new List<float>();
     public List<int> boulderType = new List<int>();
+    public List<float> groundLocations = new List<float>();
     public Vector2 playerPos;
 
     private bool active = false;
@@ -29,6 +30,7 @@ public class LevelObject
         List<GameObject> activeObjects = new List<GameObject>();
         trebuchetPrefab = gm.trebuchetPrefab;
         playerPrefab = gm.playerPrefab;
+        GameObject groundTile = gm.groundPrefab;
         activeObjects.Add(GameObject.Instantiate(playerPrefab, playerPos, Quaternion.identity));
         for(int i = 0; i < trebuchetPos.Count; i++)
         {
@@ -36,6 +38,15 @@ public class LevelObject
             treb.GetComponent<TrebuchetManager>().updateTarget(trebuchetTarget[i], upwardVels[i], boulderType[i]);
             activeObjects.Add(treb);
         }
+
+        activeObjects.Add(null);
+
+        for(int i = 1; i < groundLocations.Count; i++)
+        {
+            Vector2 location = new Vector2(groundLocations[i], groundLocations[0]);
+            activeObjects.Add(GameObject.Instantiate(groundTile, location, Quaternion.identity));
+        }
+
         return activeObjects;
     }
 
@@ -44,8 +55,13 @@ public class LevelObject
         active = !active;
     }
 
-    public void BuildGround(vector2 startPoint, vector2 endPoint)
-    {
-
+    public void BuildGround(Vector2 startPoint, Vector2 endPoint)
+    {      
+        int distance = Mathf.Abs((int)(startPoint.x - endPoint.x));
+        groundLocations.Add(startPoint.y);
+        for(int i = 0; i < distance; i++)
+        {           
+            groundLocations.Add(startPoint.x + i);
+        }
     }
 }
