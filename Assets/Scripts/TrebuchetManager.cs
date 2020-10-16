@@ -13,7 +13,7 @@ public class TrebuchetManager : MonoBehaviour
 
     private Vector2 defaultTarget;
     private float defaultUpwardVal;
-    private int defaultBoulderType;
+    private SHOT_TYPE defaultBoulderType;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +33,7 @@ public class TrebuchetManager : MonoBehaviour
     /// <param name="target">The target the boulder will be launched at.</param>
     /// <param name="upwardVel">The initial upward velocity of the boulder.</param>
     /// <param name="boulderType">The type of boulder being launched. Currently not in use.</param>
-    public void updateTarget(Vector2 target, float upwardVel, int boulderType)
+    public void updateTarget(Vector2 target, float upwardVel, SHOT_TYPE boulderType)
     {
         defaultTarget = target;
         defaultUpwardVal = upwardVel;
@@ -47,9 +47,10 @@ public class TrebuchetManager : MonoBehaviour
     /// <param name="target">The target the boulder will be launched at.</param>
     /// <param name="upwardVel">The initial upward velocity of the boulder.</param>
     /// <param name="boulderType">The type of boulder being launched. Currently not in use.</param>
-    void LaunchBoulder(Vector2 target, float upwardVel, int boulderType)
+    void LaunchBoulder(Vector2 target, float upwardVel, SHOT_TYPE boulderType)
     {
         projectileHolder = (GameObject)Instantiate(projectile, new Vector3(gameObject.transform.position.x + .5f, gameObject.transform.position.y + .22f, gameObject.transform.position.z - .001f), Quaternion.identity); //Create projectile
+        projectileHolder.GetComponent<RockManager>().shot = boulderType;
         projectileRigidbody = projectileHolder.GetComponent<Rigidbody2D>();
         //First, use vertex formula (v = (-initialVel)/(gravity[9.8])) to get time of apex of launch. Then multiply that by 2 for launch time, then apply an x velocity of 
         //(distance between launch point x and target x)/(time of arc). If I'm calculating this correctly, this will even work when objects aren't lined up.
