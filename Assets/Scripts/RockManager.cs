@@ -9,6 +9,7 @@ public class RockManager : MonoBehaviour
     /*The force constant exists so that all objects do not need to be given masses. If I wanted to simulate physically correct collisions, all objects would need to have mass so that I could
      properly calculate. That's needlessly complex, so instead, the force constant will simply multiply with the velocity of the boulder on impact. This variable is public, so it can be changed
     by other scripts when needed.*/
+    public SHOT_TYPE shot;
     //Private variables
     private bool collided = false;
     void Start()
@@ -25,7 +26,7 @@ public class RockManager : MonoBehaviour
     {
         if (collided == false && collision.gameObject.tag == "destructible") //Ensure that collision is only calculated once.
         {
-            //collision.gameObject.takeDamage(forceConstant * GetComponent<Rigidbody2D>().velocity.x);
+            collision.gameObject.GetComponent<Material>().CalcDamage(forceConstant * GetComponent<Rigidbody2D>().velocity.x, shot);
             /*Code that calls a function on the object that can take damage. I would like to add a 'destructible' flag on all structures that can be deleted in order to not cause errors.
              The takeDamage() function will need to be made for walls/target orbs. If you come up with something that doesn't use the takeDamage() signature, that is fine.*/
             collided = true;
