@@ -9,7 +9,16 @@ public class BlockManager : MonoBehaviour
     public GameObject TestBlockPublic;
     private GameObject testBlockPrivate;
 
+    //a good way to do corners and stuff may be to split this into multiple lists, one for each material, where each index represents a particular edge/corner.
+    public List<Sprite> sprites;
+
     private List<GameObject> blockList;
+
+    private List<GameObject> debugList;
+
+    private MAT_TYPE currentMaterial;
+
+    private MAT_TYPE connectorMaterial;
 
     private enum EditorState
     {
@@ -27,8 +36,11 @@ public class BlockManager : MonoBehaviour
         testBlockPrivate = TestBlockPublic;
         blockList = new List<GameObject>();
 
+        debugList = new List<GameObject>();
 
         currentState = EditorState.Painting;
+
+        currentMaterial = MAT_TYPE.WOOD;
     }
 
     // Update is called once per frame
@@ -47,25 +59,56 @@ public class BlockManager : MonoBehaviour
             ConnectorMode();
         }
 
-        //right click input code
-        if (Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(3) || Input.GetMouseButtonDown(4))
+        //checks if anything is being done now
+        if (Input.anyKey)
         {
-            if (currentState == EditorState.Painting)
+            //right click input code
+            if (Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(3) || Input.GetMouseButtonDown(4))
             {
-                Debug.Log("Now Deleting");
-                currentState = EditorState.Deleting;
-            }
-            else if (currentState == EditorState.Deleting)
-            {
-                Debug.Log("Now Connecting");
-                currentState = EditorState.Connecting;
-            }
-            else if (currentState == EditorState.Connecting)
-            {
-                Debug.Log("Now Painting");
-                currentState = EditorState.Painting;
+                if (currentState == EditorState.Painting)
+                {
+                    Debug.Log("Now Deleting");
+                    currentState = EditorState.Deleting;
+                }
+                else if (currentState == EditorState.Deleting)
+                {
+                    Debug.Log("Now Connecting");
+                    currentState = EditorState.Connecting;
+                }
+                else if (currentState == EditorState.Connecting)
+                {
+                    Debug.Log("Now Painting");
+                    currentState = EditorState.Painting;
+                }
+
             }
 
+            //input checking for changing the material. (Temporarily number buttons, could be permanent as a secondary option to clicking
+            if(Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                currentMaterial = MAT_TYPE.WOOD;
+                Debug.Log("Wood");
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                currentMaterial = MAT_TYPE.GLASS;
+                Debug.Log("Glass");
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                currentMaterial = MAT_TYPE.STONE;
+                Debug.Log("Stone");
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                currentMaterial = MAT_TYPE.STEEL;
+                Debug.Log("Steel");
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                currentMaterial = MAT_TYPE.MAGIC;
+                Debug.Log("Magic");
+            }
         }
     }
 
@@ -83,6 +126,38 @@ public class BlockManager : MonoBehaviour
                 GameObject instanceBlock;
                 instanceBlock = Instantiate(testBlockPrivate, gameCam.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
                 instanceBlock.transform.position = new Vector3(Mathf.Round(instanceBlock.transform.position.x), Mathf.Round(instanceBlock.transform.position.y), 0);
+
+                //adds the script for whaichever material is selected
+                switch (currentMaterial)
+                {
+                    case MAT_TYPE.WOOD:
+                        instanceBlock.AddComponent<Wood>();
+
+                        instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[0];
+                        break;
+                    case MAT_TYPE.GLASS:
+                        instanceBlock.AddComponent<Glass>();
+
+                        //TEMPORARY PART - CHANGES COLOR, REPLACE WITH ACTUAL SPRITE PICKING
+                        instanceBlock.GetComponent<SpriteRenderer>().color = new Color(0.4f, 0.7f, 1);
+                        break;
+                    case MAT_TYPE.STONE:
+                        instanceBlock.AddComponent<Stone>();
+
+                        instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[1];
+                        break;
+                    case MAT_TYPE.STEEL:
+                        instanceBlock.AddComponent<Steel>();
+
+                        instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[2];
+                        break;
+                    case MAT_TYPE.MAGIC:
+                        instanceBlock.AddComponent<Magic>();
+
+                        //TEMPORARY PART - CHANGES COLOR, REPLACE WITH ACTUAL SPRITE PICKING
+                        instanceBlock.GetComponent<SpriteRenderer>().color = new Color(.2f, 1, 0);
+                        break;
+                }
 
                 foreach (GameObject g in blockList)
                 {
@@ -135,73 +210,90 @@ public class BlockManager : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(gameCam.ScreenToWorldPoint(Input.mousePosition), Vector3.forward);
 
-        GameObject[] children = new GameObject[5];
-
         if (Input.GetMouseButtonDown(0))
         {
             //code for merging blocks
             if (hit.collider != null && hit.collider.gameObject.tag == "block" && currentState == EditorState.Connecting)
             {
-                /*
-                 * Code in here for merging blocks
-                 */
-
-                //Make array of blocks, max 5
-                
-                if(children[0] = null)
+                if(debugList.Count == 0)
                 {
-                    children[0] = hit.collider.gameObject;
+                    debugList.Add(hit.collider.gameObject);
                     blockList.Remove(hit.collider.gameObject);
-                    Debug.Log(children);
-                }
-                else
-                {
-                    //adjacency check, if adkacent, add to array
-                    for(int i = 0; i < 5; i++)
-                    {
-                        if(children[i] != null)
-                        {
+                    Debug.Log(debugList);
 
-                        }
-                        else
+                    //sets the type of this set of connected objects, checks this before adding it to the group
+                    connectorMaterial = hit.collider.gameObject.GetComponent<Material>().Type;
+                }
+                else if (debugList.Count < 5 && debugList.Count > 0 && connectorMaterial == hit.collider.gameObject.GetComponent<Material>().Type)
+                {
+                    for (int i = 0; i < debugList.Count; i++)
+                    {
+                        float dist = Vector3.Distance(debugList[i].transform.position, hit.collider.gameObject.transform.position);
+                        Debug.Log(dist);
+                        if (dist <= 1)
                         {
-                            Debug.Log(children[i]);
-                            children[i] = hit.collider.gameObject;
+                            debugList.Add(hit.collider.gameObject);
                             blockList.Remove(hit.collider.gameObject);
-                            Debug.Log(children);
-                            i = 5;
+                            Debug.Log("Adjacent");
+                            break;
                         }
+                        Debug.Log("Adjacency was checked");
                     }
                 }
-                //add clicked block to array
+                else if(debugList.Count == 5)
+                {
+
+                }
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(3) || Input.GetMouseButtonDown(4))
         {
-            //merge into parent and shit
-            GameObject parentObject = new GameObject();
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    if (children[i].tag == "block")
-            //    {
-            //        children[i].transform.parent = parentObject.transform;
-            //    }
-            //    else
-            //    {
-            //
-            //    }
-            //
-            //}
-
-            foreach(GameObject g in children)
+            if(debugList == null)
             {
-                g.transform.parent = parentObject.transform;
+                Debug.Log("The group is empty");
             }
+            else if(debugList.Count > 0)
+            {
+                //merge into parent and shit
+                GameObject parentObject = new GameObject();
+                parentObject.name = "block group";
 
-            blockList.Add(parentObject);
+                List<GameObject> childList = new List<GameObject>();
+                childList = debugList;
+                debugList = new List<GameObject>();
 
-            Debug.Log("Parent has been made");
+                //sets the parent's material up
+                switch (connectorMaterial)
+                {
+                    case MAT_TYPE.WOOD:
+                        parentObject.AddComponent<Wood>();
+                        break;
+                    case MAT_TYPE.GLASS:
+                        parentObject.AddComponent<Glass>();
+                        break;
+                    case MAT_TYPE.STONE:
+                        parentObject.AddComponent<Stone>();
+                        break;
+                    case MAT_TYPE.STEEL:
+                        parentObject.AddComponent<Steel>();
+                        break;
+                    case MAT_TYPE.MAGIC:
+                        parentObject.AddComponent<Magic>();
+                        break;
+                }
+
+                foreach (GameObject g in childList)
+                {
+                    g.transform.parent = parentObject.transform;
+                    Destroy(g.GetComponent<Material>());
+                    Debug.Log("Child has been connected");
+                }
+
+                blockList.Add(parentObject);
+
+                Debug.Log("Parent has been made");
+            }
         }
     }
 }
