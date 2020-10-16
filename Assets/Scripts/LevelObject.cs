@@ -33,7 +33,7 @@ public class LevelObject
         for(int i = 0; i < trebuchetPos.Count; i++)
         {
             GameObject treb = GameObject.Instantiate(trebuchetPrefab, trebuchetPos[i], Quaternion.identity);
-            treb.GetComponent<TrebuchetManager>().updateTarget(trebuchetTarget[i], upwardVels[i], boulderType[i]);
+            treb.GetComponent<TrebuchetManager>().updateTarget(trebuchetTarget[i], upwardVels[i], (SHOT_TYPE)boulderType[i]);
             activeObjects.Add(treb);
         }
         return activeObjects;

@@ -61,22 +61,16 @@ public class Material : MonoBehaviour
     public void CalcDamage(float shotSpeed, SHOT_TYPE damageType)
     {
         //arbitrary for now until we get collisions functioning.
-        float damage = shotSpeed / 50;
-        DoDamage(damage, damageType);
+        DoDamage(shotSpeed, damageType);
 
         //as long as force can transfer, deals damage to the neigboring materials
         if (forceTransfer != 0)
         {
-            damage = damage * forceTransfer;
+            shotSpeed = shotSpeed * forceTransfer;
             for (int i = 0; i < neighbors.Count; i++)
             {
-                neighbors[i].DoDamage(damage, damageType);
+                neighbors[i].DoDamage(shotSpeed, damageType);
             }
         }
-    }
-
-    public void TakeDamage(float force)
-    {
-
     }
 }
