@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: c4ba30f7ca72df04e8da6e2a64559512
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - gameCam: {instanceID: 0}
+  - TestBlockPublic: {fileID: 1459502968438159182, guid: 94b3717bb9eff714abe57e1384c894f9, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

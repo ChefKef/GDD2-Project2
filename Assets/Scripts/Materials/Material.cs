@@ -14,6 +14,11 @@ public class Material : MonoBehaviour
     //everything colliding with this, for force transfer damage calculations. Resets every frame
     protected List<Material> neighbors;
 
+    public MAT_TYPE Type
+    {
+        get { return type; }
+    }
+
     //constructor for the material, this is the base which won't likely be called
     public Material()
     {
@@ -56,21 +61,16 @@ public class Material : MonoBehaviour
     public void CalcDamage(float shotSpeed, SHOT_TYPE damageType)
     {
         //arbitrary for now until we get collisions functioning.
-        float damage = shotSpeed / 50;
-        DoDamage(damage, damageType);
+        DoDamage(shotSpeed, damageType);
 
         //as long as force can transfer, deals damage to the neigboring materials
         if (forceTransfer != 0)
         {
-            damage = damage * forceTransfer;
+            shotSpeed = shotSpeed * forceTransfer;
             for (int i = 0; i < neighbors.Count; i++)
             {
-                neighbors[i].DoDamage(damage, damageType);
+                neighbors[i].DoDamage(shotSpeed, damageType);
             }
         }
     }
 }
-
-//most likely move these enums to a game manager class or something similar. This can be used for easier collision type checking, etc.
-public enum SHOT_TYPE { NONE, STANDARD, FIRE, BOMB, ICE, SPIKE };
-public enum MAT_TYPE { NONE, WOOD, GLASS, STONE, STEEL, MAGIC };
