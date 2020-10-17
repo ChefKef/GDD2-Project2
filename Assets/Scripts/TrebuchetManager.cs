@@ -18,7 +18,7 @@ public class TrebuchetManager : MonoBehaviour
     void Start()
     {
         //Debug boulder
-        LaunchBoulder(new Vector2(0.0f, 0.0f), 20.0f, 0);
+        //LaunchBoulder(new Vector2(0.0f, 0.0f), 20.0f, 0);
     }
 
     // Update is called once per frame
