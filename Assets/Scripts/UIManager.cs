@@ -35,6 +35,13 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene("Level" + level + "Scene");
     }
 
+    //Changes game to the Level UI Screen
+    public void GoToLevelUI()
+    {
+        SceneManager.LoadScene("LevelUIScene");
+        Debug.Log("In method");
+    }
+
     //Pauses the current Level
     public void PauseLevel()
     {
