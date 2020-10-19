@@ -15,7 +15,7 @@ public class RockManager : MonoBehaviour
     private bool collided = false;
     void Start()
     {
-        switch(shot)
+        /*switch(shot)
         {
             default:
             case SHOT_TYPE.STANDARD:
@@ -33,7 +33,7 @@ public class RockManager : MonoBehaviour
             case SHOT_TYPE.SPIKE:
                 GetComponent<SpriteRenderer>().sprite = shotSprites[4];
                 break;
-        }
+        }*/
     }
 
     // Update is called once per frame
