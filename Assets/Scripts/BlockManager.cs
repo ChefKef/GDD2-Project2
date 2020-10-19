@@ -67,25 +67,21 @@ public class BlockManager : MonoBehaviour
         //checks if anything is being done now
         if (Input.anyKey)
         {
-            //right click input code
-            if (Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(3) || Input.GetMouseButtonDown(4))
+            //input checking for changing the drawing mode.
+            if (Input.GetKeyDown(KeyCode.A))
             {
-                if (currentState == EditorState.Painting)
-                {
-                    Debug.Log("Now Deleting");
-                    currentState = EditorState.Deleting;
-                }
-                else if (currentState == EditorState.Deleting)
-                {
-                    Debug.Log("Now Connecting");
-                    currentState = EditorState.Connecting;
-                }
-                else if (currentState == EditorState.Connecting)
-                {
-                    Debug.Log("Now Painting");
-                    currentState = EditorState.Painting;
-                }
-
+                currentState = EditorState.Painting;
+                Debug.Log("Now Painting");
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                currentState = EditorState.Connecting;
+                Debug.Log("Now Connecting");
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                currentState = EditorState.Deleting;
+                Debug.Log("Now Deleting");
             }
 
             //input checking for changing the material. (Temporarily number buttons, could be permanent as a secondary option to clicking
@@ -104,7 +100,7 @@ public class BlockManager : MonoBehaviour
                 currentMaterial = MAT_TYPE.STONE;
                 Debug.Log("Stone");
             }
-            if (Input.GetKeyDown(KeyCode.Alpha4))
+            /*if (Input.GetKeyDown(KeyCode.Alpha4))
             {
                 currentMaterial = MAT_TYPE.STEEL;
                 Debug.Log("Steel");
@@ -113,7 +109,7 @@ public class BlockManager : MonoBehaviour
             {
                 currentMaterial = MAT_TYPE.MAGIC;
                 Debug.Log("Magic");
-            }
+            }*/
         }
     }
 
@@ -145,7 +141,7 @@ public class BlockManager : MonoBehaviour
                 instanceBlock.transform.position = new Vector3(Mathf.Round(instanceBlock.transform.position.x), Mathf.Round(instanceBlock.transform.position.y), 0);
                 instanceBlock.tag = "destructible";
 
-                //adds the script for whaichever material is selected
+                //adds the script for whichever material is selected
                 switch (currentMaterial)
                 {
                     case MAT_TYPE.WOOD:
