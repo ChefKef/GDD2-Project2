@@ -43,9 +43,9 @@ public class RockManager : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collided == false && collision.gameObject.tag == "destructible") //Ensure that collision is only calculated once.
+        if (collided == false && (collision.gameObject.tag == "destructible" || collision.gameObject.tag == "childBlock")) //Ensure that collision is only calculated once.
         {
-            collision.gameObject.GetComponent<Material>().CalcDamage(forceConstant * GetComponent<Rigidbody2D>().velocity.x, shot);
+            collision.gameObject.GetComponentInParent<Material>().CalcDamage(forceConstant * GetComponent<Rigidbody2D>().velocity.x, shot);
             /*Code that calls a function on the object that can take damage. I would like to add a 'destructible' flag on all structures that can be deleted in order to not cause errors.
              The takeDamage() function will need to be made for walls/target orbs. If you come up with something that doesn't use the takeDamage() signature, that is fine.*/
             collided = true;
