@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     public GameObject bombShot;
     public GameObject spikeShot;
 
+    GameObject bm;
+
     GameObject lvlSelectUI;
     GameObject gridUI;
     GameObject gameUI;
@@ -72,6 +74,8 @@ public class GameManager : MonoBehaviour
         gridUI.SetActive(false);
         gameUI.SetActive(false);
         pauseUI.SetActive(false);
+
+        bm = GameObject.Find("BlockManager");
     }
 
     // Update is called once per frame
@@ -87,7 +91,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.Grid:
                 //player is building
-                PlaceBlock();
+                
                 break;
             case State.Game:
                 //Game is active
@@ -131,6 +135,8 @@ public class GameManager : MonoBehaviour
                 levelManager.cancelLevelLoop();
                 levelManager.HideGrid();
 
+                bm.GetComponent<BlockManager>().DeactivateGridPaint();
+
                 Destroy(currentBlock);
                 cbAlive = false;
                 break;
@@ -142,6 +148,8 @@ public class GameManager : MonoBehaviour
                 levelObjects.SetActive(true);
                 levelManager.cancelLevelLoop();
                 levelManager.DisplayGrid();
+
+                bm.GetComponent<BlockManager>().ActivateGridPaint();
                 break;
             case State.Game:
                 gameUI.SetActive(true);
@@ -151,6 +159,8 @@ public class GameManager : MonoBehaviour
                 levelObjects.SetActive(true);
                 levelManager.startLevelLoop();
                 levelManager.HideGrid();
+
+                bm.GetComponent<BlockManager>().DeactivateGridPaint();
 
                 Destroy(currentBlock);
                 cbAlive = false;
@@ -163,6 +173,8 @@ public class GameManager : MonoBehaviour
                 levelObjects.SetActive(false);
                 levelManager.cancelLevelLoop();
                 levelManager.HideGrid();
+
+                bm.GetComponent<BlockManager>().DeactivateGridPaint();
 
                 Destroy(currentBlock);
                 cbAlive = false;

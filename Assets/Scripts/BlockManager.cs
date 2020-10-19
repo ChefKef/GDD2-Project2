@@ -32,7 +32,7 @@ public class BlockManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Grid grid = new Grid(21, 9, 1f);
+        //Grid grid = new Grid(21, 9, 1f);
         testBlockPrivate = TestBlockPublic;
         blockList = new List<GameObject>();
 
@@ -46,7 +46,12 @@ public class BlockManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentState == EditorState.Painting)
+        
+    }
+
+    public void GridModeActive()
+    {
+        if (currentState == EditorState.Painting)
         {
             PainterMode();
         }
@@ -84,7 +89,7 @@ public class BlockManager : MonoBehaviour
             }
 
             //input checking for changing the material. (Temporarily number buttons, could be permanent as a secondary option to clicking
-            if(Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 currentMaterial = MAT_TYPE.WOOD;
                 Debug.Log("Wood");
@@ -110,6 +115,18 @@ public class BlockManager : MonoBehaviour
                 Debug.Log("Magic");
             }
         }
+    }
+
+    public void ActivateGridPaint()
+    {
+        InvokeRepeating("GridModeActive", 0.01f, 0.01f);
+    }
+
+    public void DeactivateGridPaint()
+    {
+        CancelInvoke();
+        LevelManager.Instance.activeObjects.AddRange(blockList);
+        //instanceBlock.transform.parent = GameObject.Find("LevelObjects").transform;
     }
 
     void PainterMode()
@@ -177,7 +194,6 @@ public class BlockManager : MonoBehaviour
                         blockList.Remove(instanceBlock);
                     }
                 }
-
             }
         }
         //right click input code
