@@ -239,6 +239,7 @@ public class GameManager : MonoBehaviour
         if (!cbAlive)
         {
             currentBlock = GameObject.Instantiate(blockPrefab, gridLoc, Quaternion.identity);
+            currentBlock.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             levelManager.activeObjects.Add(currentBlock);
             cbAlive = !cbAlive;
         }
@@ -249,6 +250,18 @@ public class GameManager : MonoBehaviour
         {
             currentBlock.transform.parent = levelObjects.transform;
             cbAlive = !cbAlive;
+        }
+    }
+
+    public void EndLevel(bool success)
+    {
+        if (success)
+        {
+            //won level
+        }
+        else
+        {
+            //failed
         }
     }
 }
