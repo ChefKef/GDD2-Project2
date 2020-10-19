@@ -126,6 +126,7 @@ public class BlockManager : MonoBehaviour
                 GameObject instanceBlock;
                 instanceBlock = Instantiate(testBlockPrivate, gameCam.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
                 instanceBlock.transform.position = new Vector3(Mathf.Round(instanceBlock.transform.position.x), Mathf.Round(instanceBlock.transform.position.y), 0);
+                instanceBlock.tag = "destructible";
 
                 //adds the script for whaichever material is selected
                 switch (currentMaterial)
@@ -198,7 +199,7 @@ public class BlockManager : MonoBehaviour
 
         if(Input.GetMouseButton(0))
         {
-            if (hit.collider != null && hit.collider.gameObject.tag == "block" && currentState == EditorState.Deleting)
+            if (hit.collider != null && hit.collider.gameObject.tag == "destructible" && currentState == EditorState.Deleting)
             {
                 blockList.Remove(hit.collider.gameObject);
                 Destroy(hit.collider.gameObject);
@@ -213,7 +214,7 @@ public class BlockManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //code for merging blocks
-            if (hit.collider != null && hit.collider.gameObject.tag == "block" && currentState == EditorState.Connecting)
+            if (hit.collider != null && hit.collider.gameObject.tag == "destructible" && currentState == EditorState.Connecting)
             {
                 if(debugList.Count == 0)
                 {
@@ -288,7 +289,10 @@ public class BlockManager : MonoBehaviour
                     g.transform.parent = parentObject.transform;
                     Destroy(g.GetComponent<Material>());
                     Debug.Log("Child has been connected");
+                    g.tag = "childBlock";
                 }
+
+                parentObject.tag = "destructible";
 
                 blockList.Add(parentObject);
 
