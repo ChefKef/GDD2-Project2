@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public int currentLevel;
     public State currentState;
     public State previousState;
+    State prePauseState;
     public static LevelManager levelManager;
 
     public GameObject trebuchetPrefab;
@@ -21,6 +22,12 @@ public class GameManager : MonoBehaviour
     public GameObject groundPrefab;
     public GameObject gridPrefab;
     public GameObject blockPrefab;
+
+    GameObject lvlSelectUI;
+    GameObject gridUI;
+    GameObject gameUI;
+    GameObject pauseUI;
+    public GameObject levelObjects;
 
     public GameObject currentBlock;
     private bool cbAlive = false;
@@ -54,6 +61,16 @@ public class GameManager : MonoBehaviour
 
         grid = gridPrefab.GetComponent<GridObject>();
         grid.buildIndices(new Vector2(-10, -5), 20, 10, 1);
+
+        lvlSelectUI = GameObject.Find("LevelSelectUI");
+        gridUI = GameObject.Find("GridUI");
+        gameUI = GameObject.Find("LevelUI");
+        pauseUI = GameObject.Find("PauseUI");
+        levelObjects = GameObject.Find("LevelObjects");
+
+        gridUI.SetActive(false);
+        gameUI.SetActive(false);
+        pauseUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -105,7 +122,108 @@ public class GameManager : MonoBehaviour
     {
         levelManager = LevelManager.Instance;
         levelManager.CleanUpLevel();
-        levelManager.setCurrentLevel(value);     
+        levelManager.setCurrentLevel(value);
+        ChangeGameState(State.Grid);
+    }
+
+    void ChangeGameState(State state)
+    {
+        prePauseState = currentState;
+        currentState = state;
+        switch (currentState)
+        {
+            case State.Title:
+                break;
+            case State.lvlSelect:
+                lvlSelectUI.SetActive(true);
+                gridUI.SetActive(false);
+                gameUI.SetActive(false);
+                pauseUI.SetActive(false);
+                levelObjects.SetActive(true);
+                levelManager.cancelLevelLoop();
+                break;
+            case State.Grid:
+                gridUI.SetActive(true);
+                lvlSelectUI.SetActive(false);
+                gameUI.SetActive(false);
+                pauseUI.SetActive(false);
+                levelObjects.SetActive(true);
+                levelManager.cancelLevelLoop();
+                break;
+            case State.Game:
+                gameUI.SetActive(true);
+                lvlSelectUI.SetActive(false);
+                gridUI.SetActive(false);
+                pauseUI.SetActive(false);
+                levelObjects.SetActive(true);
+                levelManager.startLevelLoop();
+                break;
+            case State.Pause:
+                pauseUI.SetActive(true);
+                lvlSelectUI.SetActive(false);
+                gridUI.SetActive(false);
+                gameUI.SetActive(false);
+                levelObjects.SetActive(false);
+                levelManager.cancelLevelLoop();
+                break;
+        }
+        /*switch (previousState)
+        {
+            case State.Title:
+                break;
+            case State.lvlSelect:
+                lvlSelect.SetActive(false);
+                break;
+            case State.Grid:
+                grid.SetActive(false);
+                break;
+            case State.Game:
+                game.SetActive(false);
+                break;
+            case State.Pause:
+                pause.SetActive(false);
+                break;
+        }*/
+    }
+
+    public void ButtonGameState(int state)
+    {
+        switch (state)
+        {
+            case 0:
+                ChangeGameState(State.Title);
+                break;
+            case 1:
+                ChangeGameState(State.lvlSelect);
+                break;
+            case 2:
+                ChangeGameState(State.Grid);
+                break;
+            case 3:
+                ChangeGameState(State.Game);
+                break;
+            case 4:
+                ChangeGameState(State.Pause);
+                break;
+        }
+    }
+
+    public void ButtonLevelSelect()
+    {
+        ChangeGameState(State.lvlSelect);
+        levelManager.CleanUpLevel();
+    }
+
+    public void ButtonRestart()
+    {
+        if(prePauseState == State.lvlSelect)
+        {
+            ChangeGameState(State.lvlSelect);
+        }
+        else
+        {
+            ChangeGameState(State.Grid);
+        }
     }
 
     Vector3 GetMouseInput()
@@ -121,10 +239,30 @@ public class GameManager : MonoBehaviour
         if (!cbAlive)
         {
             currentBlock = GameObject.Instantiate(blockPrefab, gridLoc, Quaternion.identity);
+            currentBlock.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            levelManager.activeObjects.Add(currentBlock);
             cbAlive = !cbAlive;
         }
 
         currentBlock.transform.position = gridLoc;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            currentBlock.transform.parent = levelObjects.transform;
+            cbAlive = !cbAlive;
+        }
+    }
+
+    public void EndLevel(bool success)
+    {
+        if (success)
+        {
+            //won level
+        }
+        else
+        {
+            //failed
+        }
     }
 }
 

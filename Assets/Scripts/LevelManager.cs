@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance { get { return _instance; } }
 
     public int currentLevel;
-    private List<GameObject> activeObjects;
+    public List<GameObject> activeObjects;
 
     private void Awake()
     {
@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour
     {
         LevelObject level1 = new LevelObject();
         level1.AddTrebuchet(new Vector2(5, 0), new Vector2(0, 0), 5, 0);
-        level1.BuildGround(new Vector2(-10, -2), new Vector2(10, -2));
+        level1.BuildGround(new Vector2(-10, -4), new Vector2(10, -4));
         level1.levelID = 1;
         level1.playerPos = new Vector2(0, 0);
         levels.Add(level1);
@@ -61,10 +61,19 @@ public class LevelManager : MonoBehaviour
     {
         levels[levelID].SetActiveLevel();
         activeObjects = levels[levelID].InitLevel();
+    }
+
+    public void startLevelLoop()
+    {
         InvokeRepeating("levelLoop", 3f, 4f);
     }
 
-    void levelLoop()
+    public void cancelLevelLoop()
+    {
+        CancelInvoke();
+    }
+
+    public void levelLoop()
     {
         //LevelObject currentLevelObject = levels[currentLevel].GetComponent<currentLevelObject>();
         for (int i = 0; i < activeObjects.Count; i++)
