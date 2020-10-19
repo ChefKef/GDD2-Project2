@@ -23,6 +23,12 @@ public class GameManager : MonoBehaviour
     public GameObject gridPrefab;
     public GameObject blockPrefab;
 
+    public GameObject regularShot;
+    public GameObject fireShot;
+    public GameObject iceShot;
+    public GameObject bombShot;
+    public GameObject spikeShot;
+
     GameObject lvlSelectUI;
     GameObject gridUI;
     GameObject gameUI;
@@ -31,8 +37,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject currentBlock;
     private bool cbAlive = false;
-
-    public GridObject grid;
 
     List<GameObject> levelSelectButtons;
 
@@ -59,9 +63,6 @@ public class GameManager : MonoBehaviour
         if(levelSelectButtons == null) levelSelectButtons = new List<GameObject>();
         if(levelManager.levels.Count == 0) levelManager.InitLevels();
 
-        grid = gridPrefab.GetComponent<GridObject>();
-        grid.buildIndices(new Vector2(-10, -5), 20, 10, 1);
-
         lvlSelectUI = GameObject.Find("LevelSelectUI");
         gridUI = GameObject.Find("GridUI");
         gameUI = GameObject.Find("LevelUI");
@@ -83,7 +84,6 @@ public class GameManager : MonoBehaviour
                 break;
             case State.lvlSelect:
                 //Display level select, probably scene switch eventually, rn is all done in one
-                DisplayLevelSelect();
                 break;
             case State.Grid:
                 //player is building
@@ -105,18 +105,6 @@ public class GameManager : MonoBehaviour
     }
 
     void OnDestroy() { if (this == _instance) { _instance = null; } }
-
-    void DisplayLevelSelect()
-    {
-
-        
-    }
-
-    void LoadLevels()
-    {
-
-        
-    }
 
     public void StartLevel(int value)
     {
@@ -141,6 +129,10 @@ public class GameManager : MonoBehaviour
                 pauseUI.SetActive(false);
                 levelObjects.SetActive(true);
                 levelManager.cancelLevelLoop();
+                levelManager.HideGrid();
+
+                Destroy(currentBlock);
+                cbAlive = false;
                 break;
             case State.Grid:
                 gridUI.SetActive(true);
@@ -149,6 +141,7 @@ public class GameManager : MonoBehaviour
                 pauseUI.SetActive(false);
                 levelObjects.SetActive(true);
                 levelManager.cancelLevelLoop();
+                levelManager.DisplayGrid();
                 break;
             case State.Game:
                 gameUI.SetActive(true);
@@ -157,6 +150,10 @@ public class GameManager : MonoBehaviour
                 pauseUI.SetActive(false);
                 levelObjects.SetActive(true);
                 levelManager.startLevelLoop();
+                levelManager.HideGrid();
+
+                Destroy(currentBlock);
+                cbAlive = false;
                 break;
             case State.Pause:
                 pauseUI.SetActive(true);
@@ -165,6 +162,10 @@ public class GameManager : MonoBehaviour
                 gameUI.SetActive(false);
                 levelObjects.SetActive(false);
                 levelManager.cancelLevelLoop();
+                levelManager.HideGrid();
+
+                Destroy(currentBlock);
+                cbAlive = false;
                 break;
         }
         /*switch (previousState)
@@ -172,16 +173,16 @@ public class GameManager : MonoBehaviour
             case State.Title:
                 break;
             case State.lvlSelect:
-                lvlSelect.SetActive(false);
+                
                 break;
             case State.Grid:
-                grid.SetActive(false);
+                Destroy(currentBlock);
                 break;
             case State.Game:
-                game.SetActive(false);
+                
                 break;
             case State.Pause:
-                pause.SetActive(false);
+                
                 break;
         }*/
     }
@@ -246,7 +247,7 @@ public class GameManager : MonoBehaviour
 
         currentBlock.transform.position = gridLoc;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             currentBlock.transform.parent = levelObjects.transform;
             cbAlive = !cbAlive;
