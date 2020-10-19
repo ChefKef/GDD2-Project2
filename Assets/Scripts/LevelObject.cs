@@ -11,18 +11,18 @@ public class LevelObject
     public List<Vector2> trebuchetPos = new List<Vector2>();
     public List<Vector2> trebuchetTarget = new List<Vector2>();
     public List<float> upwardVels = new List<float>();
-    public List<int> boulderType = new List<int>();
+    public List<SHOT_TYPE> boulderType = new List<SHOT_TYPE>();
     public List<float> groundLocations = new List<float>();
     public Vector2 playerPos;
 
     private bool active = false;
 
-    public void AddTrebuchet(Vector2 pos, Vector2 target, float upwardForce, int type)
+    public void AddTrebuchet(Vector2 pos, Vector2 target, float upwardForce, SHOT_TYPE shot)
     {
         this.trebuchetPos.Add(pos);
         trebuchetTarget.Add(target);
         upwardVels.Add(upwardForce);
-        boulderType.Add(type);
+        boulderType.Add(shot);
     }
 
     public List<GameObject> InitLevel()
