@@ -1,0 +1,1672 @@
+fileFormatVersion: 2
+guid: 23ca3815cd01a9c4fa142bef62034657
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1159330041199876131
+    second: Block Destroyed_0
+  - first:
+      213: 3761751174444285076
+    second: Block Destroyed_1
+  - first:
+      213: 5203674930077696090
+    second: Block Destroyed_2
+  - first:
+      213: 6853920811158235897
+    second: Block Destroyed_3
+  - first:
+      213: -6843387970010842657
+    second: Block Destroyed_4
+  - first:
+      213: -2434593690486898470
+    second: Block Destroyed_5
+  - first:
+      213: 5470754318095619080
+    second: Block Destroyed_6
+  - first:
+      213: -8605042947644020557
+    second: Block Destroyed_7
+  - first:
+      213: -7527473263650931348
+    second: Block Destroyed_8
+  - first:
+      213: 4058119873925905141
+    second: Block Destroyed_9
+  - first:
+      213: -7775598264353452180
+    second: Block Destroyed_10
+  - first:
+      213: -5611268118552802661
+    second: Block Destroyed_11
+  - first:
+      213: -3243642245474566484
+    second: Block Destroyed_12
+  - first:
+      213: -5224547702055217272
+    second: Block Destroyed_13
+  - first:
+      213: 8094080217482288206
+    second: Block Destroyed_14
+  - first:
+      213: 6264274084216218165
+    second: Block Destroyed_15
+  - first:
+      213: -6128682190370951823
+    second: Block Destroyed_16
+  - first:
+      213: -4747548353461569383
+    second: Block Destroyed_17
+  - first:
+      213: 4047849244476302479
+    second: Block Destroyed_18
+  - first:
+      213: -2145287528259693061
+    second: Block Destroyed_19
+  - first:
+      213: -3414430145296783386
+    second: Block Destroyed_20
+  - first:
+      213: -5241897260442863629
+    second: Block Destroyed_21
+  - first:
+      213: -6287686883922792640
+    second: Block Destroyed_22
+  - first:
+      213: -4711601711039339031
+    second: Block Destroyed_23
+  - first:
+      213: 8957145068498682893
+    second: Block Destroyed_24
+  - first:
+      213: -694197745687342110
+    second: Block Destroyed_25
+  - first:
+      213: -2174189191603271331
+    second: Block Destroyed_26
+  - first:
+      213: -1365850590629354718
+    second: Block Destroyed_27
+  - first:
+      213: -7252447421133259137
+    second: Block Destroyed_28
+  - first:
+      213: 7223454565298500485
+    second: Block Destroyed_29
+  - first:
+      213: 4928481929073392222
+    second: Block Destroyed_30
+  - first:
+      213: -2892376037994545770
+    second: Block Destroyed_31
+  - first:
+      213: -1552559001699137565
+    second: Block Destroyed_32
+  - first:
+      213: 8443434452281550178
+    second: Block Destroyed_33
+  - first:
+      213: -5227857234716610137
+    second: Block Destroyed_34
+  - first:
+      213: 6863138907408929590
+    second: Block Destroyed_35
+  - first:
+      213: -270530197676857936
+    second: Block Destroyed_36
+  - first:
+      213: -9037810226470150013
+    second: Block Destroyed_37
+  - first:
+      213: 8175203226068412228
+    second: Block Destroyed_38
+  - first:
+      213: 7743105604687919277
+    second: Block Destroyed_39
+  - first:
+      213: 5400894482191411821
+    second: Block Destroyed_40
+  - first:
+      213: -8253196373046583803
+    second: Block Destroyed_41
+  - first:
+      213: 7977580044883992943
+    second: Block Destroyed_42
+  - first:
+      213: 761990876736536141
+    second: Block Destroyed_43
+  - first:
+      213: 1268559870428521658
+    second: Block Destroyed_44
+  - first:
+      213: -1031401672322711451
+    second: Block Destroyed_45
+  - first:
+      213: 9001840909379453940
+    second: Block Destroyed_46
+  - first:
+      213: 3573895144845498162
+    second: Block Destroyed_47
+  - first:
+      213: 7801252442313376258
+    second: Block Destroyed_48
+  - first:
+      213: 7456238717921815617
+    second: Block Destroyed_49
+  - first:
+      213: 3587101950956442130
+    second: Block Destroyed_50
+  - first:
+      213: 8308786126500454913
+    second: Block Destroyed_51
+  - first:
+      213: 4830076646692187180
+    second: Block Destroyed_52
+  - first:
+      213: 56368439393341485
+    second: Block Destroyed_53
+  - first:
+      213: 9220764472124740287
+    second: Block Destroyed_54
+  - first:
+      213: -4191339315080774292
+    second: Block Destroyed_55
+  - first:
+      213: 6308165731819173540
+    second: Block Destroyed_56
+  - first:
+      213: -6395442120249784053
+    second: Block Destroyed_57
+  - first:
+      213: -4956154458797261093
+    second: Block Destroyed_0
+  - first:
+      213: 7617919706114529958
+    second: Block Destroyed_1
+  - first:
+      213: 4101804267257953440
+    second: Block Destroyed_2
+  - first:
+      213: 4541885154981959393
+    second: Block Destroyed_3
+  - first:
+      213: 4417526293031336358
+    second: Block Destroyed_4
+  - first:
+      213: -2879902891532672065
+    second: Block Destroyed_5
+  - first:
+      213: 2178652233795112535
+    second: Block Destroyed_6
+  - first:
+      213: -1734245360740568836
+    second: Block Destroyed_7
+  - first:
+      213: -8565773872335837259
+    second: Block Destroyed_8
+  - first:
+      213: -7507424441567130518
+    second: Block Destroyed_9
+  - first:
+      213: 4677802890715223481
+    second: Block Destroyed_10
+  - first:
+      213: -7589520578608303937
+    second: Block Destroyed_11
+  - first:
+      213: 1862432829864845790
+    second: Block Destroyed_12
+  - first:
+      213: -8626021150246948851
+    second: Block Destroyed_13
+  - first:
+      213: 7261824298298366016
+    second: Block Destroyed_14
+  - first:
+      213: -1895894897886261212
+    second: Block Destroyed_15
+  - first:
+      213: -8520076134117125195
+    second: Block Destroyed_16
+  - first:
+      213: -3151739199386567781
+    second: Block Destroyed_17
+  - first:
+      213: -2221294568065669199
+    second: Block Destroyed_18
+  - first:
+      213: 853713310382832230
+    second: Block Destroyed_19
+  - first:
+      213: -5503335353176506573
+    second: Block Destroyed_20
+  - first:
+      213: -6337240043341345283
+    second: Block Destroyed_21
+  - first:
+      213: -8168736319957384412
+    second: Block Destroyed_22
+  - first:
+      213: -6778337435153282275
+    second: Block Destroyed_23
+  - first:
+      213: 6712031676572054868
+    second: Block Destroyed_24
+  - first:
+      213: 5867276206399699531
+    second: Block Destroyed_25
+  - first:
+      213: 914667525862491877
+    second: Block Destroyed_26
+  - first:
+      213: -2087938795513763356
+    second: Block Destroyed_27
+  - first:
+      213: -7021323710665130964
+    second: Block Destroyed_28
+  - first:
+      213: 8898549104192622025
+    second: Block Destroyed_29
+  - first:
+      213: -5725006070547080378
+    second: Block Destroyed_30
+  - first:
+      213: -5092274748863246809
+    second: Block Destroyed_31
+  - first:
+      213: 1830386884174316058
+    second: Block Destroyed_32
+  - first:
+      213: 784201260170582620
+    second: Block Destroyed_33
+  - first:
+      213: -3641438470249237998
+    second: Block Destroyed_34
+  - first:
+      213: 3046217820650669081
+    second: Block Destroyed_35
+  - first:
+      213: 752010300861625089
+    second: Block Destroyed_36
+  - first:
+      213: -9185345459646927822
+    second: Block Destroyed_37
+  - first:
+      213: 456322748015857858
+    second: Block Destroyed_38
+  - first:
+      213: 4973586064106666339
+    second: Block Destroyed_39
+  - first:
+      213: -3060242557747891788
+    second: Block Destroyed_40
+  - first:
+      213: -170380647333455054
+    second: Block Destroyed_41
+  - first:
+      213: -686664402664829928
+    second: Block Destroyed_42
+  - first:
+      213: 8930611310707383917
+    second: Block Destroyed_43
+  - first:
+      213: -6546666315809443208
+    second: Block Destroyed_44
+  - first:
+      213: 408545848664181142
+    second: Block Destroyed_45
+  - first:
+      213: -8347671557825961729
+    second: Block Destroyed_46
+  - first:
+      213: 1682599567609850098
+    second: Block Destroyed_47
+  - first:
+      213: -4493992078285227236
+    second: Block Destroyed_48
+  - first:
+      213: -3743787705191277280
+    second: Block Destroyed_49
+  - first:
+      213: 6341407515932654257
+    second: Block Destroyed_50
+  - first:
+      213: -1144816977552933461
+    second: Block Destroyed_51
+  - first:
+      213: 1434302582715453235
+    second: Block Destroyed_52
+  - first:
+      213: 1054238061975658228
+    second: Block Destroyed_53
+  - first:
+      213: 2859344389215884684
+    second: Block Destroyed_54
+  - first:
+      213: 6811972869255962196
+    second: Block Destroyed_55
+  - first:
+      213: 6207024419927860416
+    second: Block Destroyed_56
+  - first:
+      213: -4544051305651445599
+    second: Block Destroyed_57
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Block Destroyed_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdebb6f47c3383bb0800000000000000
+      internalID: -4956154458797261093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_1
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6aa976a7c9948b960800000000000000
+      internalID: 7617919706114529958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_2
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ac7710bf398ce830800000000000000
+      internalID: 4101804267257953440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_3
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e6d1590c74080f30800000000000000
+      internalID: 4541885154981959393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_4
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a9b41a22c43e4d30800000000000000
+      internalID: 4417526293031336358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_5
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb3239a14978808d0800000000000000
+      internalID: -2879902891532672065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_6
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75e0874e9a02c3e10800000000000000
+      internalID: 2178652233795112535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_7
+      rect:
+        serializedVersion: 2
+        x: 931
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf070b76809bee7e0800000000000000
+      internalID: -1734245360740568836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_8
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b7a919eb02402980800000000000000
+      internalID: -8565773872335837259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_9
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6c4e461f3540d790800000000000000
+      internalID: -7507424441567130518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_10
+      rect:
+        serializedVersion: 2
+        x: 1330
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b5506ee1f4eae040800000000000000
+      internalID: 4677802890715223481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_11
+      rect:
+        serializedVersion: 2
+        x: 1463
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb0f888ae3b9ca690800000000000000
+      internalID: -7589520578608303937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_12
+      rect:
+        serializedVersion: 2
+        x: 1596
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed1ae1a8ac0b8d910800000000000000
+      internalID: 1862432829864845790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_13
+      rect:
+        serializedVersion: 2
+        x: 1729
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d00368a67773a4880800000000000000
+      internalID: -8626021150246948851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_14
+      rect:
+        serializedVersion: 2
+        x: 1862
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 048df5979be27c460800000000000000
+      internalID: 7261824298298366016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_15
+      rect:
+        serializedVersion: 2
+        x: 1995
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4209300a2ad60b5e0800000000000000
+      internalID: -1895894897886261212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_16
+      rect:
+        serializedVersion: 2
+        x: 2128
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b35aa6b5eb92c980800000000000000
+      internalID: -8520076134117125195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_17
+      rect:
+        serializedVersion: 2
+        x: 2261
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9bb3e395e5c244d0800000000000000
+      internalID: -3151739199386567781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_18
+      rect:
+        serializedVersion: 2
+        x: 2394
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b7e0f8fb506c21e0800000000000000
+      internalID: -2221294568065669199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_19
+      rect:
+        serializedVersion: 2
+        x: 2527
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66a346d8bbff8db00800000000000000
+      internalID: 853713310382832230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_20
+      rect:
+        serializedVersion: 2
+        x: 2660
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33fb01a77a930a3b0800000000000000
+      internalID: -5503335353176506573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_21
+      rect:
+        serializedVersion: 2
+        x: 2793
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfd0248b1c99d08a0800000000000000
+      internalID: -6337240043341345283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_22
+      rect:
+        serializedVersion: 2
+        x: 2926
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 423cb19c891d2ae80800000000000000
+      internalID: -8168736319957384412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_23
+      rect:
+        serializedVersion: 2
+        x: 3059
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1bc4f114028ee1a0800000000000000
+      internalID: -6778337435153282275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_24
+      rect:
+        serializedVersion: 2
+        x: 3192
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4553f3b7f3de52d50800000000000000
+      internalID: 6712031676572054868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_25
+      rect:
+        serializedVersion: 2
+        x: 3325
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4a3e81af90cc6150800000000000000
+      internalID: 5867276206399699531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_26
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e68e96c44d81bc00800000000000000
+      internalID: 914667525862491877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_27
+      rect:
+        serializedVersion: 2
+        x: 3591
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e925a45ab62603e0800000000000000
+      internalID: -2087938795513763356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_28
+      rect:
+        serializedVersion: 2
+        x: 3724
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2cf6c4294f3f8e90800000000000000
+      internalID: -7021323710665130964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_29
+      rect:
+        serializedVersion: 2
+        x: 3857
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cd85c3834ffd7b70800000000000000
+      internalID: 8898549104192622025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_30
+      rect:
+        serializedVersion: 2
+        x: 3990
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64b161caf41bc80b0800000000000000
+      internalID: -5725006070547080378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_31
+      rect:
+        serializedVersion: 2
+        x: 4123
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72e805f881b9459b0800000000000000
+      internalID: -5092274748863246809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_32
+      rect:
+        serializedVersion: 2
+        x: 4256
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a128eb06c27d66910800000000000000
+      internalID: 1830386884174316058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_33
+      rect:
+        serializedVersion: 2
+        x: 4389
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5a91e824ea02ea00800000000000000
+      internalID: 784201260170582620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_34
+      rect:
+        serializedVersion: 2
+        x: 4522
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2123a552103077dc0800000000000000
+      internalID: -3641438470249237998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_35
+      rect:
+        serializedVersion: 2
+        x: 4655
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9140954e7f6564a20800000000000000
+      internalID: 3046217820650669081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_36
+      rect:
+        serializedVersion: 2
+        x: 4788
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 103ba42626daf6a00800000000000000
+      internalID: 752010300861625089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_37
+      rect:
+        serializedVersion: 2
+        x: 4921
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23c6f7278f8178080800000000000000
+      internalID: -9185345459646927822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_38
+      rect:
+        serializedVersion: 2
+        x: 5054
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c05a622f1f255600800000000000000
+      internalID: 456322748015857858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_39
+      rect:
+        serializedVersion: 2
+        x: 5187
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36939e29c2ab50540800000000000000
+      internalID: 4973586064106666339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_40
+      rect:
+        serializedVersion: 2
+        x: 5320
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b177ea8b95d785d0800000000000000
+      internalID: -3060242557747891788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_41
+      rect:
+        serializedVersion: 2
+        x: 5453
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23b961734bfa2adf0800000000000000
+      internalID: -170380647333455054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_42
+      rect:
+        serializedVersion: 2
+        x: 5586
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81cc1472d5a7876f0800000000000000
+      internalID: -686664402664829928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_43
+      rect:
+        serializedVersion: 2
+        x: 5719
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6e9cc1bba7efeb70800000000000000
+      internalID: 8930611310707383917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_44
+      rect:
+        serializedVersion: 2
+        x: 5852
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 872b927eba19525a0800000000000000
+      internalID: -6546666315809443208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_45
+      rect:
+        serializedVersion: 2
+        x: 5985
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 699c618e8427ba500800000000000000
+      internalID: 408545848664181142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_46
+      rect:
+        serializedVersion: 2
+        x: 6118
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff0e62e22fc172c80800000000000000
+      internalID: -8347671557825961729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_47
+      rect:
+        serializedVersion: 2
+        x: 6251
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f86c96546bc95710800000000000000
+      internalID: 1682599567609850098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_48
+      rect:
+        serializedVersion: 2
+        x: 6384
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1bb366d30222a1c0800000000000000
+      internalID: -4493992078285227236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_49
+      rect:
+        serializedVersion: 2
+        x: 6517
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02d5995eae46b0cc0800000000000000
+      internalID: -3743787705191277280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_50
+      rect:
+        serializedVersion: 2
+        x: 6650
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ba782b9984310850800000000000000
+      internalID: 6341407515932654257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_51
+      rect:
+        serializedVersion: 2
+        x: 6783
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: badfe10460bcc10f0800000000000000
+      internalID: -1144816977552933461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_52
+      rect:
+        serializedVersion: 2
+        x: 6916
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33f0e27899aa7e310800000000000000
+      internalID: 1434302582715453235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_53
+      rect:
+        serializedVersion: 2
+        x: 7049
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fe51c88ee761ae00800000000000000
+      internalID: 1054238061975658228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_54
+      rect:
+        serializedVersion: 2
+        x: 7182
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8518b1929e6ea720800000000000000
+      internalID: 2859344389215884684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_55
+      rect:
+        serializedVersion: 2
+        x: 7315
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45e9993bb3df88e50800000000000000
+      internalID: 6811972869255962196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_56
+      rect:
+        serializedVersion: 2
+        x: 7448
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c4a9fdd2d7c32650800000000000000
+      internalID: 6207024419927860416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block Destroyed_57
+      rect:
+        serializedVersion: 2
+        x: 7581
+        y: 0
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a0ee75b96940f0c0800000000000000
+      internalID: -4544051305651445599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

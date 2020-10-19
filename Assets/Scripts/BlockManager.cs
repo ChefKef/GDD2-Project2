@@ -9,6 +9,9 @@ public class BlockManager : MonoBehaviour
     public GameObject TestBlockPublic;
     private GameObject testBlockPrivate;
 
+    //a good way to do corners and stuff may be to split this into multiple lists, one for each material, where each index represents a particular edge/corner.
+    public List<Sprite> sprites;
+
     private List<GameObject> blockList;
 
     private List<GameObject> debugList;
@@ -123,12 +126,15 @@ public class BlockManager : MonoBehaviour
                 GameObject instanceBlock;
                 instanceBlock = Instantiate(testBlockPrivate, gameCam.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
                 instanceBlock.transform.position = new Vector3(Mathf.Round(instanceBlock.transform.position.x), Mathf.Round(instanceBlock.transform.position.y), 0);
+                instanceBlock.tag = "destructible";
 
                 //adds the script for whaichever material is selected
                 switch (currentMaterial)
                 {
                     case MAT_TYPE.WOOD:
                         instanceBlock.AddComponent<Wood>();
+
+                        instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[0];
                         break;
                     case MAT_TYPE.GLASS:
                         instanceBlock.AddComponent<Glass>();
@@ -139,14 +145,12 @@ public class BlockManager : MonoBehaviour
                     case MAT_TYPE.STONE:
                         instanceBlock.AddComponent<Stone>();
 
-                        //TEMPORARY PART - CHANGES COLOR, REPLACE WITH ACTUAL SPRITE PICKING
-                        instanceBlock.GetComponent<SpriteRenderer>().color = new Color(1, .7f, .5f);
+                        instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[1];
                         break;
                     case MAT_TYPE.STEEL:
                         instanceBlock.AddComponent<Steel>();
 
-                        //TEMPORARY PART - CHANGES COLOR, REPLACE WITH ACTUAL SPRITE PICKING
-                        instanceBlock.GetComponent<SpriteRenderer>().color = new Color(0.8f, 0, 1);
+                        instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[2];
                         break;
                     case MAT_TYPE.MAGIC:
                         instanceBlock.AddComponent<Magic>();
@@ -195,7 +199,7 @@ public class BlockManager : MonoBehaviour
 
         if(Input.GetMouseButton(0))
         {
-            if (hit.collider != null && hit.collider.gameObject.tag == "block" && currentState == EditorState.Deleting)
+            if (hit.collider != null && hit.collider.gameObject.tag == "destructible" && currentState == EditorState.Deleting)
             {
                 blockList.Remove(hit.collider.gameObject);
                 Destroy(hit.collider.gameObject);
@@ -210,7 +214,7 @@ public class BlockManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //code for merging blocks
-            if (hit.collider != null && hit.collider.gameObject.tag == "block" && currentState == EditorState.Connecting)
+            if (hit.collider != null && hit.collider.gameObject.tag == "destructible" && currentState == EditorState.Connecting)
             {
                 if(debugList.Count == 0)
                 {
@@ -285,7 +289,10 @@ public class BlockManager : MonoBehaviour
                     g.transform.parent = parentObject.transform;
                     Destroy(g.GetComponent<Material>());
                     Debug.Log("Child has been connected");
+                    g.tag = "childBlock";
                 }
+
+                parentObject.tag = "destructible";
 
                 blockList.Add(parentObject);
 
