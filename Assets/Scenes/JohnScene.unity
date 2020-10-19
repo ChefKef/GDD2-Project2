@@ -257,6 +257,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2424828130385789331, guid: c22bcfd607f2a9a48ab480f41995d3c2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2424828130385789331, guid: c22bcfd607f2a9a48ab480f41995d3c2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6346453648414131099, guid: c22bcfd607f2a9a48ab480f41995d3c2, type: 3}
       propertyPath: m_Name
       value: Trebuchet
