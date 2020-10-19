@@ -5,7 +5,7 @@ using UnityEngine;
 public class Material : MonoBehaviour
 {
     protected int cost;
-    protected float durability;
+    public float durability;
     protected float forceTransfer;
     protected MAT_TYPE type;
     protected SHOT_TYPE weakness;
@@ -54,6 +54,7 @@ public class Material : MonoBehaviour
         if (durability <= 0.0f)
         {
             //destroy the object this is attatched to.
+            Destroy(gameObject);
         }
     }
 
@@ -69,7 +70,50 @@ public class Material : MonoBehaviour
             shotSpeed = shotSpeed * forceTransfer;
             for (int i = 0; i < neighbors.Count; i++)
             {
-                neighbors[i].DoDamage(shotSpeed, damageType);
+                if (neighbors[i])
+                {
+                    neighbors[i].DoDamage(shotSpeed, damageType);
+                }
+                else
+                {
+                    //removes it if it was destroyed recently
+                    neighbors.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+    }
+
+    //adds as a neighbor when it touches
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if ((collision.gameObject.tag == "destructible" || collision.gameObject.tag == "childBlock"))
+        {
+            Material collidedMaterial;
+            //checks if it can get a material and gets it, then checks if it's already in the list or is itself
+            if (collidedMaterial = collision.gameObject.GetComponentInParent<Material>()) 
+            {
+                if (!neighbors.Contains(collidedMaterial) && collidedMaterial != this) 
+                {
+                    neighbors.Add(collidedMaterial);
+                }
+            }
+        }
+    }
+
+    //removes as a neighbor when it stops
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if ((collision.gameObject.tag == "destructible" || collision.gameObject.tag == "childBlock"))
+        {
+            Material collidedMaterial;
+            //checks if it can get a material and gets it, then checks if it's actually in the list
+            if (collidedMaterial = collision.gameObject.GetComponentInParent<Material>())
+            {
+                if (neighbors.Contains(collidedMaterial))
+                {
+                    neighbors.Remove(collidedMaterial);
+                }
             }
         }
     }
