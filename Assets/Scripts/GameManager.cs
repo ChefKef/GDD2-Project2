@@ -63,8 +63,6 @@ public class GameManager : MonoBehaviour
         currentState = State.lvlSelect;
         previousState = State.lvlSelect;
         levelManager = LevelManager.Instance;
-        if(levelSelectButtons == null) levelSelectButtons = new List<GameObject>();
-        if(levelManager.levels.Count == 0) levelManager.InitLevels();
 
         lvlSelectUI = GameObject.Find("LevelSelectUI");
         gridUI = GameObject.Find("GridUI");
@@ -78,6 +76,9 @@ public class GameManager : MonoBehaviour
 
         bm = GameObject.Find("BlockManager");
 
+        if (levelSelectButtons == null) levelSelectButtons = new List<GameObject>();
+        if(levelManager.levels.Count == 0) levelManager.InitLevels();
+        
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManagerScript>();
         if (audioManager != null)
         {
@@ -306,6 +307,11 @@ public class GameManager : MonoBehaviour
         {
             //failed
         }
+    }
+
+    public void ChangeScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
 

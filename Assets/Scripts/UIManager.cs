@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     //Changes game to the Level Select Screen
     public void GoToLevelSelect()
     {
-        SceneManager.LoadScene("LevelSelectScene");
+        SceneManager.LoadScene("LevelUIScene");
     }
 
     //Changes game to the specified Level
