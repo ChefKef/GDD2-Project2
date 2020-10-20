@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     GameObject gameUI;
     GameObject pauseUI;
     public GameObject levelObjects;
+    public GameObject groundContainer;
 
     public GameObject currentBlock;
     private bool cbAlive = false;
