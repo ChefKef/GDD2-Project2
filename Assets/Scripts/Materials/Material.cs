@@ -14,9 +14,16 @@ public class Material : MonoBehaviour
     //everything colliding with this, for force transfer damage calculations. Resets every frame
     protected List<Material> neighbors;
 
+    private AudioManagerScript audioManager;
+
     public MAT_TYPE Type
     {
         get { return type; }
+    }
+
+    public void Start()
+    {
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManagerScript>(); //Allows block to make sounds when hit
     }
 
     //constructor for the material, this is the base which won't likely be called
@@ -39,6 +46,7 @@ public class Material : MonoBehaviour
         {
             //double damage if it is weak to this attack
             durability -= (damage * 2);
+
         }
         else if (damageType == resistance) 
         {
@@ -55,6 +63,13 @@ public class Material : MonoBehaviour
         {
             //destroy the object this is attatched to.
             Destroy(gameObject);
+            if (audioManager != null) //Plays destroyed noise
+                audioManager.playBlockBreak2Clip();
+        }
+        else
+        {
+            if (audioManager != null) //Plays hit noise
+                audioManager.playBlockHitClip();
         }
     }
 

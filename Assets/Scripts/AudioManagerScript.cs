@@ -98,8 +98,7 @@ public class AudioManagerScript : MonoBehaviour
     {
         if (effects != null)
         {
-            effects.clip = cancel;
-            effects.Play();
+            effects.PlayOneShot(cancel);
         }
     }
     //Plays confirm sound
@@ -107,8 +106,7 @@ public class AudioManagerScript : MonoBehaviour
     {
         if (effects != null)
         {
-            effects.clip = confirm;
-            effects.Play();
+            effects.PlayOneShot(confirm);
         }
     }
     //Plays jump sound
@@ -116,8 +114,7 @@ public class AudioManagerScript : MonoBehaviour
     {
         if (effects != null)
         {
-            effects.clip = jump;
-            effects.Play();
+            effects.PlayOneShot(jump);
         }
     }
     //Plays confirm sound
@@ -125,8 +122,7 @@ public class AudioManagerScript : MonoBehaviour
     {
         if (effects != null)
         {
-            effects.clip = select;
-            effects.Play();
+            effects.PlayOneShot(select);
         }
     }
     //------------Blocks------------
@@ -135,8 +131,7 @@ public class AudioManagerScript : MonoBehaviour
     {
         if (effects != null)
         {
-            effects.clip = blockBreak1;
-            effects.Play();
+            effects.PlayOneShot(blockBreak1);
         }
     }
     //Plays second block breaking sound
@@ -144,8 +139,7 @@ public class AudioManagerScript : MonoBehaviour
     {
         if (effects != null)
         {
-            effects.clip = blockBreak2;
-            effects.Play();
+            effects.PlayOneShot(blockBreak2);
         }
     }
     //Plays  block hitting sound
@@ -153,8 +147,7 @@ public class AudioManagerScript : MonoBehaviour
     {
         if (effects != null)
         {
-            effects.clip = blockHit;
-            effects.Play();
+            effects.PlayOneShot(blockHit);
         }
     }
 
@@ -164,8 +157,7 @@ public class AudioManagerScript : MonoBehaviour
     {
         if (effects != null)
         {
-            effects.clip = win;
-            effects.Play();
+            effects.PlayOneShot(win);
         }
     }
     //Plays loss sound
@@ -173,8 +165,7 @@ public class AudioManagerScript : MonoBehaviour
     {
         if (effects != null)
         {
-            effects.clip = loss;
-            effects.Play();
+            effects.PlayOneShot(loss);
         }
     }
     //Plays win sound
@@ -182,8 +173,7 @@ public class AudioManagerScript : MonoBehaviour
     {
         if (effects != null)
         {
-            effects.clip = pause;
-            effects.Play();
+            effects.PlayOneShot(pause);
         }
     }
     //Stops any effects from playing
