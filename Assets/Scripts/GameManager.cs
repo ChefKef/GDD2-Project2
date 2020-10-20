@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
                 gridUI.SetActive(false);
                 gameUI.SetActive(false);
                 pauseUI.SetActive(false);
-                levelObjects.SetActive(true);
+                levelObjects.SetActive(false);
                 levelManager.cancelLevelLoop();
                 levelManager.HideGrid();
 
