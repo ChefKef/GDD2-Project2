@@ -7,6 +7,10 @@ public class BlockManager : MonoBehaviour
     public Camera gameCam;
 
     public GameObject TestBlockPublic;
+
+    public GameObject Material;
+    public GameObject Mouse;
+
     private GameObject testBlockPrivate;
 
     //a good way to do corners and stuff may be to split this into multiple lists, one for each material, where each index represents a particular edge/corner.
@@ -28,11 +32,12 @@ public class BlockManager : MonoBehaviour
     }
 
     private EditorState currentState;
+    private bool paused;
 
     // Start is called before the first frame update
     void Start()
     {
-        Grid grid = new Grid(21, 9, 1f);
+        //Grid grid = new Grid(21, 9, 1f);
         testBlockPrivate = TestBlockPublic;
         blockList = new List<GameObject>();
 
@@ -46,7 +51,13 @@ public class BlockManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentState == EditorState.Painting)
+        if (!paused)
+            GridModeActive();
+    }
+
+    public void GridModeActive()
+    {
+        if (currentState == EditorState.Painting)
         {
             PainterMode();
         }
@@ -62,29 +73,26 @@ public class BlockManager : MonoBehaviour
         //checks if anything is being done now
         if (Input.anyKey)
         {
-            //right click input code
-            if (Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(3) || Input.GetMouseButtonDown(4))
+            //input checking for changing the drawing mode.
+            if (Input.GetKeyDown(KeyCode.A))
             {
-                if (currentState == EditorState.Painting)
-                {
-                    Debug.Log("Now Deleting");
-                    currentState = EditorState.Deleting;
-                }
-                else if (currentState == EditorState.Deleting)
-                {
-                    Debug.Log("Now Connecting");
-                    currentState = EditorState.Connecting;
-                }
-                else if (currentState == EditorState.Connecting)
-                {
-                    Debug.Log("Now Painting");
-                    currentState = EditorState.Painting;
-                }
-
+                currentState = EditorState.Painting;
+                Debug.Log("Now Painting");
             }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                currentState = EditorState.Connecting;
+                Debug.Log("Now Connecting");
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                currentState = EditorState.Deleting;
+                Debug.Log("Now Deleting");
+            }
+            Mouse.GetComponent<MouseModeManager>().setMode((int)currentState);
 
             //input checking for changing the material. (Temporarily number buttons, could be permanent as a secondary option to clicking
-            if(Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 currentMaterial = MAT_TYPE.WOOD;
                 Debug.Log("Wood");
@@ -99,7 +107,8 @@ public class BlockManager : MonoBehaviour
                 currentMaterial = MAT_TYPE.STONE;
                 Debug.Log("Stone");
             }
-            if (Input.GetKeyDown(KeyCode.Alpha4))
+            Material.GetComponent<MaterialLabelManager>().setMaterial(currentMaterial);
+            /*if (Input.GetKeyDown(KeyCode.Alpha4))
             {
                 currentMaterial = MAT_TYPE.STEEL;
                 Debug.Log("Steel");
@@ -108,8 +117,22 @@ public class BlockManager : MonoBehaviour
             {
                 currentMaterial = MAT_TYPE.MAGIC;
                 Debug.Log("Magic");
-            }
+            }*/
         }
+    }
+
+    public void ActivateGridPaint()
+    {
+        //InvokeRepeating("GridModeActive", 0.01f, 0.01f);
+        paused = false;
+    }
+
+    public void DeactivateGridPaint()
+    {
+        //CancelInvoke();
+        paused = true;
+        LevelManager.Instance.activeObjects.AddRange(blockList);
+        //instanceBlock.transform.parent = GameObject.Find("LevelObjects").transform;
     }
 
     void PainterMode()
@@ -126,9 +149,10 @@ public class BlockManager : MonoBehaviour
                 GameObject instanceBlock;
                 instanceBlock = Instantiate(testBlockPrivate, gameCam.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
                 instanceBlock.transform.position = new Vector3(Mathf.Round(instanceBlock.transform.position.x), Mathf.Round(instanceBlock.transform.position.y), 0);
+                instanceBlock.transform.parent = GameManager.Instance.levelObjects.transform;
                 instanceBlock.tag = "destructible";
 
-                //adds the script for whaichever material is selected
+                //adds the script for whichever material is selected
                 switch (currentMaterial)
                 {
                     case MAT_TYPE.WOOD:
@@ -179,6 +203,7 @@ public class BlockManager : MonoBehaviour
                     }
                 }
 
+                LevelManager.Instance.activeObjects.Add(instanceBlock);
             }
         }
         //right click input code

@@ -189,6 +189,78 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &549940288 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 936618749832048404, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+  m_PrefabInstance: {fileID: 693385790}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d1c7aa7d26b9054997d1d0fe7252ea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &693385790
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 936618749832048404, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: currentBGM
+      value: 
+      objectReference: {fileID: 8300000, guid: b5a792e1aa2f05e4291fb97405c3061b, type: 3}
+    - target: {fileID: 936618749832048405, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
 --- !u!1 &813757496
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,8 +378,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 154.69, y: -34.503}
-  m_SizeDelta: {x: 309.38626, y: 315.99335}
+  m_AnchoredPosition: {x: 190, y: -40}
+  m_SizeDelta: {x: 446.3643, y: 379.99384}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1042860196
 MonoBehaviour:
@@ -330,21 +402,26 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: a397b763ed0e885488b9130dfea668f4, type: 3}
+    m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Select Materials:\n\tWood:\n\tBrick:\n\tStone:\n\nChange Block Mode:\n\tAdding:\n\tGrouping:\n\tDeleting:\n\nAdd,
-    Group, or Delete Blocks: Left Mouse Button\n(Only blocks of the same type can
-    be grouped)\n\nSkip to Defending Phase: \n\n\nTo Do: Finish Controls and Onboarding"
+  m_Text: "Controls:\npress these keys to change the selected block material:\n\t\twood:
+    \t\t\t\t\t\t1\n\t\tbrick: \t\t\t\t\t\t2\n\t\tstone: \t\t\t\t\t\t3\npress these
+    keys to change the drawing mode:\n\t\tpainting: \t\t\t\ta\n\t\tconnecting: \t\t\ts\n\t\tdeleting:
+    \t\t\t\td\npainting mode: \t\t\tleft click on a grid space to add a block.\ndeleting
+    mode: \t\t\tleft click on a block to erase the block.\nconnecting mode: \t\tleft
+    click to select up to five adjacent \n\t\t\t\t\t\t\t\t\t\t\tblocks made from
+    the same material. \n\t\t\t\t\t\t\t\t\t\t\tright click to connect the selected
+    blocks.\n"
 --- !u!222 &1042860197
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -362,7 +439,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -386,6 +463,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: AudioManagerScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 549940288}
+    - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: playCancelClip
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6067664251300488926, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
@@ -438,11 +539,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9073429532982950653, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -423.5
+      value: -500
       objectReference: {fileID: 0}
     - target: {fileID: 9073429532982950653, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -224.5
+      value: -260
       objectReference: {fileID: 0}
     - target: {fileID: 9073429532982950653, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
       propertyPath: m_SizeDelta.x
@@ -599,8 +700,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -188, y: 57.5}
-  m_SizeDelta: {x: 272.7725, y: 124.979294}
+  m_AnchoredPosition: {x: -220, y: -44.5}
+  m_SizeDelta: {x: 350, y: 389.03503}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1614881515
 MonoBehaviour:
@@ -623,11 +724,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: a397b763ed0e885488b9130dfea668f4, type: 3}
+    m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -635,11 +736,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'To Do: Add Story behind the Game?
-
-
-    Talk about building vs. defending
-    phases.'
+  m_Text: "How To Play:\nyou are a wizard tasked with quickly constructing fortresses
+    to protect magic orbs used to defend your kingdom from the northern empire. \n\nyou
+    will get a short amount of time to build a stronghold before the enemy's trebuchets
+    begin to fire.  you are able to conjure 3 types of materials, each of which is
+    strong or weak against a certain type of shot. if all the orbs survive the attack,
+    you win the level. if any of the orbs are destroyed during the attack, you need
+    to try again. \n\nclick the button at the bottom right of the level screen to
+    skip the remaining time and make the trebuchets start firing.\n"
 --- !u!222 &1614881516
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -40,6 +40,7 @@ public class LevelObject
             GameObject treb = GameObject.Instantiate(trebuchetPrefab, trebuchetPos[i], Quaternion.identity);
             treb.GetComponent<TrebuchetManager>().updateTarget(trebuchetTarget[i], upwardVels[i], (SHOT_TYPE)boulderType[i]);
             treb.transform.parent = gm.levelObjects.transform;
+            treb.transform.position = new Vector3(treb.transform.position.x, treb.transform.position.y, -8);
             activeObjects.Add(treb);
         }
 
@@ -49,7 +50,8 @@ public class LevelObject
         {
             Vector2 location = new Vector2(groundLocations[i], groundLocations[0]);
             GameObject ground = GameObject.Instantiate(groundTile, location, Quaternion.identity);
-            ground.transform.parent = gm.levelObjects.transform;
+            ground.transform.parent = gm.groundContainer.transform;
+            ground.transform.position = new Vector3(ground.transform.position.x, ground.transform.position.y, 2 + i);
             activeObjects.Add(ground);
         }
 
@@ -65,7 +67,7 @@ public class LevelObject
     {      
         int distance = Mathf.Abs((int)(startPoint.x - endPoint.x));
         groundLocations.Add(startPoint.y);
-        for(int i = 0; i < distance; i++)
+        for(int i = 0; i < distance; i+=2)
         {           
             groundLocations.Add(startPoint.x + i);
         }

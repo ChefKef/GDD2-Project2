@@ -68,16 +68,16 @@ public class LevelManager : MonoBehaviour
     public void InitLevels()
     {
         LevelObject level1 = new LevelObject();
-        level1.AddTrebuchet(new Vector2(5, -2), new Vector2(0, 0), 5, SHOT_TYPE.STANDARD);
-        level1.BuildGround(new Vector2(-10, -4), new Vector2(10, -4));
+        level1.AddTrebuchet(new Vector2(5, 0), new Vector2(0, 0), 5, SHOT_TYPE.STANDARD);
+        level1.BuildGround(new Vector2(-15, -4), new Vector2(15, -4));
         level1.levelID = 1;
         level1.playerPos = new Vector2(0, 0);
         levels.Add(level1);
 
         LevelObject level2 = new LevelObject();
-        level2.AddTrebuchet(new Vector2(5, -2), new Vector2(0, 0), 5, SHOT_TYPE.ICE);
-        level2.AddTrebuchet(new Vector2(7, -2), new Vector2(0, 0), 7, SHOT_TYPE.FIRE);
-        level2.BuildGround(new Vector2(-10, -4), new Vector2(10, -4));
+        level2.AddTrebuchet(new Vector2(5, 0), new Vector2(0, 0), 5, SHOT_TYPE.ICE);
+        level2.AddTrebuchet(new Vector2(8, 0), new Vector2(0, 0), 10, SHOT_TYPE.FIRE);
+        level2.BuildGround(new Vector2(-15, -4), new Vector2(15, -4));
         level2.levelID = 2;
         level2.playerPos = new Vector2(-1, 0);
         levels.Add(level2);
