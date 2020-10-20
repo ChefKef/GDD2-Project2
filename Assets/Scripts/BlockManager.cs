@@ -28,6 +28,7 @@ public class BlockManager : MonoBehaviour
     }
 
     private EditorState currentState;
+    private bool paused;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +47,8 @@ public class BlockManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!paused)
+            GridModeActive();
     }
 
     public void GridModeActive()
@@ -115,12 +117,14 @@ public class BlockManager : MonoBehaviour
 
     public void ActivateGridPaint()
     {
-        InvokeRepeating("GridModeActive", 0.01f, 0.01f);
+        //InvokeRepeating("GridModeActive", 0.01f, 0.01f);
+        paused = false;
     }
 
     public void DeactivateGridPaint()
     {
-        CancelInvoke();
+        //CancelInvoke();
+        paused = true;
         LevelManager.Instance.activeObjects.AddRange(blockList);
         //instanceBlock.transform.parent = GameObject.Find("LevelObjects").transform;
     }
