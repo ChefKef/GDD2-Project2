@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &493662216 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 936618749832048404, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+  m_PrefabInstance: {fileID: 920468099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d1c7aa7d26b9054997d1d0fe7252ea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &815942630
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,6 +200,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &920468099
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 936618749832048405, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
 --- !u!1 &1420924768
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,7 +463,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -419,6 +487,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: AudioManagerScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 493662216}
+    - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: playCancelClip
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342489648758535960, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6067664251300488926, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
@@ -550,8 +642,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -87.5}
-  m_SizeDelta: {x: 640, y: 180}
+  m_AnchoredPosition: {x: 0, y: -115}
+  m_SizeDelta: {x: 775, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1670395936
 MonoBehaviour:
@@ -586,7 +678,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Art Sources:\n\tnyknck. (2019). pixel catapult. itch.io. https://kvsr.itch.io/pixel-catapult\n\tpixel
+  m_Text: "Art and Music Sources:\n\tghosthack. (2020). piano music loops + fx music
+    sounds. itch.io. https://ghosthack.itch.io/piano-music-loops-fx-music-sounds\r\n\tjdwasabi.
+    (2018). 8-bit / 16-bit sound effects (x25) pack. itch.io. https://jdwasabi.itch.io/8-bit-16-bit-sound-effects-pack\n\tnyknck.
+    (2019). pixel catapult. itch.io. https://kvsr.itch.io/pixel-catapult\n\tpixel
     frog. (2020). kings and pigs. itch.io. https://pixelfrog-store.itch.io/kings-and-pigs\n\tppeldo.
     (2019). free pixel art fx. itch.io. https://ppeldo.itch.io/2d-pixel-art-game-spellmagic-fx\n\tszadi
     art. (2020a). pixel castle 2d. itch.io. https://szadiart.itch.io/pixle-castle-2d\n\tszadi
@@ -717,8 +812,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00000095367, y: 70}
-  m_SizeDelta: {x: 640, y: 135}
+  m_AnchoredPosition: {x: 0, y: 90}
+  m_SizeDelta: {x: 775, y: 135}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1827778005
 MonoBehaviour:
@@ -753,7 +848,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Developers:\n\ttriton adamski - lead artist and ui programmer\n\tjohn
+  m_Text: "Developers:\n\ttriton adamski - art, sound, and ui programmer\n\tjohn
     hayes - trebuchet and boulder programmer\n\tsijal jaradat - block and grid programmer\n\tfisher
     meddaugh - block and material programmer\n\tcorey rigney - game loop programmer"
 --- !u!222 &1827778006

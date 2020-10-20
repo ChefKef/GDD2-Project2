@@ -11,18 +11,18 @@ public class LevelObject
     public List<Vector2> trebuchetPos = new List<Vector2>();
     public List<Vector2> trebuchetTarget = new List<Vector2>();
     public List<float> upwardVels = new List<float>();
-    public List<int> boulderType = new List<int>();
+    public List<SHOT_TYPE> boulderType = new List<SHOT_TYPE>();
     public List<float> groundLocations = new List<float>();
     public Vector2 playerPos;
 
     private bool active = false;
 
-    public void AddTrebuchet(Vector2 pos, Vector2 target, float upwardForce, int type)
+    public void AddTrebuchet(Vector2 pos, Vector2 target, float upwardForce, SHOT_TYPE shot)
     {
         this.trebuchetPos.Add(pos);
         trebuchetTarget.Add(target);
         upwardVels.Add(upwardForce);
-        boulderType.Add(type);
+        boulderType.Add(shot);
     }
 
     public List<GameObject> InitLevel()
@@ -31,11 +31,15 @@ public class LevelObject
         trebuchetPrefab = gm.trebuchetPrefab;
         playerPrefab = gm.playerPrefab;
         GameObject groundTile = gm.groundPrefab;
-        activeObjects.Add(GameObject.Instantiate(playerPrefab, playerPos, Quaternion.identity));
+        GameObject player = GameObject.Instantiate(playerPrefab, playerPos, Quaternion.identity);
+        player.transform.parent = gm.levelObjects.transform;
+        activeObjects.Add(player);
+
         for(int i = 0; i < trebuchetPos.Count; i++)
         {
             GameObject treb = GameObject.Instantiate(trebuchetPrefab, trebuchetPos[i], Quaternion.identity);
             treb.GetComponent<TrebuchetManager>().updateTarget(trebuchetTarget[i], upwardVels[i], (SHOT_TYPE)boulderType[i]);
+            treb.transform.parent = gm.levelObjects.transform;
             activeObjects.Add(treb);
         }
 
@@ -44,7 +48,9 @@ public class LevelObject
         for(int i = 1; i < groundLocations.Count; i++)
         {
             Vector2 location = new Vector2(groundLocations[i], groundLocations[0]);
-            activeObjects.Add(GameObject.Instantiate(groundTile, location, Quaternion.identity));
+            GameObject ground = GameObject.Instantiate(groundTile, location, Quaternion.identity);
+            ground.transform.parent = gm.levelObjects.transform;
+            activeObjects.Add(ground);
         }
 
         return activeObjects;

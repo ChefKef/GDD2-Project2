@@ -5,7 +5,7 @@ using UnityEngine;
 public class TrebuchetManager : MonoBehaviour
 {
     //Public variables
-    public Object projectile; //The projectile that the trebuchet can launch. Will later be an array of different types of projectiles.
+    GameObject projectile; //The projectile that the trebuchet can launch. Will later be an array of different types of projectiles.
 
     //Private variables
     private GameObject projectileHolder; //Holds the projectile to run calculations on it after creation.
@@ -14,11 +14,17 @@ public class TrebuchetManager : MonoBehaviour
     private Vector2 defaultTarget;
     private float defaultUpwardVal;
     private SHOT_TYPE defaultBoulderType;
+
+    Animator anim;
+
+    static GameManager gm;
+
     // Start is called before the first frame update
     void Start()
     {
         //Debug boulder
-        LaunchBoulder(new Vector2(0.0f, 0.0f), 20.0f, 0);
+        //LaunchBoulder(new Vector2(0.0f, 0.0f), 20.0f, 0);
+        anim = this.gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -38,6 +44,29 @@ public class TrebuchetManager : MonoBehaviour
         defaultTarget = target;
         defaultUpwardVal = upwardVel;
         defaultBoulderType = boulderType;
+
+        switch (defaultBoulderType)
+        {
+            case SHOT_TYPE.STANDARD:
+                projectile = GameManager.Instance.regularShot;
+                break;
+            case SHOT_TYPE.ICE:
+                projectile = GameManager.Instance.iceShot;
+                break;
+            case SHOT_TYPE.FIRE:
+                projectile = GameManager.Instance.fireShot;
+                break;
+            case SHOT_TYPE.BOMB:
+                projectile = GameManager.Instance.bombShot;
+                break;
+            case SHOT_TYPE.SPIKE:
+                projectile = GameManager.Instance.spikeShot;
+                break;
+            default:
+                projectile = GameManager.Instance.regularShot;
+                break;
+        }
+
         Debug.Log(defaultUpwardVal);
     }
 
@@ -49,6 +78,7 @@ public class TrebuchetManager : MonoBehaviour
     /// <param name="boulderType">The type of boulder being launched. Currently not in use.</param>
     void LaunchBoulder(Vector2 target, float upwardVel, SHOT_TYPE boulderType)
     {
+        anim.SetTrigger("TrebuchetTrigger");
         projectileHolder = (GameObject)Instantiate(projectile, new Vector3(gameObject.transform.position.x + .5f, gameObject.transform.position.y + .22f, gameObject.transform.position.z - .001f), Quaternion.identity); //Create projectile
         projectileHolder.GetComponent<RockManager>().shot = boulderType;
         projectileRigidbody = projectileHolder.GetComponent<Rigidbody2D>();
