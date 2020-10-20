@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
 
     List<GameObject> levelSelectButtons;
 
+    private AudioManagerScript audioManager;
 
     private void Awake()
     {
@@ -62,8 +63,6 @@ public class GameManager : MonoBehaviour
         currentState = State.lvlSelect;
         previousState = State.lvlSelect;
         levelManager = LevelManager.Instance;
-        if(levelSelectButtons == null) levelSelectButtons = new List<GameObject>();
-        if(levelManager.levels.Count == 0) levelManager.InitLevels();
 
         lvlSelectUI = GameObject.Find("LevelSelectUI");
         gridUI = GameObject.Find("GridUI");
@@ -76,6 +75,16 @@ public class GameManager : MonoBehaviour
         pauseUI.SetActive(false);
 
         bm = GameObject.Find("BlockManager");
+
+        if (levelSelectButtons == null) levelSelectButtons = new List<GameObject>();
+        if(levelManager.levels.Count == 0) levelManager.InitLevels();
+        
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManagerScript>();
+        if (audioManager != null)
+        {
+            audioManager.setTitleBGM();
+            audioManager.playCurrentBGM();
+        }
     }
 
     // Update is called once per frame
@@ -139,6 +148,12 @@ public class GameManager : MonoBehaviour
 
                 Destroy(currentBlock);
                 cbAlive = false;
+
+                if (audioManager != null) //Updates Background Music
+                {
+                    audioManager.setTitleBGM();
+                    audioManager.playCurrentBGM();
+                }
                 break;
             case State.Grid:
                 gridUI.SetActive(true);
@@ -150,6 +165,11 @@ public class GameManager : MonoBehaviour
                 levelManager.DisplayGrid();
 
                 bm.GetComponent<BlockManager>().ActivateGridPaint();
+                if (audioManager != null) //Updates Background Music
+                {
+                    audioManager.setLevelBGM();
+                    audioManager.playCurrentBGM();
+                }
                 break;
             case State.Game:
                 gameUI.SetActive(true);
@@ -164,6 +184,12 @@ public class GameManager : MonoBehaviour
 
                 Destroy(currentBlock);
                 cbAlive = false;
+
+                if (audioManager != null) //Updates Background Music
+                {
+                    audioManager.setFiringBGM();
+                    audioManager.playCurrentBGM();
+                }
                 break;
             case State.Pause:
                 pauseUI.SetActive(true);
@@ -178,6 +204,11 @@ public class GameManager : MonoBehaviour
 
                 Destroy(currentBlock);
                 cbAlive = false;
+                if (audioManager != null) //Stops Background Music
+                {
+                    audioManager.stopBGM();
+                }
+
                 break;
         }
         /*switch (previousState)
@@ -276,6 +307,11 @@ public class GameManager : MonoBehaviour
         {
             //failed
         }
+    }
+
+    public void ChangeScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
 
