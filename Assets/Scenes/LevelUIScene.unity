@@ -1572,6 +1572,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 92053950517955935, guid: a142120bf42ab4c4aa86ccbd83a89398, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 272851867}
+    - target: {fileID: 92053950517955935, guid: a142120bf42ab4c4aa86ccbd83a89398, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ButtonResume
+      objectReference: {fileID: 0}
+    - target: {fileID: 92053950517955935, guid: a142120bf42ab4c4aa86ccbd83a89398, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3696916005341240712, guid: a142120bf42ab4c4aa86ccbd83a89398, type: 3}
       propertyPath: m_LocalPosition.z
       value: -26.27
@@ -1779,6 +1791,7 @@ Transform:
   m_Children:
   - {fileID: 729225609}
   - {fileID: 2083213622}
+  - {fileID: 1973009241}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2265,6 +2278,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
+--- !u!1 &1973009240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1973009241}
+  m_Layer: 0
+  m_Name: DrawnObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1973009241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973009240}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1201373334}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &1975410813 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9073429532982950653, guid: b1f88210f65d53443a651c682f3b6300, type: 3}
+  m_PrefabInstance: {fileID: 1931856121}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2032558301
 GameObject:
   m_ObjectHideFlags: 0
