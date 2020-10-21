@@ -24,8 +24,10 @@ public class TimerManager : MonoBehaviour
         if(!timerDone)
         {
             timer += Time.deltaTime;
+            //Debug.Log("Timer running. Time on timer: " + timer);
             if (Mathf.Floor(timer) > secondsPassed)
             {
+                Debug.Log("Timer math occuring.");
                 if (seconds == 0)
                 {
                     if (minutes == 0)
@@ -40,6 +42,7 @@ public class TimerManager : MonoBehaviour
                 }
                 secondsPassed++;
                 seconds--;
+                updateTimer();
             }
         }
     }
