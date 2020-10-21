@@ -220,11 +220,6 @@ public class BlockManager : MonoBehaviour
                 }
             }
         }
-        //right click input code
-        else if (Input.GetMouseButtonDown(1))
-        {
-            Play();
-        }
     }
 
     void DeleterMode()

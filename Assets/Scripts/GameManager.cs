@@ -340,10 +340,6 @@ public class GameManager : MonoBehaviour
         {
             ChangeGameState(State.lvlSelect);
         }
-        else if(prePauseState == State.Game)
-        {
-            ChangeGameState(State.Game);
-        }
         else
         {            
             ChangeGameState(State.Grid);
