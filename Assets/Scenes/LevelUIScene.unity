@@ -645,7 +645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9184317251949520537, guid: 4d1e0c44dd4497a49a9337071933ac68, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 200
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 9184317251949520537, guid: 4d1e0c44dd4497a49a9337071933ac68, type: 3}
       propertyPath: m_SizeDelta.x
@@ -685,6 +685,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d1e0c44dd4497a49a9337071933ac68, type: 3}
+--- !u!1 &231176834 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9184317251949520538, guid: 4d1e0c44dd4497a49a9337071933ac68, type: 3}
+  m_PrefabInstance: {fileID: 213908151}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &240750692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -890,6 +895,10 @@ PrefabInstance:
       propertyPath: groundContainer
       value: 
       objectReference: {fileID: 2083213621}
+    - target: {fileID: 4128781456327159371, guid: 167d45ac5fa06aa49a1dbe6265e2966c, type: 3}
+      propertyPath: timerObject
+      value: 
+      objectReference: {fileID: 231176834}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 167d45ac5fa06aa49a1dbe6265e2966c, type: 3}
 --- !u!114 &272851867 stripped
@@ -1155,10 +1164,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 272851867}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ButtonGameState
-        m_Mode: 3
+      - m_Target: {fileID: 411696853}
+        m_TargetAssemblyTypeName: BlockManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1298,7 +1307,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 729225608}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1201373334}
@@ -1602,7 +1611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2807931040627133925, guid: bb2cfdb6b9335dc46ae4b848d3b71370, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 212.5
+      value: 275
       objectReference: {fileID: 0}
     - target: {fileID: 2807931040627133925, guid: bb2cfdb6b9335dc46ae4b848d3b71370, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2202,6 +2211,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 298949123}
     m_Modifications:
+    - target: {fileID: 1427167412387693805, guid: 292c34ef7562d994a906132f09acd7ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 272851867}
+    - target: {fileID: 1427167412387693805, guid: 292c34ef7562d994a906132f09acd7ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ButtonGameState
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427167412387693805, guid: 292c34ef7562d994a906132f09acd7ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427167412387693805, guid: 292c34ef7562d994a906132f09acd7ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427167412387693805, guid: 292c34ef7562d994a906132f09acd7ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260412045210446338, guid: 292c34ef7562d994a906132f09acd7ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 272851867}
+    - target: {fileID: 4260412045210446338, guid: 292c34ef7562d994a906132f09acd7ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ButtonGameState
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260412045210446338, guid: 292c34ef7562d994a906132f09acd7ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260412045210446338, guid: 292c34ef7562d994a906132f09acd7ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260412045210446338, guid: 292c34ef7562d994a906132f09acd7ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6814126116087312272, guid: 292c34ef7562d994a906132f09acd7ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2358,7 +2407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 28282614235921823, guid: 85ef7bce83890954f8a82d14a2c0f425, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 212.5
+      value: 275
       objectReference: {fileID: 0}
     - target: {fileID: 28282614235921823, guid: 85ef7bce83890954f8a82d14a2c0f425, type: 3}
       propertyPath: m_SizeDelta.x

@@ -348,12 +348,14 @@ public class BlockManager : MonoBehaviour
         }
     }
 
-    void Play()
+    public void Play()
     {
         foreach(GameObject g in blockList)
         {
             g.AddComponent<Rigidbody2D>();
         }
         currentState = EditorState.Play;
+
+        GameManager.Instance.ChangeGameState(GameManager.State.Game);
     }
 }
