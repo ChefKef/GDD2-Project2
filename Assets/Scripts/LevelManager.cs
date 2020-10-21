@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
     GameObject[,] gridSquares;
     GameObject gridContainer;
 
+    public GameObject gmPrefabBackup;
+
     public GameObject gridPrefab;
 
     private void Awake()
