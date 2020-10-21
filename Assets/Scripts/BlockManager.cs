@@ -189,13 +189,13 @@ public class BlockManager : MonoBehaviour
                 }
 
                 //dupe checking - don't think we need since the raycast checks if the collider is null
-                //foreach (GameObject g in blockList)
-                //{
-                //    if (g.transform.position == instanceBlock.transform.position)
-                //    {
-                //        intersecting = true;
-                //    }
-                //}
+                foreach (GameObject g in blockList)
+                {
+                    if (g.transform.position == instanceBlock.transform.position)
+                    {
+                        intersecting = true;
+                    }
+                }
 
                 //if (!intersecting)
                 //{
@@ -204,7 +204,6 @@ public class BlockManager : MonoBehaviour
                     //boundary checking
                     if (instanceBlock.transform.position.y <= -5 || instanceBlock.transform.position.y >= 5 || instanceBlock.transform.position.x <= -11 || instanceBlock.transform.position.x >= 11)
                     {
-                        blockList.Remove(instanceBlock);
                         intersecting = true;
                     }
                 //}
@@ -212,6 +211,7 @@ public class BlockManager : MonoBehaviour
                 //final check, adds it to active or destroys it
                 if(intersecting)
                 {
+                    blockList.Remove(instanceBlock);
                     Destroy(instanceBlock);
                 }
                 else

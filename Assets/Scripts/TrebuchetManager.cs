@@ -18,6 +18,7 @@ public class TrebuchetManager : MonoBehaviour
     Animator anim;
 
     static GameManager gm;
+    private GameObject drawnObjects;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class TrebuchetManager : MonoBehaviour
         //Debug boulder
         //LaunchBoulder(new Vector2(0.0f, 0.0f), 20.0f, 0);
         anim = this.gameObject.GetComponent<Animator>();
+        drawnObjects = GameObject.Find("DrawnObjects");
     }
 
     // Update is called once per frame
@@ -80,6 +82,7 @@ public class TrebuchetManager : MonoBehaviour
     {
         anim.SetTrigger("TrebuchetTrigger");
         projectileHolder = (GameObject)Instantiate(projectile, new Vector3(gameObject.transform.position.x + .5f, gameObject.transform.position.y + .22f, gameObject.transform.position.z - .001f), Quaternion.identity); //Create projectile
+        projectileHolder.transform.parent = drawnObjects.transform;
         projectileHolder.GetComponent<RockManager>().shot = boulderType;
         projectileRigidbody = projectileHolder.GetComponent<Rigidbody2D>();
         //First, use vertex formula (v = (-initialVel)/(gravity[9.8])) to get time of apex of launch. Then multiply that by 2 for launch time, then apply an x velocity of 

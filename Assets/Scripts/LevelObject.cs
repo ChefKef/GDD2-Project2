@@ -18,6 +18,11 @@ public class LevelObject
 
     private bool active = false;
 
+    public void Awake()
+    {
+        Debug.Log("GM Instance: " + GameManager.Instance);
+    }
+
     public void AddTrebuchet(Vector2 pos, Vector2 target, float upwardForce, SHOT_TYPE shot, bool flip)
     {
         this.trebuchetPos.Add(pos);
@@ -34,6 +39,12 @@ public class LevelObject
         playerPrefab = gm.playerPrefab;
         GameObject groundTile = gm.groundPrefab;
         GameObject player = GameObject.Instantiate(playerPrefab, playerPos, Quaternion.identity);
+
+
+        Debug.Log("Player: " + player);
+        Debug.Log("GM: " + gm);
+
+
         player.transform.parent = gm.levelObjects.transform;
         activeObjects.Add(player);
 
