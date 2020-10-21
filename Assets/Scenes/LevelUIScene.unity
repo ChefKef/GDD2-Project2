@@ -1113,6 +1113,7 @@ MonoBehaviour:
   - {fileID: 5385653859221103724, guid: 9704e2a709fdd0949a59c8eb0b04a6a6, type: 3}
   - {fileID: 2602544849901411586, guid: edf5737cd2c75014ebf14aca3544533a, type: 3}
   - {fileID: 8507977608190122285, guid: 562369e91a429a04eabb8b7ace794381, type: 3}
+  outline: {fileID: 0}
   blockList: []
 --- !u!4 &411696854
 Transform:

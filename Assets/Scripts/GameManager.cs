@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
         clearUI.SetActive(false);
 
         bm = GameObject.Find("BlockManager");
+        bm.GetComponent<BlockManager>().DeactivateGridPaint();
 
         tm = timerObject.GetComponent<TimerManager>();
 
@@ -115,6 +116,7 @@ public class GameManager : MonoBehaviour
                 if (tm.getDone())
                 {
                     ChangeGameState(State.Game);
+                    bm.GetComponent<BlockManager>().Play();
                 }
                 break;
             case State.Game:
