@@ -265,6 +265,30 @@ public class GameManager : MonoBehaviour
         {
             ChangeGameState(State.lvlSelect);
         }
+        else if(prePauseState == State.Game)
+        {
+            ChangeGameState(State.Game);
+        }
+        else
+        {            
+            ChangeGameState(State.Grid);
+            foreach (Transform child in levelObjects.transform.GetChild(2))
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
+
+    public void ButtonResume()
+    {
+        if (prePauseState == State.lvlSelect)
+        {
+            ChangeGameState(State.lvlSelect);
+        }
+        else if (prePauseState == State.Game)
+        {
+            ChangeGameState(State.Game);
+        }
         else
         {
             ChangeGameState(State.Grid);
