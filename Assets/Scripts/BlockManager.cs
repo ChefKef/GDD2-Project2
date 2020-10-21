@@ -292,7 +292,7 @@ public class BlockManager : MonoBehaviour
                 //merge into parent and shit
                 GameObject parentObject = new GameObject();
                 parentObject.name = "block group";
-                parentObject.transform.parent = GameManager.Instance.levelObjects.transform;
+                parentObject.transform.parent = GameManager.Instance.levelObjects.transform.GetChild(2);
 
                 List<GameObject> childList = new List<GameObject>();
                 childList = debugList;
