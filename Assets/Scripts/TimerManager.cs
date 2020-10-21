@@ -41,7 +41,10 @@ public class TimerManager : MonoBehaviour
                     }
                 }
                 secondsPassed++;
-                seconds--;
+                if(seconds > 0)
+                {
+                    seconds--;
+                }
                 updateTimer();
             }
         }
