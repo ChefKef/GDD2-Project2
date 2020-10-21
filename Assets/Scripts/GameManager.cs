@@ -119,6 +119,10 @@ public class GameManager : MonoBehaviour
                 break;
             case State.Game:
                 //Game is active
+                if (tm.getDone())
+                {
+                    ChangeGameState(State.Clear);
+                }
 
                 break;
             case State.Pause:
@@ -189,7 +193,8 @@ public class GameManager : MonoBehaviour
                 levelManager.cancelLevelLoop();
                 levelManager.DisplayGrid();
 
-                tm.setTimer(60);
+                if (previousState != State.Pause) //Prevents timer reseting after pausing
+                    tm.setTimer(60);
 
                 bm.GetComponent<BlockManager>().ActivateGridPaint();
                 if (audioManager != null) //Updates Background Music
@@ -208,6 +213,9 @@ public class GameManager : MonoBehaviour
                 levelObjects.SetActive(true);
                 levelManager.startLevelLoop();
                 levelManager.HideGrid();
+
+                if (previousState != State.Pause) //Prevents timer reseting after pausing
+                    tm.setTimer(30);
 
                 bm.GetComponent<BlockManager>().DeactivateGridPaint();
 
