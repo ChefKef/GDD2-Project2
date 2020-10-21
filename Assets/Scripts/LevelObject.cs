@@ -12,7 +12,7 @@ public class LevelObject
     public List<Vector2> trebuchetTarget = new List<Vector2>();
     public List<float> upwardVels = new List<float>();
     public List<SHOT_TYPE> boulderType = new List<SHOT_TYPE>();
-    public List<float> groundLocations = new List<float>();
+    public List<Vector3> groundLocations = new List<Vector3>();
     public List<bool> flipTreb = new List<bool>();
     public Vector2 playerPos;
 
@@ -52,10 +52,10 @@ public class LevelObject
 
         for(int i = 1; i < groundLocations.Count; i++)
         {
-            Vector2 location = new Vector2(groundLocations[i], groundLocations[0]);
+            Vector2 location = groundLocations[i];
             GameObject ground = GameObject.Instantiate(groundTile, location, Quaternion.identity);
             ground.transform.parent = gm.groundContainer.transform;
-            ground.transform.position = new Vector3(ground.transform.position.x, ground.transform.position.y, 2 + i);
+            //ground.transform.position = new Vector3(ground.transform.position.x, ground.transform.position.y, 2 + i);
             activeObjects.Add(ground);
         }
 
@@ -67,13 +67,12 @@ public class LevelObject
         active = !active;
     }
 
-    public void BuildGround(Vector2 startPoint, Vector2 endPoint)
+    public void BuildGround(Vector3 startPoint, Vector3 endPoint)
     {      
         int distance = Mathf.Abs((int)(startPoint.x - endPoint.x));
-        groundLocations.Add(startPoint.y);
         for(int i = 0; i < distance; i+=2)
         {           
-            groundLocations.Add(startPoint.x + i);
+            groundLocations.Add(new Vector3(startPoint.x + i, startPoint.y, startPoint.z));
         }
     }
 }
