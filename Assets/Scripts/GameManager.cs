@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
         clearUI.SetActive(false);
 
         bm = GameObject.Find("BlockManager");
+        bm.GetComponent<BlockManager>().DeactivateGridPaint();
 
         tm = timerObject.GetComponent<TimerManager>();
 

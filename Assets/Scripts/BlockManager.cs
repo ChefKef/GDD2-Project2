@@ -16,6 +16,8 @@ public class BlockManager : MonoBehaviour
     //a good way to do corners and stuff may be to split this into multiple lists, one for each material, where each index represents a particular edge/corner.
     public List<Sprite> sprites;
 
+    public Sprite outline;
+
     public List<GameObject> blockList;
 
     private List<GameObject> debugList;
@@ -166,7 +168,6 @@ public class BlockManager : MonoBehaviour
                     case MAT_TYPE.GLASS:
                         instanceBlock.AddComponent<Glass>();
 
-                        //TEMPORARY PART - CHANGES COLOR, REPLACE WITH ACTUAL SPRITE PICKING
                         instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[1];
                         break;
                     case MAT_TYPE.STONE:
