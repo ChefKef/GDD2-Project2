@@ -167,17 +167,17 @@ public class BlockManager : MonoBehaviour
                         instanceBlock.AddComponent<Glass>();
 
                         //TEMPORARY PART - CHANGES COLOR, REPLACE WITH ACTUAL SPRITE PICKING
-                        instanceBlock.GetComponent<SpriteRenderer>().color = new Color(0.4f, 0.7f, 1);
+                        instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[1];
                         break;
                     case MAT_TYPE.STONE:
                         instanceBlock.AddComponent<Stone>();
 
-                        instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[1];
+                        instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[2];
                         break;
                     case MAT_TYPE.STEEL:
                         instanceBlock.AddComponent<Steel>();
 
-                        instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[2];
+                        instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[3];
                         break;
                     case MAT_TYPE.MAGIC:
                         instanceBlock.AddComponent<Magic>();

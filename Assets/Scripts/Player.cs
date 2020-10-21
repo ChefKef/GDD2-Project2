@@ -6,9 +6,11 @@ public class Player : MonoBehaviour
 {
     public float health;
     // Start is called before the first frame update
+    private AudioManagerScript audioManager;
     void Start()
     {
         health = 100.0f;
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManagerScript>();
     }
 
     // Update is called once per frame
@@ -20,7 +22,11 @@ public class Player : MonoBehaviour
     public void GetHit(float damage)
     {
         health -= damage;
-        if(health <= 0.0f)
+
+        if (audioManager != null)
+            audioManager.playBlockHitClip();
+
+        if (health <= 0.0f)
         {
             Die();
         }
