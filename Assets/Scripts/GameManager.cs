@@ -259,6 +259,7 @@ public class GameManager : MonoBehaviour
                 if (audioManager != null) //Stops Background Music
                 {
                     audioManager.stopBGM();
+                    audioManager.playWinClip();
                 }
 
                 break;
@@ -280,6 +281,7 @@ public class GameManager : MonoBehaviour
                 if (audioManager != null) //Stops Background Music
                 {
                     audioManager.stopBGM();
+                    audioManager.playLossClip();
                 }
 
                 break;

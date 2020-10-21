@@ -68,18 +68,20 @@ public class LevelManager : MonoBehaviour
     public void InitLevels()
     {
         LevelObject level1 = new LevelObject();
-        level1.AddTrebuchet(new Vector2(7, 0), new Vector2(-1, 0), 7, SHOT_TYPE.STANDARD);
-        level1.BuildGround(new Vector2(-15, -4), new Vector2(15, -4));
+        level1.AddTrebuchet(new Vector2(15, -2), new Vector2(2, -4), 8, SHOT_TYPE.STANDARD, false);
+        //level1.BuildGround(new Vector2(-15, -4), new Vector2(15, -4));
+        level1.BuildGround(new Vector2(-20, -6.5f), new Vector2(20, -6.5f));
         level1.levelID = 1;
-        level1.playerPos = new Vector2(0, 0);
+        level1.playerPos = new Vector2(0, -4);
         levels.Add(level1);
 
         LevelObject level2 = new LevelObject();
-        level2.AddTrebuchet(new Vector2(6, 0), new Vector2(-1, 0), 7, SHOT_TYPE.ICE);
-        level2.AddTrebuchet(new Vector2(10, 0), new Vector2(-1, 0), 12, SHOT_TYPE.FIRE);
-        level2.BuildGround(new Vector2(-15, -4), new Vector2(15, -4));
+        level2.AddTrebuchet(new Vector2(15, -2), new Vector2(2, -4), 7, SHOT_TYPE.ICE, false);
+        level2.AddTrebuchet(new Vector2(-15, -2), new Vector2(0, -4), 12, SHOT_TYPE.FIRE, true);
+        //level2.BuildGround(new Vector2(-15, -4), new Vector2(15, -4));
+        level2.BuildGround(new Vector2(-20, -6.5f), new Vector2(20, -6.5f));
         level2.levelID = 2;
-        level2.playerPos = new Vector2(-1, 0);
+        level2.playerPos = new Vector2(0, -4);
         levels.Add(level2);
     }
 

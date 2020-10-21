@@ -13,16 +13,18 @@ public class LevelObject
     public List<float> upwardVels = new List<float>();
     public List<SHOT_TYPE> boulderType = new List<SHOT_TYPE>();
     public List<float> groundLocations = new List<float>();
+    public List<bool> flipTreb = new List<bool>();
     public Vector2 playerPos;
 
     private bool active = false;
 
-    public void AddTrebuchet(Vector2 pos, Vector2 target, float upwardForce, SHOT_TYPE shot)
+    public void AddTrebuchet(Vector2 pos, Vector2 target, float upwardForce, SHOT_TYPE shot, bool flip)
     {
         this.trebuchetPos.Add(pos);
         trebuchetTarget.Add(target);
         upwardVels.Add(upwardForce);
         boulderType.Add(shot);
+        flipTreb.Add(flip);
     }
 
     public List<GameObject> InitLevel()
@@ -41,6 +43,8 @@ public class LevelObject
             treb.GetComponent<TrebuchetManager>().updateTarget(trebuchetTarget[i], upwardVels[i], (SHOT_TYPE)boulderType[i]);
             treb.transform.parent = gm.levelObjects.transform;
             treb.transform.position = new Vector3(treb.transform.position.x, treb.transform.position.y, -8);
+            if (flipTreb[i])
+                treb.transform.localScale = new Vector2(-treb.transform.localScale.x, treb.transform.localScale.y);
             activeObjects.Add(treb);
         }
 
