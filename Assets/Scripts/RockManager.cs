@@ -51,5 +51,9 @@ public class RockManager : MonoBehaviour
             collided = true;
             Destroy(gameObject);
         }
+        if(collision.gameObject.tag == "Player")
+        {
+            //end their entire existence
+        }
     }
 }
