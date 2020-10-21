@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentLevel = 1;
+        currentLevel = 0;
         currentState = State.lvlSelect;
         previousState = State.lvlSelect;
         levelManager = LevelManager.Instance;
@@ -152,6 +152,8 @@ public class GameManager : MonoBehaviour
         levelManager.CleanUpLevel();
         levelManager.setCurrentLevel(value);
         ChangeGameState(State.Grid);
+        tm.setTimer(60); //Resets Timer
+        currentLevel = value; //Update current level variable
     }
 
     public void ChangeGameState(State state)
@@ -189,6 +191,8 @@ public class GameManager : MonoBehaviour
                 lvlSelectUI.SetActive(false);
                 gameUI.SetActive(true);
                 pauseUI.SetActive(false);
+                failUI.SetActive(false);
+                clearUI.SetActive(false);
                 levelObjects.SetActive(true);
                 levelManager.cancelLevelLoop();
                 levelManager.DisplayGrid();
@@ -338,23 +342,22 @@ public class GameManager : MonoBehaviour
     public void ButtonLevelSelect()
     {
         ChangeGameState(State.lvlSelect);
+        foreach (Transform child in levelObjects.transform.GetChild(2))
+        {
+            Destroy(child.gameObject);
+        }
         levelManager.CleanUpLevel();
+
     }
 
     public void ButtonRestart()
     {
-        if(prePauseState == State.lvlSelect)
+        foreach (Transform child in levelObjects.transform.GetChild(2))
         {
-            ChangeGameState(State.lvlSelect);
+            Destroy(child.gameObject);
         }
-        else
-        {            
-            ChangeGameState(State.Grid);
-            foreach (Transform child in levelObjects.transform.GetChild(2))
-            {
-                Destroy(child.gameObject);
-            }
-        }
+
+        StartLevel(currentLevel);
     }
 
     public void ButtonResume()
