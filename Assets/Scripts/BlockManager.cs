@@ -7,6 +7,10 @@ public class BlockManager : MonoBehaviour
     public Camera gameCam;
 
     public GameObject TestBlockPublic;
+
+    public GameObject Material;
+    public GameObject Mouse;
+
     private GameObject testBlockPrivate;
 
     //a good way to do corners and stuff may be to split this into multiple lists, one for each material, where each index represents a particular edge/corner.
@@ -85,6 +89,7 @@ public class BlockManager : MonoBehaviour
                 currentState = EditorState.Deleting;
                 Debug.Log("Now Deleting");
             }
+            Mouse.GetComponent<MouseModeManager>().setMode((int)currentState);
 
             //input checking for changing the material. (Temporarily number buttons, could be permanent as a secondary option to clicking
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -102,6 +107,7 @@ public class BlockManager : MonoBehaviour
                 currentMaterial = MAT_TYPE.STONE;
                 Debug.Log("Stone");
             }
+            Material.GetComponent<MaterialLabelManager>().setMaterial(currentMaterial);
             /*if (Input.GetKeyDown(KeyCode.Alpha4))
             {
                 currentMaterial = MAT_TYPE.STEEL;
@@ -143,6 +149,7 @@ public class BlockManager : MonoBehaviour
                 GameObject instanceBlock;
                 instanceBlock = Instantiate(testBlockPrivate, gameCam.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
                 instanceBlock.transform.position = new Vector3(Mathf.Round(instanceBlock.transform.position.x), Mathf.Round(instanceBlock.transform.position.y), 0);
+                instanceBlock.transform.parent = GameManager.Instance.levelObjects.transform;
                 instanceBlock.tag = "destructible";
 
                 //adds the script for whichever material is selected
@@ -195,6 +202,8 @@ public class BlockManager : MonoBehaviour
                         blockList.Remove(instanceBlock);
                     }
                 }
+
+                LevelManager.Instance.activeObjects.Add(instanceBlock);
             }
         }
         //right click input code

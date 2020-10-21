@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     GameObject gameUI;
     GameObject pauseUI;
     public GameObject levelObjects;
+    public GameObject groundContainer;
 
     public GameObject currentBlock;
     private bool cbAlive = false;
@@ -140,7 +141,7 @@ public class GameManager : MonoBehaviour
                 gridUI.SetActive(false);
                 gameUI.SetActive(false);
                 pauseUI.SetActive(false);
-                levelObjects.SetActive(true);
+                levelObjects.SetActive(false);
                 levelManager.cancelLevelLoop();
                 levelManager.HideGrid();
 
@@ -158,7 +159,7 @@ public class GameManager : MonoBehaviour
             case State.Grid:
                 gridUI.SetActive(true);
                 lvlSelectUI.SetActive(false);
-                gameUI.SetActive(false);
+                gameUI.SetActive(true);
                 pauseUI.SetActive(false);
                 levelObjects.SetActive(true);
                 levelManager.cancelLevelLoop();
