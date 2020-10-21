@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public enum State { Title, lvlSelect, Grid, Game, Pause};
+    public enum State { Title, lvlSelect, Grid, Game, Pause, Fail, Clear};
 
     private static GameManager _instance;
 
@@ -35,7 +35,13 @@ public class GameManager : MonoBehaviour
     GameObject gridUI;
     GameObject gameUI;
     GameObject pauseUI;
+    GameObject failUI;
+    GameObject clearUI;
     public GameObject levelObjects;
+    public GameObject groundContainer;
+
+    public GameObject timerObject;
+    public TimerManager tm;
 
     public GameObject currentBlock;
     private bool cbAlive = false;
@@ -63,21 +69,28 @@ public class GameManager : MonoBehaviour
         currentState = State.lvlSelect;
         previousState = State.lvlSelect;
         levelManager = LevelManager.Instance;
-        if(levelSelectButtons == null) levelSelectButtons = new List<GameObject>();
-        if(levelManager.levels.Count == 0) levelManager.InitLevels();
 
         lvlSelectUI = GameObject.Find("LevelSelectUI");
         gridUI = GameObject.Find("GridUI");
         gameUI = GameObject.Find("LevelUI");
         pauseUI = GameObject.Find("PauseUI");
+        failUI = GameObject.Find("FailUI");
+        clearUI = GameObject.Find("ClearUI");
         levelObjects = GameObject.Find("LevelObjects");
 
         gridUI.SetActive(false);
         gameUI.SetActive(false);
         pauseUI.SetActive(false);
+        failUI.SetActive(false);
+        clearUI.SetActive(false);
 
         bm = GameObject.Find("BlockManager");
 
+        tm = timerObject.GetComponent<TimerManager>();
+
+        if (levelSelectButtons == null) levelSelectButtons = new List<GameObject>();
+        if(levelManager.levels.Count == 0) levelManager.InitLevels();
+        
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManagerScript>();
         if (audioManager != null)
         {
@@ -99,7 +112,10 @@ public class GameManager : MonoBehaviour
                 break;
             case State.Grid:
                 //player is building
-                
+                if (tm.getDone())
+                {
+                    ChangeGameState(State.Game);
+                }
                 break;
             case State.Game:
                 //Game is active
@@ -107,6 +123,14 @@ public class GameManager : MonoBehaviour
                 break;
             case State.Pause:
                 //Game is paused
+
+                break;
+            case State.Clear:
+                //Level has been cleared
+
+                break;
+            case State.Fail:
+                //Level has been failed
 
                 break;
             default:
@@ -126,7 +150,7 @@ public class GameManager : MonoBehaviour
         ChangeGameState(State.Grid);
     }
 
-    void ChangeGameState(State state)
+    public void ChangeGameState(State state)
     {
         prePauseState = currentState;
         currentState = state;
@@ -139,7 +163,9 @@ public class GameManager : MonoBehaviour
                 gridUI.SetActive(false);
                 gameUI.SetActive(false);
                 pauseUI.SetActive(false);
-                levelObjects.SetActive(true);
+                failUI.SetActive(false);
+                clearUI.SetActive(false);
+                levelObjects.SetActive(false);
                 levelManager.cancelLevelLoop();
                 levelManager.HideGrid();
 
@@ -157,11 +183,13 @@ public class GameManager : MonoBehaviour
             case State.Grid:
                 gridUI.SetActive(true);
                 lvlSelectUI.SetActive(false);
-                gameUI.SetActive(false);
+                gameUI.SetActive(true);
                 pauseUI.SetActive(false);
                 levelObjects.SetActive(true);
                 levelManager.cancelLevelLoop();
                 levelManager.DisplayGrid();
+
+                tm.setTimer(60);
 
                 bm.GetComponent<BlockManager>().ActivateGridPaint();
                 if (audioManager != null) //Updates Background Music
@@ -175,6 +203,8 @@ public class GameManager : MonoBehaviour
                 lvlSelectUI.SetActive(false);
                 gridUI.SetActive(false);
                 pauseUI.SetActive(false);
+                failUI.SetActive(false);
+                clearUI.SetActive(false);
                 levelObjects.SetActive(true);
                 levelManager.startLevelLoop();
                 levelManager.HideGrid();
@@ -195,6 +225,50 @@ public class GameManager : MonoBehaviour
                 lvlSelectUI.SetActive(false);
                 gridUI.SetActive(false);
                 gameUI.SetActive(false);
+                failUI.SetActive(false);
+                clearUI.SetActive(false);
+                levelObjects.SetActive(false);
+                levelManager.cancelLevelLoop();
+                levelManager.HideGrid();
+
+                bm.GetComponent<BlockManager>().DeactivateGridPaint();
+
+                Destroy(currentBlock);
+                cbAlive = false;
+                if (audioManager != null) //Stops Background Music
+                {
+                    audioManager.stopBGM();
+                }
+
+                break;
+            case State.Clear:
+                pauseUI.SetActive(false);
+                lvlSelectUI.SetActive(false);
+                gridUI.SetActive(false);
+                gameUI.SetActive(false);
+                failUI.SetActive(false);
+                clearUI.SetActive(true);
+                levelObjects.SetActive(false);
+                levelManager.cancelLevelLoop();
+                levelManager.HideGrid();
+
+                bm.GetComponent<BlockManager>().DeactivateGridPaint();
+
+                Destroy(currentBlock);
+                cbAlive = false;
+                if (audioManager != null) //Stops Background Music
+                {
+                    audioManager.stopBGM();
+                }
+
+                break;
+            case State.Fail:
+                pauseUI.SetActive(false);
+                lvlSelectUI.SetActive(false);
+                gridUI.SetActive(false);
+                gameUI.SetActive(false);
+                failUI.SetActive(true);
+                clearUI.SetActive(false);
                 levelObjects.SetActive(false);
                 levelManager.cancelLevelLoop();
                 levelManager.HideGrid();
@@ -263,6 +337,30 @@ public class GameManager : MonoBehaviour
         {
             ChangeGameState(State.lvlSelect);
         }
+        else if(prePauseState == State.Game)
+        {
+            ChangeGameState(State.Game);
+        }
+        else
+        {            
+            ChangeGameState(State.Grid);
+            foreach (Transform child in levelObjects.transform.GetChild(2))
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
+
+    public void ButtonResume()
+    {
+        if (prePauseState == State.lvlSelect)
+        {
+            ChangeGameState(State.lvlSelect);
+        }
+        else if (prePauseState == State.Game)
+        {
+            ChangeGameState(State.Game);
+        }
         else
         {
             ChangeGameState(State.Grid);
@@ -301,11 +399,18 @@ public class GameManager : MonoBehaviour
         if (success)
         {
             //won level
+            ChangeGameState(State.Clear);
         }
         else
         {
             //failed
+            ChangeGameState(State.Fail);
         }
+    }
+
+    public void ChangeScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
 

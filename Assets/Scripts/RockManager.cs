@@ -34,6 +34,7 @@ public class RockManager : MonoBehaviour
                 GetComponent<SpriteRenderer>().sprite = shotSprites[4];
                 break;
         }*/
+        forceConstant = 1f;
     }
 
     // Update is called once per frame
@@ -45,11 +46,16 @@ public class RockManager : MonoBehaviour
     {
         if (collided == false && (collision.gameObject.tag == "destructible" || collision.gameObject.tag == "childBlock")) //Ensure that collision is only calculated once.
         {
-            collision.gameObject.GetComponentInParent<Material>().CalcDamage(forceConstant * GetComponent<Rigidbody2D>().velocity.x, shot);
+            collision.gameObject.GetComponentInParent<Material>().CalcDamage(forceConstant * Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x), shot);
             /*Code that calls a function on the object that can take damage. I would like to add a 'destructible' flag on all structures that can be deleted in order to not cause errors.
              The takeDamage() function will need to be made for walls/target orbs. If you come up with something that doesn't use the takeDamage() signature, that is fine.*/
             collided = true;
             Destroy(gameObject);
+        }
+        if(collision.gameObject.tag == "Player")
+        {
+            //end their entire existence
+            collision.gameObject.GetComponent<Player>().GetHit(forceConstant * Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) * 10);
         }
     }
 }
