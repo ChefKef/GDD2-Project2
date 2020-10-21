@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviour
                 if (tm.getDone())
                 {
                     ChangeGameState(State.Game);
+                    bm.GetComponent<BlockManager>().Play();
                 }
                 break;
             case State.Game:
