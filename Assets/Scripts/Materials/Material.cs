@@ -5,7 +5,7 @@ using UnityEngine;
 public class Material : MonoBehaviour
 {
     protected int cost;
-    public float durability;
+    protected float durability;
     protected float forceTransfer;
     protected MAT_TYPE type;
     protected SHOT_TYPE weakness;

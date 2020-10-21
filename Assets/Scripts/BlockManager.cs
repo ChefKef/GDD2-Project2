@@ -16,7 +16,7 @@ public class BlockManager : MonoBehaviour
     //a good way to do corners and stuff may be to split this into multiple lists, one for each material, where each index represents a particular edge/corner.
     public List<Sprite> sprites;
 
-    public Sprite outline;
+    public GameObject outline;
 
     public List<GameObject> blockList;
 
