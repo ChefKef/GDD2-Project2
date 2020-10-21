@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
     public GameObject levelObjects;
     public GameObject groundContainer;
 
+    public GameObject timerObject;
+    public TimerManager tm;
+
     public GameObject currentBlock;
     private bool cbAlive = false;
 
@@ -83,6 +86,8 @@ public class GameManager : MonoBehaviour
 
         bm = GameObject.Find("BlockManager");
 
+        tm = timerObject.GetComponent<TimerManager>();
+
         if (levelSelectButtons == null) levelSelectButtons = new List<GameObject>();
         if(levelManager.levels.Count == 0) levelManager.InitLevels();
         
@@ -107,7 +112,10 @@ public class GameManager : MonoBehaviour
                 break;
             case State.Grid:
                 //player is building
-                
+                if (tm.getDone())
+                {
+                    ChangeGameState(State.Game);
+                }
                 break;
             case State.Game:
                 //Game is active
@@ -142,7 +150,7 @@ public class GameManager : MonoBehaviour
         ChangeGameState(State.Grid);
     }
 
-    void ChangeGameState(State state)
+    public void ChangeGameState(State state)
     {
         prePauseState = currentState;
         currentState = state;
@@ -180,6 +188,8 @@ public class GameManager : MonoBehaviour
                 levelObjects.SetActive(true);
                 levelManager.cancelLevelLoop();
                 levelManager.DisplayGrid();
+
+                tm.setTimer(60);
 
                 bm.GetComponent<BlockManager>().ActivateGridPaint();
                 if (audioManager != null) //Updates Background Music
