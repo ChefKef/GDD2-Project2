@@ -1054,7 +1054,11 @@ MonoBehaviour:
   TestBlockPublic: {fileID: 1459502968438159182, guid: 94b3717bb9eff714abe57e1384c894f9, type: 3}
   Material: {fileID: 1268685759}
   Mouse: {fileID: 1532222169}
-  sprites: []
+  sprites:
+  - {fileID: 4869711706538104963, guid: 145e29c68837e3844ba44b3bcb0124f8, type: 3}
+  - {fileID: 2602544849901411586, guid: edf5737cd2c75014ebf14aca3544533a, type: 3}
+  - {fileID: 8507977608190122285, guid: 562369e91a429a04eabb8b7ace794381, type: 3}
+  blockList: []
 --- !u!4 &411696854
 Transform:
   m_ObjectHideFlags: 0

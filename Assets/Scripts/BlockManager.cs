@@ -16,7 +16,7 @@ public class BlockManager : MonoBehaviour
     //a good way to do corners and stuff may be to split this into multiple lists, one for each material, where each index represents a particular edge/corner.
     public List<Sprite> sprites;
 
-    private List<GameObject> blockList;
+    public List<GameObject> blockList;
 
     private List<GameObject> debugList;
 
@@ -28,7 +28,8 @@ public class BlockManager : MonoBehaviour
     {
         Painting,
         Deleting,
-        Connecting
+        Connecting,
+        Play
     }
 
     private EditorState currentState;
@@ -51,12 +52,14 @@ public class BlockManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!paused)
+        if (!paused && currentState != EditorState.Play)
             GridModeActive();
     }
 
     public void GridModeActive()
     {
+        Cleanup();
+
         if (currentState == EditorState.Painting)
         {
             PainterMode();
@@ -107,13 +110,13 @@ public class BlockManager : MonoBehaviour
                 currentMaterial = MAT_TYPE.STONE;
                 Debug.Log("Stone");
             }
-            Material.GetComponent<MaterialLabelManager>().setMaterial(currentMaterial);
-            /*if (Input.GetKeyDown(KeyCode.Alpha4))
+            if (Input.GetKeyDown(KeyCode.Alpha4))
             {
                 currentMaterial = MAT_TYPE.STEEL;
-                Debug.Log("Steel");
+                Debug.Log("Brick");
             }
-            if (Input.GetKeyDown(KeyCode.Alpha5))
+            Material.GetComponent<MaterialLabelManager>().setMaterial(currentMaterial);
+            /*if (Input.GetKeyDown(KeyCode.Alpha5))
             {
                 currentMaterial = MAT_TYPE.MAGIC;
                 Debug.Log("Magic");
@@ -141,7 +144,7 @@ public class BlockManager : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            if (hit.collider == null && currentState == EditorState.Painting)
+            if (hit.collider == null)
             {
                 bool intersecting = false;
 
@@ -184,37 +187,42 @@ public class BlockManager : MonoBehaviour
                         break;
                 }
 
-                foreach (GameObject g in blockList)
-                {
-                    if (g.transform.position == instanceBlock.transform.position)
-                    {
-                        Destroy(instanceBlock);
-                        intersecting = true;
-                    }
-                }
+                //dupe checking - don't think we need since the raycast checks if the collider is null
+                //foreach (GameObject g in blockList)
+                //{
+                //    if (g.transform.position == instanceBlock.transform.position)
+                //    {
+                //        intersecting = true;
+                //    }
+                //}
 
-                if (!intersecting)
-                {
+                //if (!intersecting)
+                //{
                     blockList.Add(instanceBlock);
 
+                    //boundary checking
                     if (instanceBlock.transform.position.y <= -5 || instanceBlock.transform.position.y >= 5 || instanceBlock.transform.position.x <= -11 || instanceBlock.transform.position.x >= 11)
                     {
                         blockList.Remove(instanceBlock);
+                        intersecting = true;
                     }
-                }
+                //}
 
-                LevelManager.Instance.activeObjects.Add(instanceBlock);
+                //final check, adds it to active or destroys it
+                if(intersecting)
+                {
+                    Destroy(instanceBlock);
+                }
+                else
+                {
+                    LevelManager.Instance.activeObjects.Add(instanceBlock);
+                }
             }
         }
         //right click input code
-        else if (Input.GetMouseButtonDown(1) && currentState == EditorState.Painting)
+        else if (Input.GetMouseButtonDown(1))
         {
-            //Apply rigid bodies to all blocks and remove them from the list so its not done another time
-            while (blockList.Count > 0)
-            {
-                blockList[0].AddComponent<Rigidbody2D>();
-                blockList.RemoveAt(0);
-            }
+            Play();
         }
     }
 
@@ -239,7 +247,7 @@ public class BlockManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //code for merging blocks
-            if (hit.collider != null && hit.collider.gameObject.tag == "destructible" && currentState == EditorState.Connecting)
+            if (hit.collider != null && hit.collider.gameObject.tag == "destructible")
             {
                 if(debugList.Count == 0)
                 {
@@ -284,6 +292,7 @@ public class BlockManager : MonoBehaviour
                 //merge into parent and shit
                 GameObject parentObject = new GameObject();
                 parentObject.name = "block group";
+                parentObject.transform.parent = GameManager.Instance.levelObjects.transform.GetChild(2);
 
                 List<GameObject> childList = new List<GameObject>();
                 childList = debugList;
@@ -324,5 +333,27 @@ public class BlockManager : MonoBehaviour
                 Debug.Log("Parent has been made");
             }
         }
+    }
+
+    //deletes any null blocks
+    void Cleanup()
+    {
+        for (int i = 0; i < blockList.Count; i++) 
+        {
+            if (blockList[i] == null)
+            {
+                blockList.RemoveAt(i);
+                i--;
+            }
+        }
+    }
+
+    void Play()
+    {
+        foreach(GameObject g in blockList)
+        {
+            g.AddComponent<Rigidbody2D>();
+        }
+        currentState = EditorState.Play;
     }
 }
