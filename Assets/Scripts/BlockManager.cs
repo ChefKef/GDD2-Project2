@@ -143,7 +143,7 @@ public class BlockManager : MonoBehaviour
                 GameObject instanceBlock;
                 instanceBlock = Instantiate(testBlockPrivate, gameCam.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
                 instanceBlock.transform.position = new Vector3(Mathf.Round(instanceBlock.transform.position.x), Mathf.Round(instanceBlock.transform.position.y), 0);
-                instanceBlock.transform.parent = GameManager.Instance.levelObjects.transform;
+                instanceBlock.transform.parent = GameManager.Instance.levelObjects.transform.GetChild(2);
                 instanceBlock.tag = "destructible";
 
                 //adds the script for whichever material is selected
