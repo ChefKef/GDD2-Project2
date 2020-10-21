@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public enum State { Title, lvlSelect, Grid, Game, Pause};
+    public enum State { Title, lvlSelect, Grid, Game, Pause, Fail, Clear};
 
     private static GameManager _instance;
 
@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     GameObject gridUI;
     GameObject gameUI;
     GameObject pauseUI;
+    GameObject failUI;
+    GameObject clearUI;
     public GameObject levelObjects;
     public GameObject groundContainer;
 
@@ -69,11 +71,15 @@ public class GameManager : MonoBehaviour
         gridUI = GameObject.Find("GridUI");
         gameUI = GameObject.Find("LevelUI");
         pauseUI = GameObject.Find("PauseUI");
+        failUI = GameObject.Find("FailUI");
+        clearUI = GameObject.Find("ClearUI");
         levelObjects = GameObject.Find("LevelObjects");
 
         gridUI.SetActive(false);
         gameUI.SetActive(false);
         pauseUI.SetActive(false);
+        failUI.SetActive(false);
+        clearUI.SetActive(false);
 
         bm = GameObject.Find("BlockManager");
 
@@ -111,6 +117,14 @@ public class GameManager : MonoBehaviour
                 //Game is paused
 
                 break;
+            case State.Clear:
+                //Level has been cleared
+
+                break;
+            case State.Fail:
+                //Level has been failed
+
+                break;
             default:
                 //title screen
                 break;
@@ -141,6 +155,8 @@ public class GameManager : MonoBehaviour
                 gridUI.SetActive(false);
                 gameUI.SetActive(false);
                 pauseUI.SetActive(false);
+                failUI.SetActive(false);
+                clearUI.SetActive(false);
                 levelObjects.SetActive(false);
                 levelManager.cancelLevelLoop();
                 levelManager.HideGrid();
@@ -177,6 +193,8 @@ public class GameManager : MonoBehaviour
                 lvlSelectUI.SetActive(false);
                 gridUI.SetActive(false);
                 pauseUI.SetActive(false);
+                failUI.SetActive(false);
+                clearUI.SetActive(false);
                 levelObjects.SetActive(true);
                 levelManager.startLevelLoop();
                 levelManager.HideGrid();
@@ -197,6 +215,50 @@ public class GameManager : MonoBehaviour
                 lvlSelectUI.SetActive(false);
                 gridUI.SetActive(false);
                 gameUI.SetActive(false);
+                failUI.SetActive(false);
+                clearUI.SetActive(false);
+                levelObjects.SetActive(false);
+                levelManager.cancelLevelLoop();
+                levelManager.HideGrid();
+
+                bm.GetComponent<BlockManager>().DeactivateGridPaint();
+
+                Destroy(currentBlock);
+                cbAlive = false;
+                if (audioManager != null) //Stops Background Music
+                {
+                    audioManager.stopBGM();
+                }
+
+                break;
+            case State.Clear:
+                pauseUI.SetActive(false);
+                lvlSelectUI.SetActive(false);
+                gridUI.SetActive(false);
+                gameUI.SetActive(false);
+                failUI.SetActive(false);
+                clearUI.SetActive(true);
+                levelObjects.SetActive(false);
+                levelManager.cancelLevelLoop();
+                levelManager.HideGrid();
+
+                bm.GetComponent<BlockManager>().DeactivateGridPaint();
+
+                Destroy(currentBlock);
+                cbAlive = false;
+                if (audioManager != null) //Stops Background Music
+                {
+                    audioManager.stopBGM();
+                }
+
+                break;
+            case State.Fail:
+                pauseUI.SetActive(false);
+                lvlSelectUI.SetActive(false);
+                gridUI.SetActive(false);
+                gameUI.SetActive(false);
+                failUI.SetActive(true);
+                clearUI.SetActive(false);
                 levelObjects.SetActive(false);
                 levelManager.cancelLevelLoop();
                 levelManager.HideGrid();
@@ -265,6 +327,30 @@ public class GameManager : MonoBehaviour
         {
             ChangeGameState(State.lvlSelect);
         }
+        else if(prePauseState == State.Game)
+        {
+            ChangeGameState(State.Game);
+        }
+        else
+        {            
+            ChangeGameState(State.Grid);
+            foreach (Transform child in levelObjects.transform.GetChild(2))
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
+
+    public void ButtonResume()
+    {
+        if (prePauseState == State.lvlSelect)
+        {
+            ChangeGameState(State.lvlSelect);
+        }
+        else if (prePauseState == State.Game)
+        {
+            ChangeGameState(State.Game);
+        }
         else
         {
             ChangeGameState(State.Grid);
@@ -303,10 +389,12 @@ public class GameManager : MonoBehaviour
         if (success)
         {
             //won level
+            ChangeGameState(State.Clear);
         }
         else
         {
             //failed
+            ChangeGameState(State.Fail);
         }
     }
 
