@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour
             case State.Grid:
                 gridUI.SetActive(true);
                 lvlSelectUI.SetActive(false);
-                gameUI.SetActive(false);
+                gameUI.SetActive(true);
                 pauseUI.SetActive(false);
                 levelObjects.SetActive(true);
                 levelManager.cancelLevelLoop();
