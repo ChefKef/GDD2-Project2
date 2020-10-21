@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4306866505067214438}
   - component: {fileID: 5741644439456557127}
   - component: {fileID: 6388389186039095857}
+  - component: {fileID: 8487758146314168820}
   m_Layer: 0
   m_Name: SpikeShot
   m_TagString: Untagged
@@ -98,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceConstant: 0
   shot: 0
+  shotSprites: []
 --- !u!50 &6388389186039095857
 Rigidbody2D:
   serializedVersion: 4
@@ -119,3 +121,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &8487758146314168820
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7712373763135539595}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

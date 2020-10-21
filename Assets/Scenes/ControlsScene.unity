@@ -415,13 +415,13 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: "Controls:\npress these keys to change the selected block material:\n\t\twood:
-    \t\t\t\t\t\t1\n\t\tbrick: \t\t\t\t\t\t2\n\t\tstone: \t\t\t\t\t\t3\npress these
-    keys to change the drawing mode:\n\t\tpainting: \t\t\t\ta\n\t\tconnecting: \t\t\ts\n\t\tdeleting:
-    \t\t\t\td\npainting mode: \t\t\tleft click on a grid space to add a block.\ndeleting
-    mode: \t\t\tleft click on a block to erase the block.\nconnecting mode: \t\tleft
-    click to select up to five adjacent \n\t\t\t\t\t\t\t\t\t\t\tblocks made from
-    the same material. \n\t\t\t\t\t\t\t\t\t\t\tright click to connect the selected
-    blocks.\n"
+    \t\t\t\t\t\t1\n\t\tglass: \t\t\t\t\t\t2\n\t\tstone: \t\t\t\t\t\t3\n\t\tbrick:
+    \t\t\t\t\t\t4\npress these keys to change the drawing mode:\n\t\tpainting: \t\t\t\ta\n\t\tconnecting:
+    \t\t\ts\n\t\tdeleting: \t\t\t\td\npainting mode: \t\t\tleft click on a grid space
+    to add a block.\ndeleting mode: \t\t\tleft click on a block to erase the block.\nconnecting
+    mode: \t\tleft click to select up to five adjacent \n\t\t\t\t\t\t\t\t\t\t\tblocks
+    made from the same material. \n\t\t\t\t\t\t\t\t\t\t\tright click to connect the
+    selected blocks.\n"
 --- !u!222 &1042860197
 CanvasRenderer:
   m_ObjectHideFlags: 0

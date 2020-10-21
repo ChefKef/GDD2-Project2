@@ -26,10 +26,13 @@ public class MaterialLabelManager : MonoBehaviour
                 value.GetComponent<UnityEngine.UI.Text>().text = "wood";
                 break;
             case MAT_TYPE.GLASS:
-                value.GetComponent<UnityEngine.UI.Text>().text = "brick";
+                value.GetComponent<UnityEngine.UI.Text>().text = "glass";
                 break;
             case MAT_TYPE.STONE:
                 value.GetComponent<UnityEngine.UI.Text>().text = "stone";
+                break;
+            case MAT_TYPE.STEEL:
+                value.GetComponent<UnityEngine.UI.Text>().text = "brick";
                 break;
             default:
                 value.GetComponent<UnityEngine.UI.Text>().text = "error";

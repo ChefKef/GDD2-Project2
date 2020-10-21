@@ -31,6 +31,9 @@ public class MouseModeManager : MonoBehaviour
             case 2:
                 value.GetComponent<UnityEngine.UI.Text>().text = "connecting";
                 break;
+            case 3:
+                value.GetComponent<UnityEngine.UI.Text>().text = "playing";
+                break;
             default:
                 value.GetComponent<UnityEngine.UI.Text>().text = "error";
                 break;
