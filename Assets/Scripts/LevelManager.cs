@@ -147,4 +147,9 @@ public class LevelManager : MonoBehaviour
     {
         gridContainer.SetActive(false);
     }
+
+    public void StartCode()
+    {
+
+    }
 }

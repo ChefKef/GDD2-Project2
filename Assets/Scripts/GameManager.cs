@@ -158,6 +158,7 @@ public class GameManager : MonoBehaviour
         levelManager.CleanUpLevel();
         levelManager.setCurrentLevel(value);
         ChangeGameState(State.Grid);
+        bm.GetComponent<BlockManager>().StartCode();
         tm.setTimer(60); //Resets Timer
         currentLevel = value; //Update current level variable
     }
