@@ -80,6 +80,7 @@ public class BlockManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.A))
             {
                 currentState = EditorState.Painting;
+                CancelConnecting();
                 Debug.Log("Now Painting");
             }
             if (Input.GetKeyDown(KeyCode.S))
@@ -90,6 +91,7 @@ public class BlockManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.D))
             {
                 currentState = EditorState.Deleting;
+                CancelConnecting();
                 Debug.Log("Now Deleting");
             }
             Mouse.GetComponent<MouseModeManager>().setMode((int)currentState);
@@ -166,18 +168,17 @@ public class BlockManager : MonoBehaviour
                     case MAT_TYPE.GLASS:
                         instanceBlock.AddComponent<Glass>();
 
-                        //TEMPORARY PART - CHANGES COLOR, REPLACE WITH ACTUAL SPRITE PICKING
-                        instanceBlock.GetComponent<SpriteRenderer>().color = new Color(0.4f, 0.7f, 1);
+                        instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[1];
                         break;
                     case MAT_TYPE.STONE:
                         instanceBlock.AddComponent<Stone>();
 
-                        instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[1];
+                        instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[2];
                         break;
                     case MAT_TYPE.STEEL:
                         instanceBlock.AddComponent<Steel>();
 
-                        instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[2];
+                        instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[3];
                         break;
                     case MAT_TYPE.MAGIC:
                         instanceBlock.AddComponent<Magic>();
@@ -203,7 +204,6 @@ public class BlockManager : MonoBehaviour
                     //boundary checking
                     if (instanceBlock.transform.position.y <= -5 || instanceBlock.transform.position.y >= 5 || instanceBlock.transform.position.x <= -11 || instanceBlock.transform.position.x >= 11)
                     {
-                        blockList.Remove(instanceBlock);
                         intersecting = true;
                     }
                 //}
@@ -211,6 +211,7 @@ public class BlockManager : MonoBehaviour
                 //final check, adds it to active or destroys it
                 if(intersecting)
                 {
+                    blockList.Remove(instanceBlock);
                     Destroy(instanceBlock);
                 }
                 else
@@ -218,11 +219,6 @@ public class BlockManager : MonoBehaviour
                     LevelManager.Instance.activeObjects.Add(instanceBlock);
                 }
             }
-        }
-        //right click input code
-        else if (Input.GetMouseButtonDown(1))
-        {
-            Play();
         }
     }
 
@@ -254,6 +250,9 @@ public class BlockManager : MonoBehaviour
                     debugList.Add(hit.collider.gameObject);
                     blockList.Remove(hit.collider.gameObject);
                     Debug.Log(debugList);
+                    hit.collider.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                    hit.collider.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
+                    hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, -0.1f);
 
                     //sets the type of this set of connected objects, checks this before adding it to the group
                     connectorMaterial = hit.collider.gameObject.GetComponent<Material>().Type;
@@ -264,11 +263,14 @@ public class BlockManager : MonoBehaviour
                     {
                         float dist = Vector3.Distance(debugList[i].transform.position, hit.collider.gameObject.transform.position);
                         Debug.Log(dist);
-                        if (dist <= 1)
+                        if (dist <= 1.2f)
                         {
                             debugList.Add(hit.collider.gameObject);
                             blockList.Remove(hit.collider.gameObject);
                             Debug.Log("Adjacent");
+                            hit.collider.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                            hit.collider.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
+                            hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, -0.1f);
                             break;
                         }
                         Debug.Log("Adjacency was checked");
@@ -320,6 +322,7 @@ public class BlockManager : MonoBehaviour
 
                 foreach (GameObject g in childList)
                 {
+                    g.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(255, 255, 0);
                     g.transform.parent = parentObject.transform;
                     Destroy(g.GetComponent<Material>());
                     Debug.Log("Child has been connected");
@@ -335,6 +338,18 @@ public class BlockManager : MonoBehaviour
         }
     }
 
+
+    void CancelConnecting()
+    {
+        foreach(GameObject g in debugList)
+        {
+            blockList.Add(g);
+            g.transform.GetChild(0).gameObject.SetActive(false);
+            g.transform.position = new Vector3(g.transform.position.x, g.transform.position.y, 0);
+        }
+        debugList = new List<GameObject>();
+    }
+
     //deletes any null blocks
     void Cleanup()
     {
@@ -348,12 +363,15 @@ public class BlockManager : MonoBehaviour
         }
     }
 
-    void Play()
+    public void Play()
     {
+        CancelConnecting();
         foreach(GameObject g in blockList)
         {
             g.AddComponent<Rigidbody2D>();
         }
         currentState = EditorState.Play;
+
+        GameManager.Instance.ChangeGameState(GameManager.State.Game);
     }
 }

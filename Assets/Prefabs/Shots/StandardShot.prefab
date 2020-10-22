@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8350561656490923139}
   - component: {fileID: 866049766446342909}
   - component: {fileID: 6648712770944458529}
+  - component: {fileID: -5431806496539746960}
   m_Layer: 0
   m_Name: StandardShot
   m_TagString: Untagged
@@ -98,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceConstant: 0
   shot: 0
+  shotSprites: []
 --- !u!50 &6648712770944458529
 Rigidbody2D:
   serializedVersion: 4
@@ -119,3 +121,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &-5431806496539746960
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8366622675564578808}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.375

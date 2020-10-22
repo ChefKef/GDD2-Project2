@@ -39,7 +39,6 @@ public class UIManager : MonoBehaviour
     public void GoToLevelUI()
     {
         SceneManager.LoadScene("LevelUIScene");
-        Debug.Log("In method");
     }
 
     //Pauses the current Level

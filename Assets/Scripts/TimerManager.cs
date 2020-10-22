@@ -15,6 +15,7 @@ public class TimerManager : MonoBehaviour
     void Start()
     {
         value = GetComponentInParent<Transform>().Find("Value").gameObject;
+        timerDone = false;
     }
 
     // Update is called once per frame
@@ -23,8 +24,10 @@ public class TimerManager : MonoBehaviour
         if(!timerDone)
         {
             timer += Time.deltaTime;
+            //Debug.Log("Timer running. Time on timer: " + timer);
             if (Mathf.Floor(timer) > secondsPassed)
             {
+                Debug.Log("Timer math occuring.");
                 if (seconds == 0)
                 {
                     if (minutes == 0)
@@ -38,7 +41,11 @@ public class TimerManager : MonoBehaviour
                     }
                 }
                 secondsPassed++;
-                seconds--;
+                if(seconds > 0)
+                {
+                    seconds--;
+                }
+                updateTimer();
             }
         }
     }
@@ -59,7 +66,14 @@ public class TimerManager : MonoBehaviour
         timerDone = false;
         timer = 0.0f;
         secondsPassed = 0;
-        minutes = time % 60;
+        if(time > 59)
+        {
+            minutes = Mathf.FloorToInt((float)time / (float)60);
+        }
+        else
+        {
+            minutes = 0;
+        }
         seconds = time - (60 * minutes);
         updateTimer();
     }

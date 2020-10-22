@@ -5,7 +5,7 @@ using UnityEngine;
 public class Material : MonoBehaviour
 {
     protected int cost;
-    public float durability;
+    protected float durability;
     protected float forceTransfer;
     protected MAT_TYPE type;
     protected SHOT_TYPE weakness;
@@ -42,24 +42,26 @@ public class Material : MonoBehaviour
     //deals damage based on a previously calculated amount (either when hit or by transferrence)
     public void DoDamage(float damage, SHOT_TYPE damageType)
     {
-        if (damageType == weakness)
+        if (damageType == this.weakness)
         {
             //double damage if it is weak to this attack
-            durability -= (damage * 2);
+            this.durability -= (damage * 2);
 
         }
-        else if (damageType == resistance) 
+        else if (damageType == this.resistance) 
         {
             //halves if it resists it
-            durability -= (damage / 2);
+            this.durability -= (damage / 2);
         }
         else
         {
             //regular damage otherwise
-            durability -= damage;
+            this.durability -= damage;
         }
 
-        if (durability <= 0.0f)
+        Debug.Log(damage);
+
+        if (this.durability <= 0.0f)
         {
             //destroy the object this is attatched to.
             Destroy(gameObject);
