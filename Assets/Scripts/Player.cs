@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     private AudioManagerScript audioManager;
     void Start()
     {
-        health = 100.0f;
+        health = 10.0f;
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManagerScript>();
     }
 
