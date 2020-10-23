@@ -184,13 +184,13 @@ public class BlockManager : MonoBehaviour
                 }
 
                 //dupe checking - don't think we need since the raycast checks if the collider is null
-                //foreach (GameObject g in blockList)
-                //{
-                //    if (g.transform.position == instanceBlock.transform.position)
-                //    {
-                //        intersecting = true;
-                //    }
-                //}
+                foreach (GameObject g in blockList)
+                {
+                    if (g.transform.position == instanceBlock.transform.position)
+                    {
+                        intersecting = true;
+                    }
+                }
 
                 //if (!intersecting)
                 //{
