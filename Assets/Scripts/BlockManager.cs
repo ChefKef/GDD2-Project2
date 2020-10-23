@@ -38,15 +38,7 @@ public class BlockManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Grid grid = new Grid(21, 9, 1f);
-        testBlockPrivate = TestBlockPublic;
-        blockList = new List<GameObject>();
-
-        debugList = new List<GameObject>();
-
-        currentState = EditorState.Painting;
-
-        currentMaterial = MAT_TYPE.WOOD;
+        StartCode();
     }
 
     // Update is called once per frame
@@ -373,5 +365,18 @@ public class BlockManager : MonoBehaviour
         currentState = EditorState.Play;
 
         GameManager.Instance.ChangeGameState(GameManager.State.Game);
+    }
+
+    public void StartCode()
+    {
+        //Grid grid = new Grid(21, 9, 1f);
+        testBlockPrivate = TestBlockPublic;
+        blockList = new List<GameObject>();
+
+        debugList = new List<GameObject>();
+
+        currentState = EditorState.Painting;
+
+        currentMaterial = MAT_TYPE.WOOD;
     }
 }

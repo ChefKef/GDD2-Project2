@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
         failUI = GameObject.Find("FailUI");
         clearUI = GameObject.Find("ClearUI");
         levelObjects = GameObject.Find("LevelObjects");
+        groundContainer = GameObject.Find("GroundContainer");
 
         gridUI.SetActive(false);
         gameUI.SetActive(false);
@@ -146,7 +147,10 @@ public class GameManager : MonoBehaviour
         previousState = currentState;
     }
 
-    void OnDestroy() { if (this == _instance) { _instance = null; } }
+    void OnDestroy() {
+        Debug.Log("Destroyed gm");
+        if (this == _instance) { _instance = null; } 
+    }
 
     public void StartLevel(int value)
     {
@@ -154,6 +158,7 @@ public class GameManager : MonoBehaviour
         levelManager.CleanUpLevel();
         levelManager.setCurrentLevel(value);
         ChangeGameState(State.Grid);
+        bm.GetComponent<BlockManager>().StartCode();
         tm.setTimer(60); //Resets Timer
         currentLevel = value; //Update current level variable
     }
