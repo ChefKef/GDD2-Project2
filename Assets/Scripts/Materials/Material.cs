@@ -21,6 +21,11 @@ public class Material : MonoBehaviour
         get { return type; }
     }
 
+    public int Cost
+    {
+        get { return cost; }
+    }
+
     public void Start()
     {
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManagerScript>(); //Allows block to make sounds when hit
