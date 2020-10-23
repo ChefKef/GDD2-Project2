@@ -38,15 +38,7 @@ public class BlockManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Grid grid = new Grid(21, 9, 1f);
-        testBlockPrivate = TestBlockPublic;
-        blockList = new List<GameObject>();
-
-        debugList = new List<GameObject>();
-
-        currentState = EditorState.Painting;
-
-        currentMaterial = MAT_TYPE.WOOD;
+        StartCode();
     }
 
     // Update is called once per frame
@@ -80,6 +72,7 @@ public class BlockManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.A))
             {
                 currentState = EditorState.Painting;
+                CancelConnecting();
                 Debug.Log("Now Painting");
             }
             if (Input.GetKeyDown(KeyCode.S))
@@ -90,6 +83,7 @@ public class BlockManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.D))
             {
                 currentState = EditorState.Deleting;
+                CancelConnecting();
                 Debug.Log("Now Deleting");
             }
             Mouse.GetComponent<MouseModeManager>().setMode((int)currentState);
@@ -166,7 +160,6 @@ public class BlockManager : MonoBehaviour
                     case MAT_TYPE.GLASS:
                         instanceBlock.AddComponent<Glass>();
 
-                        //TEMPORARY PART - CHANGES COLOR, REPLACE WITH ACTUAL SPRITE PICKING
                         instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[1];
                         break;
                     case MAT_TYPE.STONE:
@@ -188,13 +181,13 @@ public class BlockManager : MonoBehaviour
                 }
 
                 //dupe checking - don't think we need since the raycast checks if the collider is null
-                foreach (GameObject g in blockList)
-                {
-                    if (g.transform.position == instanceBlock.transform.position)
-                    {
-                        intersecting = true;
-                    }
-                }
+                //foreach (GameObject g in blockList)
+                //{
+                //    if (g.transform.position == instanceBlock.transform.position)
+                //    {
+                //        intersecting = true;
+                //    }
+                //}
 
                 //if (!intersecting)
                 //{
@@ -249,6 +242,9 @@ public class BlockManager : MonoBehaviour
                     debugList.Add(hit.collider.gameObject);
                     blockList.Remove(hit.collider.gameObject);
                     Debug.Log(debugList);
+                    hit.collider.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                    hit.collider.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
+                    hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, -0.1f);
 
                     //sets the type of this set of connected objects, checks this before adding it to the group
                     connectorMaterial = hit.collider.gameObject.GetComponent<Material>().Type;
@@ -259,11 +255,14 @@ public class BlockManager : MonoBehaviour
                     {
                         float dist = Vector3.Distance(debugList[i].transform.position, hit.collider.gameObject.transform.position);
                         Debug.Log(dist);
-                        if (dist <= 1)
+                        if (dist <= 1.2f)
                         {
                             debugList.Add(hit.collider.gameObject);
                             blockList.Remove(hit.collider.gameObject);
                             Debug.Log("Adjacent");
+                            hit.collider.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                            hit.collider.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
+                            hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, -0.1f);
                             break;
                         }
                         Debug.Log("Adjacency was checked");
@@ -315,6 +314,7 @@ public class BlockManager : MonoBehaviour
 
                 foreach (GameObject g in childList)
                 {
+                    g.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(255, 255, 0);
                     g.transform.parent = parentObject.transform;
                     Destroy(g.GetComponent<Material>());
                     Debug.Log("Child has been connected");
@@ -328,6 +328,18 @@ public class BlockManager : MonoBehaviour
                 Debug.Log("Parent has been made");
             }
         }
+    }
+
+
+    void CancelConnecting()
+    {
+        foreach(GameObject g in debugList)
+        {
+            blockList.Add(g);
+            g.transform.GetChild(0).gameObject.SetActive(false);
+            g.transform.position = new Vector3(g.transform.position.x, g.transform.position.y, 0);
+        }
+        debugList = new List<GameObject>();
     }
 
     //deletes any null blocks
@@ -345,6 +357,7 @@ public class BlockManager : MonoBehaviour
 
     public void Play()
     {
+        CancelConnecting();
         foreach(GameObject g in blockList)
         {
             g.AddComponent<Rigidbody2D>();
@@ -352,5 +365,18 @@ public class BlockManager : MonoBehaviour
         currentState = EditorState.Play;
 
         GameManager.Instance.ChangeGameState(GameManager.State.Game);
+    }
+
+    public void StartCode()
+    {
+        //Grid grid = new Grid(21, 9, 1f);
+        testBlockPrivate = TestBlockPublic;
+        blockList = new List<GameObject>();
+
+        debugList = new List<GameObject>();
+
+        currentState = EditorState.Painting;
+
+        currentMaterial = MAT_TYPE.WOOD;
     }
 }

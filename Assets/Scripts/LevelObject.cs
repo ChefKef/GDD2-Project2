@@ -34,16 +34,17 @@ public class LevelObject
 
     public List<GameObject> InitLevel()
     {
+        if (gm == null)
+        {
+            Debug.Log("recreating gm");
+            gm = GameManager.Instance;
+        }
+
         List<GameObject> activeObjects = new List<GameObject>();
         trebuchetPrefab = gm.trebuchetPrefab;
         playerPrefab = gm.playerPrefab;
         GameObject groundTile = gm.groundPrefab;
         GameObject player = GameObject.Instantiate(playerPrefab, playerPos, Quaternion.identity);
-
-
-        Debug.Log("Player: " + player);
-        Debug.Log("GM: " + gm);
-
 
         player.transform.parent = gm.levelObjects.transform;
         activeObjects.Add(player);

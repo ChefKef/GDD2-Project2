@@ -44,8 +44,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 0
-  levelManager: {fileID: 0}
+  currentState: 0
+  previousState: 0
   trebuchetPrefab: {fileID: 6346453648414131099, guid: c22bcfd607f2a9a48ab480f41995d3c2, type: 3}
   playerPrefab: {fileID: 6174787714683200432, guid: 90df0862532d59b499c866a7a8fcb978, type: 3}
-  buttonPrefab: {fileID: 0}
-  canvasPrefab: {fileID: 0}
+  groundPrefab: {fileID: 7667244061207680598, guid: 96d2450b361b5534eba0afb57fab21df, type: 3}
+  gridPrefab: {fileID: 1362639493840471445, guid: fc88709787be5fc46b72486ee2cc9413, type: 3}
+  blockPrefab: {fileID: 2522996355958966827, guid: 5cb4fc8e1e6835943b1a9f9bd957b176, type: 3}
+  regularShot: {fileID: 8366622675564578808, guid: 741918f875a10554099c1e63b5cf0083, type: 3}
+  fireShot: {fileID: 108975094499874599, guid: 2398cf9b59bc4b54687622ab578cbba9, type: 3}
+  iceShot: {fileID: 1507139599823353781, guid: 0ba40ff3764e8ff488bea85fc1337029, type: 3}
+  bombShot: {fileID: 7136846543262890294, guid: eeeda9162498bbb4ebf82798aa2ce71c, type: 3}
+  spikeShot: {fileID: 7712373763135539595, guid: 670e36b951d8d164a801f8e61a72c752, type: 3}
+  levelObjects: {fileID: 0}
+  groundContainer: {fileID: 0}
+  timerObject: {fileID: 9184317251949520538, guid: 4d1e0c44dd4497a49a9337071933ac68, type: 3}
+  tm: {fileID: 0}
+  currentBlock: {fileID: 0}
