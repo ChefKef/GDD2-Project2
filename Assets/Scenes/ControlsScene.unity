@@ -739,11 +739,11 @@ MonoBehaviour:
   m_Text: "How To Play:\nyou are a wizard tasked with quickly constructing fortresses
     to protect magic orbs used to defend your kingdom from the northern empire. \n\nyou
     will get a short amount of time to build a stronghold before the enemy's trebuchets
-    begin to fire.  you are able to conjure 3 types of materials, each of which is
-    strong or weak against a certain type of shot. if all the orbs survive the attack,
-    you win the level. if any of the orbs are destroyed during the attack, you need
-    to try again. \n\nclick the button at the bottom right of the level screen to
-    skip the remaining time and make the trebuchets start firing.\n"
+    begin to fire.  you can spend components to conjure 4 different types of materials,
+    each of which is strong or weak against a certain type of shot. if all the orbs
+    survive the attack, you win the level. if any of the orbs are destroyed during
+    the attack, you need to try again. \n\nclick the button at the bottom right of
+    the level screen to skip the remaining time and make the trebuchets start firing.\n"
 --- !u!222 &1614881516
 CanvasRenderer:
   m_ObjectHideFlags: 0

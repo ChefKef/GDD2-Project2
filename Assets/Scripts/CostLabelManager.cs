@@ -20,6 +20,6 @@ public class CostLabelManager : MonoBehaviour
 
     public void setNumber(int remainingComponents)
     {
-        value.GetComponent<UnityEngine.UI.Text>().text = remainingComponents.ToString();
+        value.GetComponent<UnityEngine.UI.Text>().text = remainingComponents.ToString() + ".:.";
     }
 }
