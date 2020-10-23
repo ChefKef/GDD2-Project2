@@ -10,6 +10,7 @@ public class BlockManager : MonoBehaviour
 
     public GameObject Material;
     public GameObject Mouse;
+    public GameObject Components;
 
     private GameObject testBlockPrivate;
 
@@ -23,6 +24,8 @@ public class BlockManager : MonoBehaviour
     private MAT_TYPE currentMaterial;
 
     private MAT_TYPE connectorMaterial;
+
+    private int remainingComponents;
 
     private enum EditorState
     {
@@ -193,11 +196,17 @@ public class BlockManager : MonoBehaviour
                 //{
                     blockList.Add(instanceBlock);
 
-                    //boundary checking
-                    if (instanceBlock.transform.position.y <= -5 || instanceBlock.transform.position.y >= 5 || instanceBlock.transform.position.x <= -11 || instanceBlock.transform.position.x >= 11)
-                    {
-                        intersecting = true;
-                    }
+                //boundary checking
+                if (instanceBlock.transform.position.y <= -5 || instanceBlock.transform.position.y >= 5 || instanceBlock.transform.position.x <= -11 || instanceBlock.transform.position.x >= 11)
+                {
+                    intersecting = true;
+                }
+
+                //cost checking
+                if (instanceBlock.GetComponent<Material>().Cost > remainingComponents)
+                {
+                    intersecting = true;
+                }
                 //}
 
                 //final check, adds it to active or destroys it
@@ -208,7 +217,11 @@ public class BlockManager : MonoBehaviour
                 }
                 else
                 {
+                    //adds it
                     LevelManager.Instance.activeObjects.Add(instanceBlock);
+                    //update components
+                    remainingComponents -= instanceBlock.GetComponent<Material>().Cost;
+                    Components.GetComponent<CostLabelManager>().setNumber(remainingComponents);
                 }
             }
         }
@@ -220,12 +233,28 @@ public class BlockManager : MonoBehaviour
 
         if(Input.GetMouseButton(0))
         {
-            if (hit.collider != null && hit.collider.gameObject.tag == "destructible" && currentState == EditorState.Deleting)
+            if (hit.collider != null && hit.collider.gameObject.tag == "destructible")
             {
+                //edits cost
+                remainingComponents += hit.collider.gameObject.GetComponent<Material>().Cost;
+                //deletes it
                 blockList.Remove(hit.collider.gameObject);
                 Destroy(hit.collider.gameObject);
             }
-        } 
+            //similar code but loops through all its siblings as well
+            if (hit.collider != null && hit.collider.gameObject.tag == "childBlock")
+            {
+                //gets the parent
+                GameObject parent = hit.collider.gameObject.transform.parent.gameObject;
+                //increases the components
+                int cost = parent.GetComponent<Material>().Cost;
+                remainingComponents += cost * parent.transform.childCount;
+                //deletes
+                blockList.Remove(parent);
+                Destroy(parent);
+            }
+            Components.GetComponent<CostLabelManager>().setNumber(remainingComponents);
+        }
     }
 
     void ConnectorMode()
@@ -377,6 +406,14 @@ public class BlockManager : MonoBehaviour
 
         currentState = EditorState.Painting;
 
+        Mouse.GetComponent<MouseModeManager>().setMode((int)currentState);
+
         currentMaterial = MAT_TYPE.WOOD;
+
+        Material.GetComponent<MaterialLabelManager>().setMaterial(currentMaterial);
+
+        remainingComponents = 50;
+
+        Components.GetComponent<CostLabelManager>().setNumber(remainingComponents);
     }
 }
