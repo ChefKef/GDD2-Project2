@@ -27,21 +27,13 @@ public class BlockManager : MonoBehaviour
 
     private int remainingComponents;
 
-    private enum EditorState
-    {
-        Painting,
-        Deleting,
-        Connecting,
-        Play
-    }
-
     private EditorState currentState;
     private bool paused;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCode();
+
     }
 
     // Update is called once per frame
@@ -89,7 +81,7 @@ public class BlockManager : MonoBehaviour
                 CancelConnecting();
                 Debug.Log("Now Deleting");
             }
-            Mouse.GetComponent<MouseModeManager>().setMode((int)currentState);
+            Mouse.GetComponent<MouseModeManager>().setMode(currentState);
 
             //input checking for changing the material. (Temporarily number buttons, could be permanent as a secondary option to clicking
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -406,7 +398,7 @@ public class BlockManager : MonoBehaviour
 
         currentState = EditorState.Painting;
 
-        Mouse.GetComponent<MouseModeManager>().setMode((int)currentState);
+        Mouse.GetComponent<MouseModeManager>().setMode(currentState);
 
         currentMaterial = MAT_TYPE.WOOD;
 
@@ -416,4 +408,12 @@ public class BlockManager : MonoBehaviour
 
         Components.GetComponent<CostLabelManager>().setNumber(remainingComponents);
     }
+}
+
+public enum EditorState
+{
+    Painting,
+    Deleting,
+    Connecting,
+    Play
 }
