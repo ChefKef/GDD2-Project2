@@ -742,8 +742,9 @@ MonoBehaviour:
     begin to fire.  you can spend components to conjure 4 different types of materials,
     each of which is strong or weak against a certain type of shot. if all the orbs
     survive the attack, you win the level. if any of the orbs are destroyed during
-    the attack, you need to try again. \n\nclick the button at the bottom right of
-    the level screen to skip the remaining time and make the trebuchets start firing.\n"
+    the attack, you need to try again. click the button at the bottom right of the
+    level screen to skip the remaining time and make the trebuchets start firing
+    immediately.\n"
 --- !u!222 &1614881516
 CanvasRenderer:
   m_ObjectHideFlags: 0
