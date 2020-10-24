@@ -392,8 +392,6 @@ public class BlockManager : MonoBehaviour
             g.AddComponent<Rigidbody2D>();
         }
         currentState = EditorState.Play;
-
-        GameManager.Instance.ChangeGameState(GameManager.State.Game);
     }
 
     public void StartCode()
