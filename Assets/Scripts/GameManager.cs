@@ -109,37 +109,35 @@ public class GameManager : MonoBehaviour
             case State.Title:
                 //Display title screen, probably scene switch
                 break;
+
             case State.lvlSelect:
                 //Display level select, probably scene switch eventually, rn is all done in one
                 break;
+
             case State.Grid:
                 //player is building
                 if (tm.getDone())
-                {
-                    ChangeGameState(State.Game);
-                    bm.GetComponent<BlockManager>().Play();
-                }
+                    StartGame();
                 break;
+
             case State.Game:
                 //Game is active
                 if (tm.getDone())
-                {
                     ChangeGameState(State.Clear);
-                }
-
                 break;
+
             case State.Pause:
                 //Game is paused
-
                 break;
+
             case State.Clear:
                 //Level has been cleared
-
                 break;
+
             case State.Fail:
                 //Level has been failed
-
                 break;
+
             default:
                 //title screen
                 break;
@@ -150,6 +148,13 @@ public class GameManager : MonoBehaviour
     void OnDestroy() {
         Debug.Log("Destroyed gm");
         if (this == _instance) { _instance = null; } 
+    }
+
+    //Changes the current state to Game and adds physics to the blocks
+    public void StartGame()
+    {
+        ChangeGameState(State.Game);
+        bm.GetComponent<BlockManager>().Play();
     }
 
     public void StartLevel(int value)
