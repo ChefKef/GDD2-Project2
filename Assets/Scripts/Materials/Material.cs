@@ -44,6 +44,11 @@ public class Material : MonoBehaviour
         neighbors = new List<Material>();
     }
 
+    public void MultiplyDurability(float multiplier)
+    {
+        durability *= multiplier;
+    }
+
     //deals damage based on a previously calculated amount (either when hit or by transferrence)
     public void DoDamage(float damage, SHOT_TYPE damageType)
     {

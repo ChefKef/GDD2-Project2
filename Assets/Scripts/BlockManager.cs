@@ -333,6 +333,7 @@ public class BlockManager : MonoBehaviour
                         break;
                 }
 
+                float children = 0.0f;
                 foreach (GameObject g in childList)
                 {
                     g.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(255, 255, 0);
@@ -340,7 +341,11 @@ public class BlockManager : MonoBehaviour
                     Destroy(g.GetComponent<Material>());
                     Debug.Log("Child has been connected");
                     g.tag = "childBlock";
+                    children += 1.0f;
                 }
+
+                //multiplies the durability by either 1 or the number of children / 1.5
+                parentObject.GetComponent<Material>().MultiplyDurability(Mathf.Min(1.0f, (children / 1.5f)));
 
                 parentObject.tag = "destructible";
 
