@@ -44,6 +44,8 @@ public class RockManager : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Instantiate(GameManager.Instance.shotAnim, gameObject.transform.position + new Vector3(0, 0, -1), Quaternion.identity, GameObject.Find("DrawnObjects").transform);
+
         if (collided == false && (collision.gameObject.tag == "destructible" || collision.gameObject.tag == "childBlock")) //Ensure that collision is only calculated once.
         {
             collision.gameObject.GetComponentInParent<Material>().CalcDamage(forceConstant * Mathf.Abs(GetComponent<Rigidbody2D>().velocity.magnitude), shot);

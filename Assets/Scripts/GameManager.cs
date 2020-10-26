@@ -28,7 +28,10 @@ public class GameManager : MonoBehaviour
     public GameObject iceShot;
     public GameObject bombShot;
     public GameObject spikeShot;
+
     public GameObject dustAnim;
+    public GameObject shotAnim;
+
 
     GameObject bm;
 
