@@ -952,6 +952,10 @@ PrefabInstance:
       propertyPath: dustAnim
       value: 
       objectReference: {fileID: 488093804388192925, guid: 758ea72cfd78ba644be3f61a5ea95f89, type: 3}
+    - target: {fileID: 4128781456327159371, guid: 167d45ac5fa06aa49a1dbe6265e2966c, type: 3}
+      propertyPath: shotAnim
+      value: 
+      objectReference: {fileID: 6798747474300203979, guid: dc2b81b94198a204d9ce209520a7867c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 167d45ac5fa06aa49a1dbe6265e2966c, type: 3}
 --- !u!114 &272851867 stripped
