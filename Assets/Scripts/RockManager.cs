@@ -52,8 +52,9 @@ public class RockManager : MonoBehaviour
             collided = true;
             Destroy(gameObject);
         }
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player" && collided == false)
         {
+            collided = true;
             //end their entire existence
             collision.gameObject.GetComponent<Player>().GetHit(forceConstant * Mathf.Abs(GetComponent<Rigidbody2D>().velocity.magnitude));
         }
