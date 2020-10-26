@@ -78,9 +78,10 @@ public class TrebuchetManager : MonoBehaviour
     /// <param name="target">The target the boulder will be launched at.</param>
     /// <param name="upwardVel">The initial upward velocity of the boulder.</param>
     /// <param name="boulderType">The type of boulder being launched. Currently not in use.</param>
-    void LaunchBoulder(Vector2 target, float upwardVel, SHOT_TYPE boulderType)
+    IEnumerator LaunchBoulder(Vector2 target, float upwardVel, SHOT_TYPE boulderType)
     {
-        anim.SetTrigger("TrebuchetTrigger");
+        yield return new WaitForSeconds(0.5f);
+
         projectileHolder = (GameObject)Instantiate(projectile, new Vector3(gameObject.transform.position.x + .5f, gameObject.transform.position.y + .22f, gameObject.transform.position.z - .001f), Quaternion.identity); //Create projectile
         projectileHolder.transform.parent = drawnObjects.transform;
         projectileHolder.GetComponent<RockManager>().shot = boulderType;
@@ -102,7 +103,9 @@ public class TrebuchetManager : MonoBehaviour
     /// <param name="variance">A value between -0.5 and 0.5. Slightly changes where the trebuchet fires.</param>
     public void LaunchDefaultBoulder(float variance)
     {
-        LaunchBoulder(defaultTarget, defaultUpwardVal + variance, defaultBoulderType);
+        anim.SetTrigger("TrebuchetTrigger");
+
+        StartCoroutine(LaunchBoulder(defaultTarget, defaultUpwardVal + variance, defaultBoulderType));
     }
 
     IEnumerator DestroyOldProjectiles(bool status, float delayTime, GameObject toDestroy)
