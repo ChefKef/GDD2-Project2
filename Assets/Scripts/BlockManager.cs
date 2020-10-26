@@ -270,7 +270,7 @@ public class BlockManager : MonoBehaviour
                     //sets the type of this set of connected objects, checks this before adding it to the group
                     connectorMaterial = hit.collider.gameObject.GetComponent<Material>().Type;
                 }
-                else if (debugList.Count < 5 && debugList.Count > 0 && connectorMaterial == hit.collider.gameObject.GetComponent<Material>().Type)
+                else if (debugList.Count < 5 && debugList.Count > 0 && connectorMaterial == hit.collider.gameObject.GetComponent<Material>().Type && !debugList.Contains(hit.collider.gameObject))
                 {
                     for (int i = 0; i < debugList.Count; i++)
                     {
@@ -344,8 +344,8 @@ public class BlockManager : MonoBehaviour
                     children += 1.0f;
                 }
 
-                //multiplies the durability by either 1 or the number of children / 1.5
-                parentObject.GetComponent<Material>().MultiplyDurability(Mathf.Min(1.0f, (children / 1.5f)));
+                //multiplies the durability by either 1 or the number of children / 1.75
+                parentObject.GetComponent<Material>().MultiplyDurability(Mathf.Max(1.0f, (children / 1.75f)));
 
                 parentObject.tag = "destructible";
 

@@ -6,6 +6,7 @@ public class Material : MonoBehaviour
 {
     protected int cost;
     protected float durability;
+    protected float durabilityMax;
     protected float forceTransfer;
     protected MAT_TYPE type;
     protected SHOT_TYPE weakness;
@@ -47,6 +48,7 @@ public class Material : MonoBehaviour
     public void MultiplyDurability(float multiplier)
     {
         durability *= multiplier;
+        durabilityMax = durability;
     }
 
     //deals damage based on a previously calculated amount (either when hit or by transferrence)
@@ -94,14 +96,33 @@ public class Material : MonoBehaviour
             if (audioManager != null) //Plays destroyed noise
                 audioManager.playBlockBreak2Clip();
         }
+        else
+        {
+            if (audioManager != null) //Plays hit noise
+                audioManager.playBlockHitClip();
+
+            float percentage = durability / durabilityMax;
+
+            //sets the color to red, but with tinted using a percentage of health
+            if (gameObject.name == "block group")
+            {
+                //does it for all children
+                foreach (Transform childTransform in transform)
+                {
+                    childTransform.GetComponent<SpriteRenderer>().color = new Color(1f, percentage, percentage);
+                }
+            }
+            else
+            {
+                //sets the color of the tint child
+                gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, percentage, percentage);
+            }
+        }
     }
 
     //calculates the damage based on some factor of the shot that hit this block
     public void CalcDamage(float shotSpeed, SHOT_TYPE damageType)
     {
-        //arbitrary for now until we get collisions functioning.
-        DoDamage(shotSpeed, damageType);
-
         //as long as force can transfer, deals damage to the neigboring materials
         if (forceTransfer != 0)
         {
@@ -120,6 +141,9 @@ public class Material : MonoBehaviour
                 }
             }
         }
+
+        //damages itself last, so it still deals damage to neighbors even if it's destroyed
+        DoDamage(shotSpeed, damageType);
     }
 
     //adds as a neighbor when it touches
