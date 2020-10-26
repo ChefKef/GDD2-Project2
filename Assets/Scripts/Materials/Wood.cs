@@ -10,6 +10,7 @@ public class Wood : Material
         //initiallizes things as unimportant values
         cost = 2;
         durability = 5f;
+        durabilityMax = 5f;
         forceTransfer = 0.75f;
         type = MAT_TYPE.WOOD;
         weakness = SHOT_TYPE.FIRE;
