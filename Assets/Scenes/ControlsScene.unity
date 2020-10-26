@@ -187,7 +187,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &549940288 stripped
 MonoBehaviour:
@@ -245,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 936618749832048407, guid: 9bab592d8a8c02e4c847a0cdb0c8a63f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -664,7 +664,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1614881513
 GameObject:
@@ -700,8 +700,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -220, y: -44.5}
-  m_SizeDelta: {x: 350, y: 389.03503}
+  m_AnchoredPosition: {x: -220, y: -39.992}
+  m_SizeDelta: {x: 350, y: 380.0103}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1614881515
 MonoBehaviour:
@@ -736,15 +736,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "How To Play:\nyou are a wizard tasked with quickly constructing fortresses
-    to protect magic orbs used to defend your kingdom from the northern empire. \n\nyou
-    will get a short amount of time to build a stronghold before the enemy's trebuchets
-    begin to fire.  you can spend components to conjure 4 different types of materials,
-    each of which is strong or weak against a certain type of shot. if all the orbs
-    survive the attack, you win the level. if any of the orbs are destroyed during
-    the attack, you need to try again. click the button at the bottom right of the
-    level screen to skip the remaining time and make the trebuchets start firing
-    immediately.\n"
+  m_Text: "How To Play:\nyou are a wizard tasked with building forts to protect magic
+    orbs used to defend your kingdom from the northern empire. \n\nyou have a short
+    amount of time to build before the enemy begins to fire.  spend components to
+    conjure 4 different types of materials, which are strong or weak against different
+    shot types.\n\nif the orb survives the attack, you win! if the orb takes too
+    much damage, you must try again. \n\nclick the button at the bottom right of
+    the screen to make the trebuchets start firing immediately.\n"
 --- !u!222 &1614881516
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -860,7 +858,7 @@ RectTransform:
   - {fileID: 1042860195}
   - {fileID: 1614881514}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
