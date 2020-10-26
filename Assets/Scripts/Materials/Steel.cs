@@ -9,8 +9,8 @@ public class Steel : Material
     {
         //initiallizes things as unimportant values
         cost = 8;
-        durability = 25f;
-        forceTransfer = 0.75f;
+        durability = 15f;
+        forceTransfer = 0.2f;
         type = MAT_TYPE.STEEL;
         weakness = SHOT_TYPE.SPIKE;
         resistance = SHOT_TYPE.FIRE;

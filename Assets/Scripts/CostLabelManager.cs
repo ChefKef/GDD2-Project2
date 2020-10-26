@@ -9,7 +9,6 @@ public class CostLabelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        value = GetComponentInParent<Transform>().Find("Value").gameObject;
     }
 
     // Update is called once per frame
@@ -20,6 +19,11 @@ public class CostLabelManager : MonoBehaviour
 
     public void setNumber(int remainingComponents)
     {
+        if (!value)
+        {
+            value = gameObject.GetComponentInParent<Transform>().Find("Value").gameObject;
+        }
+
         value.GetComponent<UnityEngine.UI.Text>().text = remainingComponents.ToString() + ".:.";
     }
 }

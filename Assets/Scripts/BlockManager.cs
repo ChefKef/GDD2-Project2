@@ -27,21 +27,13 @@ public class BlockManager : MonoBehaviour
 
     private int remainingComponents;
 
-    private enum EditorState
-    {
-        Painting,
-        Deleting,
-        Connecting,
-        Play
-    }
-
     private EditorState currentState;
     private bool paused;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCode();
+
     }
 
     // Update is called once per frame
@@ -89,7 +81,7 @@ public class BlockManager : MonoBehaviour
                 CancelConnecting();
                 Debug.Log("Now Deleting");
             }
-            Mouse.GetComponent<MouseModeManager>().setMode((int)currentState);
+            Mouse.GetComponent<MouseModeManager>().setMode(currentState);
 
             //input checking for changing the material. (Temporarily number buttons, could be permanent as a secondary option to clicking
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -184,13 +176,13 @@ public class BlockManager : MonoBehaviour
                 }
 
                 //dupe checking - don't think we need since the raycast checks if the collider is null
-                //foreach (GameObject g in blockList)
-                //{
-                //    if (g.transform.position == instanceBlock.transform.position)
-                //    {
-                //        intersecting = true;
-                //    }
-                //}
+                foreach (GameObject g in blockList)
+                {
+                    if (g.transform.position == instanceBlock.transform.position)
+                    {
+                        intersecting = true;
+                    }
+                }
 
                 //if (!intersecting)
                 //{
@@ -341,6 +333,7 @@ public class BlockManager : MonoBehaviour
                         break;
                 }
 
+                float children = 0.0f;
                 foreach (GameObject g in childList)
                 {
                     g.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(255, 255, 0);
@@ -348,7 +341,11 @@ public class BlockManager : MonoBehaviour
                     Destroy(g.GetComponent<Material>());
                     Debug.Log("Child has been connected");
                     g.tag = "childBlock";
+                    children += 1.0f;
                 }
+
+                //multiplies the durability by either 1 or the number of children / 1.5
+                parentObject.GetComponent<Material>().MultiplyDurability(Mathf.Min(1.0f, (children / 1.5f)));
 
                 parentObject.tag = "destructible";
 
@@ -404,7 +401,7 @@ public class BlockManager : MonoBehaviour
 
         currentState = EditorState.Painting;
 
-        Mouse.GetComponent<MouseModeManager>().setMode((int)currentState);
+        Mouse.GetComponent<MouseModeManager>().setMode(currentState);
 
         currentMaterial = MAT_TYPE.WOOD;
 
@@ -414,4 +411,12 @@ public class BlockManager : MonoBehaviour
 
         Components.GetComponent<CostLabelManager>().setNumber(remainingComponents);
     }
+}
+
+public enum EditorState
+{
+    Painting,
+    Deleting,
+    Connecting,
+    Play
 }

@@ -10,7 +10,7 @@ public class Glass : Material
         //initiallizes things as unimportant values
         cost = 3;
         durability = 8f;
-        forceTransfer = 0.0f;
+        forceTransfer = 0.5f;
         type = MAT_TYPE.GLASS;
         weakness = SHOT_TYPE.BOMB;
         resistance = SHOT_TYPE.ICE;

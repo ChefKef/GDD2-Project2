@@ -9,7 +9,7 @@ public class Stone : Material
     {
         //initiallizes things as unimportant values
         cost = 5;
-        durability = 15f;
+        durability = 12f;
         forceTransfer = 0.5f;
         type = MAT_TYPE.STONE;
         weakness = SHOT_TYPE.ICE;

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,6 @@ public class MouseModeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        value = GetComponentInParent<Transform>().Find("Value").gameObject;
     }
 
     // Update is called once per frame
@@ -18,20 +18,25 @@ public class MouseModeManager : MonoBehaviour
 
     }
 
-    public void setMode(int editorState)
+    public void setMode(EditorState editorState)
     {
-        switch(editorState)
+        if (!value)
         {
-            case 0:
+            value = gameObject.GetComponentInParent<Transform>().Find("Value").gameObject;
+        }
+
+        switch (editorState)
+        {
+            case EditorState.Painting:
                 value.GetComponent<UnityEngine.UI.Text>().text = "painting";
                 break;
-            case 1:
+            case EditorState.Deleting:
                 value.GetComponent<UnityEngine.UI.Text>().text = "deleting";
                 break;
-            case 2:
+            case EditorState.Connecting:
                 value.GetComponent<UnityEngine.UI.Text>().text = "connecting";
                 break;
-            case 3:
+            case EditorState.Play:
                 value.GetComponent<UnityEngine.UI.Text>().text = "playing";
                 break;
             default:
