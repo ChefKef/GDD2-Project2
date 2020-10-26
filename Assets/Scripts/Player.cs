@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public float healthMax;
     // Start is called before the first frame update
     private AudioManagerScript audioManager;
+    
     void Start()
     {
         health = 10.0f;
@@ -23,6 +24,9 @@ public class Player : MonoBehaviour
 
     public void GetHit(float damage)
     {
+        //Play animation to signal damage
+        Instantiate(GameManager.Instance.dustAnim, gameObject.transform.position + new Vector3(0, 0, -1), Quaternion.identity, GameObject.Find("DrawnObjects").transform);
+
         health -= damage;
 
         if (audioManager != null)

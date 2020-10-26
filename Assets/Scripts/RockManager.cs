@@ -44,6 +44,8 @@ public class RockManager : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Instantiate(GameManager.Instance.shotAnim, gameObject.transform.position + new Vector3(0, 0, -1), Quaternion.identity, GameObject.Find("DrawnObjects").transform);
+
         if (collided == false && (collision.gameObject.tag == "destructible" || collision.gameObject.tag == "childBlock")) //Ensure that collision is only calculated once.
         {
             collision.gameObject.GetComponentInParent<Material>().CalcDamage(forceConstant * Mathf.Abs(GetComponent<Rigidbody2D>().velocity.magnitude), shot);
@@ -52,10 +54,12 @@ public class RockManager : MonoBehaviour
             collided = true;
             Destroy(gameObject);
         }
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player" && collided == false)
         {
+            collided = true;
             //end their entire existence
             collision.gameObject.GetComponent<Player>().GetHit(forceConstant * Mathf.Abs(GetComponent<Rigidbody2D>().velocity.magnitude));
+            Destroy(gameObject);
         }
     }
 }
