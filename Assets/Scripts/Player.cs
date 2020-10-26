@@ -5,11 +5,13 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float health;
+    public float healthMax;
     // Start is called before the first frame update
     private AudioManagerScript audioManager;
     void Start()
     {
         health = 10.0f;
+        healthMax = 10.0f;
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManagerScript>();
     }
 
@@ -25,6 +27,9 @@ public class Player : MonoBehaviour
 
         if (audioManager != null)
             audioManager.playBlockHitClip();
+
+        float percentage = health / healthMax;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, percentage, percentage);
 
         if (health <= 0.0f)
         {
