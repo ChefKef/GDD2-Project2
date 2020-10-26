@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentLevel = 1;
+        currentLevel = 0;
         currentState = State.lvlSelect;
         previousState = State.lvlSelect;
         levelManager = LevelManager.Instance;
@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
         failUI = GameObject.Find("FailUI");
         clearUI = GameObject.Find("ClearUI");
         levelObjects = GameObject.Find("LevelObjects");
+        groundContainer = GameObject.Find("GroundContainer");
 
         gridUI.SetActive(false);
         gameUI.SetActive(false);
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour
         clearUI.SetActive(false);
 
         bm = GameObject.Find("BlockManager");
+        bm.GetComponent<BlockManager>().DeactivateGridPaint();
 
         tm = timerObject.GetComponent<TimerManager>();
 
@@ -107,32 +109,35 @@ public class GameManager : MonoBehaviour
             case State.Title:
                 //Display title screen, probably scene switch
                 break;
+
             case State.lvlSelect:
                 //Display level select, probably scene switch eventually, rn is all done in one
                 break;
+
             case State.Grid:
                 //player is building
                 if (tm.getDone())
-                {
-                    ChangeGameState(State.Game);
-                }
+                    StartGame();
                 break;
+
             case State.Game:
                 //Game is active
-
+                if (tm.getDone())
+                    ChangeGameState(State.Clear);
                 break;
+
             case State.Pause:
                 //Game is paused
-
                 break;
+
             case State.Clear:
                 //Level has been cleared
-
                 break;
+
             case State.Fail:
                 //Level has been failed
-
                 break;
+
             default:
                 //title screen
                 break;
@@ -140,7 +145,17 @@ public class GameManager : MonoBehaviour
         previousState = currentState;
     }
 
-    void OnDestroy() { if (this == _instance) { _instance = null; } }
+    void OnDestroy() {
+        Debug.Log("Destroyed gm");
+        if (this == _instance) { _instance = null; } 
+    }
+
+    //Changes the current state to Game and adds physics to the blocks
+    public void StartGame()
+    {
+        ChangeGameState(State.Game);
+        bm.GetComponent<BlockManager>().Play();
+    }
 
     public void StartLevel(int value)
     {
@@ -148,6 +163,9 @@ public class GameManager : MonoBehaviour
         levelManager.CleanUpLevel();
         levelManager.setCurrentLevel(value);
         ChangeGameState(State.Grid);
+        bm.GetComponent<BlockManager>().StartCode();
+        tm.setTimer(60); //Resets Timer
+        currentLevel = value; //Update current level variable
     }
 
     public void ChangeGameState(State state)
@@ -185,11 +203,14 @@ public class GameManager : MonoBehaviour
                 lvlSelectUI.SetActive(false);
                 gameUI.SetActive(true);
                 pauseUI.SetActive(false);
+                failUI.SetActive(false);
+                clearUI.SetActive(false);
                 levelObjects.SetActive(true);
                 levelManager.cancelLevelLoop();
                 levelManager.DisplayGrid();
 
-                tm.setTimer(60);
+                if (previousState != State.Pause) //Prevents timer reseting after pausing
+                    tm.setTimer(60);
 
                 bm.GetComponent<BlockManager>().ActivateGridPaint();
                 if (audioManager != null) //Updates Background Music
@@ -208,6 +229,9 @@ public class GameManager : MonoBehaviour
                 levelObjects.SetActive(true);
                 levelManager.startLevelLoop();
                 levelManager.HideGrid();
+
+                if (previousState != State.Pause) //Prevents timer reseting after pausing
+                    tm.setTimer(30);
 
                 bm.GetComponent<BlockManager>().DeactivateGridPaint();
 
@@ -330,27 +354,22 @@ public class GameManager : MonoBehaviour
     public void ButtonLevelSelect()
     {
         ChangeGameState(State.lvlSelect);
+        foreach (Transform child in levelObjects.transform.GetChild(2))
+        {
+            Destroy(child.gameObject);
+        }
         levelManager.CleanUpLevel();
+
     }
 
     public void ButtonRestart()
     {
-        if(prePauseState == State.lvlSelect)
+        foreach (Transform child in levelObjects.transform.GetChild(2))
         {
-            ChangeGameState(State.lvlSelect);
+            Destroy(child.gameObject);
         }
-        else if(prePauseState == State.Game)
-        {
-            ChangeGameState(State.Game);
-        }
-        else
-        {            
-            ChangeGameState(State.Grid);
-            foreach (Transform child in levelObjects.transform.GetChild(2))
-            {
-                Destroy(child.gameObject);
-            }
-        }
+
+        StartLevel(currentLevel);
     }
 
     public void ButtonResume()

@@ -9,7 +9,6 @@ public class MaterialLabelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        value = GetComponentInParent<Transform>().Find("Value").gameObject;
     }
 
     // Update is called once per frame
@@ -20,19 +19,24 @@ public class MaterialLabelManager : MonoBehaviour
 
     public void setMaterial(MAT_TYPE material)
     {
+        if (!value)
+        {
+            value = gameObject.GetComponentInParent<Transform>().Find("Value").gameObject;
+        }
+
         switch (material)
         {
             case MAT_TYPE.WOOD:
-                value.GetComponent<UnityEngine.UI.Text>().text = "wood";
+                value.GetComponent<UnityEngine.UI.Text>().text = "wood (2.:.)";
                 break;
             case MAT_TYPE.GLASS:
-                value.GetComponent<UnityEngine.UI.Text>().text = "glass";
+                value.GetComponent<UnityEngine.UI.Text>().text = "glass (3.:.)";
                 break;
             case MAT_TYPE.STONE:
-                value.GetComponent<UnityEngine.UI.Text>().text = "stone";
+                value.GetComponent<UnityEngine.UI.Text>().text = "stone (5.:.)";
                 break;
             case MAT_TYPE.STEEL:
-                value.GetComponent<UnityEngine.UI.Text>().text = "brick";
+                value.GetComponent<UnityEngine.UI.Text>().text = "brick (8.:.)";
                 break;
             default:
                 value.GetComponent<UnityEngine.UI.Text>().text = "error";

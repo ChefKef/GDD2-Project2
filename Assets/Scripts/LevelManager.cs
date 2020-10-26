@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
     GameObject[,] gridSquares;
     GameObject gridContainer;
 
+    public GameObject gmPrefabBackup;
+
     public GameObject gridPrefab;
 
     private void Awake()
@@ -68,21 +70,55 @@ public class LevelManager : MonoBehaviour
     public void InitLevels()
     {
         LevelObject level1 = new LevelObject();
-        level1.AddTrebuchet(new Vector2(15, -2), new Vector2(2, -4), 8, SHOT_TYPE.STANDARD, false);
-        //level1.BuildGround(new Vector2(-15, -4), new Vector2(15, -4));
-        level1.BuildGround(new Vector2(-20, -6.5f), new Vector2(20, -6.5f));
+        level1.AddTrebuchet(new Vector2(15, -1.2f), new Vector2(2, -4), 8, SHOT_TYPE.STANDARD, false);
+        level1.BuildGround(new Vector3(-20, -5.5f, 5f), new Vector3(20, -5.5f, 5f));
+        level1.BuildGround(new Vector3(-20, -7.5f, 10f), new Vector3(20, -7.5f, 10f));
+        level1.BuildGround(new Vector3(-20, -9.5f, 10f), new Vector3(20, -9.5f, 10f));
         level1.levelID = 1;
         level1.playerPos = new Vector2(0, -4);
         levels.Add(level1);
 
         LevelObject level2 = new LevelObject();
-        level2.AddTrebuchet(new Vector2(15, -2), new Vector2(2, -4), 7, SHOT_TYPE.ICE, false);
-        level2.AddTrebuchet(new Vector2(-15, -2), new Vector2(0, -4), 12, SHOT_TYPE.FIRE, true);
-        //level2.BuildGround(new Vector2(-15, -4), new Vector2(15, -4));
-        level2.BuildGround(new Vector2(-20, -6.5f), new Vector2(20, -6.5f));
+        level2.AddTrebuchet(new Vector2(-15, -1.2f), new Vector2(-0.5f, -20), 14, SHOT_TYPE.SPIKE, true);
+        level2.BuildGround(new Vector3(-20, -5.5f, 5f), new Vector3(20, -5.5f, 5f));
+        level2.BuildGround(new Vector3(-20, -7.5f, 10f), new Vector3(20, -7.5f, 10f));
+        level2.BuildGround(new Vector3(-20, -9.5f, 10f), new Vector3(20, -9.5f, 10f));
         level2.levelID = 2;
         level2.playerPos = new Vector2(0, -4);
         levels.Add(level2);
+
+        LevelObject level3 = new LevelObject();
+        level3.AddTrebuchet(new Vector2(15, -1.2f), new Vector2(3, -4), 7, SHOT_TYPE.ICE, false);
+        level3.AddTrebuchet(new Vector2(-15, -1.2f), new Vector2(-1, -4), 12, SHOT_TYPE.FIRE, true);
+        level3.BuildGround(new Vector3(-20, -5.5f, 5f), new Vector3(20, -5.5f, 5f));
+        level3.BuildGround(new Vector3(-20, -7.5f, 10f), new Vector3(20, -7.5f, 10f));
+        level3.BuildGround(new Vector3(-20, -9.5f, 10f), new Vector3(20, -9.5f, 10f));
+        level3.levelID = 3;
+        level3.playerPos = new Vector2(0, -4);
+        levels.Add(level3);
+
+        LevelObject level4 = new LevelObject();
+        level4.AddTrebuchet(new Vector2(15, 2.8f), new Vector2(4, 0), 8, SHOT_TYPE.SPIKE, false);
+        level4.AddTrebuchet(new Vector2(-15, -1.2f), new Vector2(-4, -4), 5, SHOT_TYPE.BOMB, true);
+        level4.BuildGround(new Vector3(-20, -5.5f, 5f), new Vector3(20, -5.5f, 5f));
+        level4.BuildGround(new Vector3(-20, -7.5f, 10f), new Vector3(20, -7.5f, 10f));
+        level4.BuildGround(new Vector3(-20, -9.5f, 10f), new Vector3(20, -9.5f, 10f));
+        level4.BuildGround(new Vector3(14, -1.5f, 5f), new Vector3(20, -1.5f, 5f));
+        level4.levelID = 4;
+        level4.playerPos = new Vector2(0, -4);
+        levels.Add(level4);
+
+        LevelObject level5 = new LevelObject();
+        level5.AddTrebuchet(new Vector2(15, 6.8f), new Vector2(5, -4), 8, SHOT_TYPE.FIRE, false);
+        level5.AddTrebuchet(new Vector2(15, -1.2f), new Vector2(4, -4), 5, SHOT_TYPE.SPIKE, false);
+        level5.AddTrebuchet(new Vector2(-15, -1.2f), new Vector2(-3, -4), 7, SHOT_TYPE.ICE, true);
+        level5.BuildGround(new Vector3(-20, -5.5f, 5f), new Vector3(20, -5.5f, 5f));
+        level5.BuildGround(new Vector3(-20, -7.5f, 10f), new Vector3(20, -7.5f, 10f));
+        level5.BuildGround(new Vector3(-20, -9.5f, 10f), new Vector3(20, -9.5f, 10f));
+        level5.BuildGround(new Vector3(14, 2.5f, 5f), new Vector3(20, -1.5f, 5f));
+        level5.levelID = 5;
+        level5.playerPos = new Vector2(0, -4);
+        levels.Add(level5);
     }
 
     public void setCurrentLevel(int levelID)
@@ -142,5 +178,10 @@ public class LevelManager : MonoBehaviour
     public void HideGrid()
     {
         gridContainer.SetActive(false);
+    }
+
+    public void StartCode()
+    {
+
     }
 }

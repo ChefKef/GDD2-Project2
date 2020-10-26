@@ -10,6 +10,7 @@ public class BlockManager : MonoBehaviour
 
     public GameObject Material;
     public GameObject Mouse;
+    public GameObject Components;
 
     private GameObject testBlockPrivate;
 
@@ -24,13 +25,7 @@ public class BlockManager : MonoBehaviour
 
     private MAT_TYPE connectorMaterial;
 
-    private enum EditorState
-    {
-        Painting,
-        Deleting,
-        Connecting,
-        Play
-    }
+    private int remainingComponents;
 
     private EditorState currentState;
     private bool paused;
@@ -38,15 +33,7 @@ public class BlockManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Grid grid = new Grid(21, 9, 1f);
-        testBlockPrivate = TestBlockPublic;
-        blockList = new List<GameObject>();
 
-        debugList = new List<GameObject>();
-
-        currentState = EditorState.Painting;
-
-        currentMaterial = MAT_TYPE.WOOD;
     }
 
     // Update is called once per frame
@@ -80,6 +67,7 @@ public class BlockManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.A))
             {
                 currentState = EditorState.Painting;
+                CancelConnecting();
                 Debug.Log("Now Painting");
             }
             if (Input.GetKeyDown(KeyCode.S))
@@ -90,9 +78,10 @@ public class BlockManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.D))
             {
                 currentState = EditorState.Deleting;
+                CancelConnecting();
                 Debug.Log("Now Deleting");
             }
-            Mouse.GetComponent<MouseModeManager>().setMode((int)currentState);
+            Mouse.GetComponent<MouseModeManager>().setMode(currentState);
 
             //input checking for changing the material. (Temporarily number buttons, could be permanent as a secondary option to clicking
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -166,7 +155,6 @@ public class BlockManager : MonoBehaviour
                     case MAT_TYPE.GLASS:
                         instanceBlock.AddComponent<Glass>();
 
-                        //TEMPORARY PART - CHANGES COLOR, REPLACE WITH ACTUAL SPRITE PICKING
                         instanceBlock.GetComponent<SpriteRenderer>().sprite = sprites[1];
                         break;
                     case MAT_TYPE.STONE:
@@ -188,41 +176,46 @@ public class BlockManager : MonoBehaviour
                 }
 
                 //dupe checking - don't think we need since the raycast checks if the collider is null
-                //foreach (GameObject g in blockList)
-                //{
-                //    if (g.transform.position == instanceBlock.transform.position)
-                //    {
-                //        intersecting = true;
-                //    }
-                //}
+                foreach (GameObject g in blockList)
+                {
+                    if (g.transform.position == instanceBlock.transform.position)
+                    {
+                        intersecting = true;
+                    }
+                }
 
                 //if (!intersecting)
                 //{
                     blockList.Add(instanceBlock);
 
-                    //boundary checking
-                    if (instanceBlock.transform.position.y <= -5 || instanceBlock.transform.position.y >= 5 || instanceBlock.transform.position.x <= -11 || instanceBlock.transform.position.x >= 11)
-                    {
-                        blockList.Remove(instanceBlock);
-                        intersecting = true;
-                    }
+                //boundary checking
+                if (instanceBlock.transform.position.y <= -5 || instanceBlock.transform.position.y >= 5 || instanceBlock.transform.position.x <= -11 || instanceBlock.transform.position.x >= 11)
+                {
+                    intersecting = true;
+                }
+
+                //cost checking
+                if (instanceBlock.GetComponent<Material>().Cost > remainingComponents)
+                {
+                    intersecting = true;
+                }
                 //}
 
                 //final check, adds it to active or destroys it
                 if(intersecting)
                 {
+                    blockList.Remove(instanceBlock);
                     Destroy(instanceBlock);
                 }
                 else
                 {
+                    //adds it
                     LevelManager.Instance.activeObjects.Add(instanceBlock);
+                    //update components
+                    remainingComponents -= instanceBlock.GetComponent<Material>().Cost;
+                    Components.GetComponent<CostLabelManager>().setNumber(remainingComponents);
                 }
             }
-        }
-        //right click input code
-        else if (Input.GetMouseButtonDown(1))
-        {
-            Play();
         }
     }
 
@@ -232,12 +225,28 @@ public class BlockManager : MonoBehaviour
 
         if(Input.GetMouseButton(0))
         {
-            if (hit.collider != null && hit.collider.gameObject.tag == "destructible" && currentState == EditorState.Deleting)
+            if (hit.collider != null && hit.collider.gameObject.tag == "destructible")
             {
+                //edits cost
+                remainingComponents += hit.collider.gameObject.GetComponent<Material>().Cost;
+                //deletes it
                 blockList.Remove(hit.collider.gameObject);
                 Destroy(hit.collider.gameObject);
             }
-        } 
+            //similar code but loops through all its siblings as well
+            if (hit.collider != null && hit.collider.gameObject.tag == "childBlock")
+            {
+                //gets the parent
+                GameObject parent = hit.collider.gameObject.transform.parent.gameObject;
+                //increases the components
+                int cost = parent.GetComponent<Material>().Cost;
+                remainingComponents += cost * parent.transform.childCount;
+                //deletes
+                blockList.Remove(parent);
+                Destroy(parent);
+            }
+            Components.GetComponent<CostLabelManager>().setNumber(remainingComponents);
+        }
     }
 
     void ConnectorMode()
@@ -254,6 +263,9 @@ public class BlockManager : MonoBehaviour
                     debugList.Add(hit.collider.gameObject);
                     blockList.Remove(hit.collider.gameObject);
                     Debug.Log(debugList);
+                    hit.collider.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                    hit.collider.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
+                    hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, -0.1f);
 
                     //sets the type of this set of connected objects, checks this before adding it to the group
                     connectorMaterial = hit.collider.gameObject.GetComponent<Material>().Type;
@@ -264,11 +276,14 @@ public class BlockManager : MonoBehaviour
                     {
                         float dist = Vector3.Distance(debugList[i].transform.position, hit.collider.gameObject.transform.position);
                         Debug.Log(dist);
-                        if (dist <= 1)
+                        if (dist <= 1.2f)
                         {
                             debugList.Add(hit.collider.gameObject);
                             blockList.Remove(hit.collider.gameObject);
                             Debug.Log("Adjacent");
+                            hit.collider.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                            hit.collider.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
+                            hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, -0.1f);
                             break;
                         }
                         Debug.Log("Adjacency was checked");
@@ -318,13 +333,19 @@ public class BlockManager : MonoBehaviour
                         break;
                 }
 
+                float children = 0.0f;
                 foreach (GameObject g in childList)
                 {
+                    g.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(255, 255, 0);
                     g.transform.parent = parentObject.transform;
                     Destroy(g.GetComponent<Material>());
                     Debug.Log("Child has been connected");
                     g.tag = "childBlock";
+                    children += 1.0f;
                 }
+
+                //multiplies the durability by either 1 or the number of children / 1.5
+                parentObject.GetComponent<Material>().MultiplyDurability(Mathf.Min(1.0f, (children / 1.5f)));
 
                 parentObject.tag = "destructible";
 
@@ -333,6 +354,18 @@ public class BlockManager : MonoBehaviour
                 Debug.Log("Parent has been made");
             }
         }
+    }
+
+
+    void CancelConnecting()
+    {
+        foreach(GameObject g in debugList)
+        {
+            blockList.Add(g);
+            g.transform.GetChild(0).gameObject.SetActive(false);
+            g.transform.position = new Vector3(g.transform.position.x, g.transform.position.y, 0);
+        }
+        debugList = new List<GameObject>();
     }
 
     //deletes any null blocks
@@ -350,12 +383,40 @@ public class BlockManager : MonoBehaviour
 
     public void Play()
     {
+        CancelConnecting();
         foreach(GameObject g in blockList)
         {
             g.AddComponent<Rigidbody2D>();
         }
         currentState = EditorState.Play;
-
-        GameManager.Instance.ChangeGameState(GameManager.State.Game);
     }
+
+    public void StartCode()
+    {
+        //Grid grid = new Grid(21, 9, 1f);
+        testBlockPrivate = TestBlockPublic;
+        blockList = new List<GameObject>();
+
+        debugList = new List<GameObject>();
+
+        currentState = EditorState.Painting;
+
+        Mouse.GetComponent<MouseModeManager>().setMode(currentState);
+
+        currentMaterial = MAT_TYPE.WOOD;
+
+        Material.GetComponent<MaterialLabelManager>().setMaterial(currentMaterial);
+
+        remainingComponents = 50;
+
+        Components.GetComponent<CostLabelManager>().setNumber(remainingComponents);
+    }
+}
+
+public enum EditorState
+{
+    Painting,
+    Deleting,
+    Connecting,
+    Play
 }

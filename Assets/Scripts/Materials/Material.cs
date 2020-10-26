@@ -5,7 +5,7 @@ using UnityEngine;
 public class Material : MonoBehaviour
 {
     protected int cost;
-    public float durability;
+    protected float durability;
     protected float forceTransfer;
     protected MAT_TYPE type;
     protected SHOT_TYPE weakness;
@@ -19,6 +19,11 @@ public class Material : MonoBehaviour
     public MAT_TYPE Type
     {
         get { return type; }
+    }
+
+    public int Cost
+    {
+        get { return cost; }
     }
 
     public void Start()
@@ -37,6 +42,11 @@ public class Material : MonoBehaviour
         weakness = SHOT_TYPE.NONE;
         resistance = SHOT_TYPE.NONE;
         neighbors = new List<Material>();
+    }
+
+    public void MultiplyDurability(float multiplier)
+    {
+        durability *= multiplier;
     }
 
     //deals damage based on a previously calculated amount (either when hit or by transferrence)
