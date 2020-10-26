@@ -944,6 +944,14 @@ PrefabInstance:
       propertyPath: timerObject
       value: 
       objectReference: {fileID: 231176834}
+    - target: {fileID: 4128781456327159371, guid: 167d45ac5fa06aa49a1dbe6265e2966c, type: 3}
+      propertyPath: dustCloud
+      value: 
+      objectReference: {fileID: 488093804388192925, guid: 758ea72cfd78ba644be3f61a5ea95f89, type: 3}
+    - target: {fileID: 4128781456327159371, guid: 167d45ac5fa06aa49a1dbe6265e2966c, type: 3}
+      propertyPath: dustAnim
+      value: 
+      objectReference: {fileID: 488093804388192925, guid: 758ea72cfd78ba644be3f61a5ea95f89, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 167d45ac5fa06aa49a1dbe6265e2966c, type: 3}
 --- !u!114 &272851867 stripped
@@ -2974,7 +2982,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973009240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1201373334}

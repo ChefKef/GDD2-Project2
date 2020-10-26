@@ -52,6 +52,22 @@ public class Material : MonoBehaviour
     //deals damage based on a previously calculated amount (either when hit or by transferrence)
     public void DoDamage(float damage, SHOT_TYPE damageType)
     {
+        //Play animation to signal damage
+        if (transform.childCount > 1) //Group of Blocks
+        {
+            foreach (Transform child in transform)
+            {
+                Instantiate(GameManager.Instance.dustAnim, child.transform.position + new Vector3 (0, 0, -1), Quaternion.identity, GameObject.Find("DrawnObjects").transform);
+            }
+        }
+        else //Single Block
+        {
+            Instantiate(GameManager.Instance.dustAnim, transform.position + new Vector3(0, 0, -1), Quaternion.identity, GameObject.Find("DrawnObjects").transform);
+        }
+
+        if (audioManager != null) //Plays hit noise
+            audioManager.playBlockHitClip();
+
         if (damageType == this.weakness)
         {
             //double damage if it is weak to this attack
@@ -77,11 +93,6 @@ public class Material : MonoBehaviour
             Destroy(gameObject);
             if (audioManager != null) //Plays destroyed noise
                 audioManager.playBlockBreak2Clip();
-        }
-        else
-        {
-            if (audioManager != null) //Plays hit noise
-                audioManager.playBlockHitClip();
         }
     }
 

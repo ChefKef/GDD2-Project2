@@ -25,7 +25,7 @@ public class TrebuchetManager : MonoBehaviour
     {
         //Debug boulder
         //LaunchBoulder(new Vector2(0.0f, 0.0f), 20.0f, 0);
-        anim = this.gameObject.GetComponent<Animator>();
+        anim = gameObject.GetComponent<Animator>();
         drawnObjects = GameObject.Find("DrawnObjects");
     }
 
